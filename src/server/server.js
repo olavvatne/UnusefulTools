@@ -1,14 +1,13 @@
 import express from "express";
 import React from "react";
 import HelloWorld from "../shared/components/HelloWorld";
+import WeekNumber from "../shared/components/WeekNumber";
 import ToolTemp from "../shared/components/ToolTemp";
 const app = express();
 
 //TODO: New backend structure that makes more sense.
 app.set('views', './views');
 app.set('view engine', 'ejs');
-
-import routes from "../shared/routes";
 
 app.get('/', function (req, res) {
     let content = React.renderToString(<ToolTemp />);
@@ -30,7 +29,17 @@ app.get('/helloworld', function(req, res) {
     res.render('pages/helloworld', templateData);
 });
 
-var server = app.listen(3000, function () {
+app.get('/weeknumber', function(req, res) {
+    let content = React.renderToString(<WeekNumber />);
+    var templateData = {
+        toolTitle: "Week number",
+        toolDescription: "Which week is it? Current week of the year is displayed.",
+        reactContent: content
+    };
+    res.render('pages/helloworld', templateData);
+});
+
+var server = app.listen(7000, function () {
     var host = server.address().address;
     var port = server.address().port;
 
