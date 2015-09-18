@@ -4,8 +4,7 @@ module.exports = {
     devtool: 'inline-source-map',
     entry: [
         'webpack-dev-server/client?http://localhost:8080',
-        'webpack/hot/only-dev-server',
-        './src/client/entry',
+        'webpack/hot/only-dev-server'
     ],
     output: {
         path: __dirname + '/public/js/',
