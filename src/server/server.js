@@ -1,6 +1,7 @@
 import express from "express";
 import React from "react";
 import HelloWorld from "../shared/components/HelloWorld";
+import WeekNumber from "../shared/components/WeekNumber";
 import ToolTemp from "../shared/components/ToolTemp";
 const app = express();
 
@@ -23,6 +24,16 @@ app.get('/helloworld', function(req, res) {
     var templateData = {
         toolTitle: "Tool #1",
         toolDescription: "First tool of many.",
+        reactContent: content
+    };
+    res.render('pages/helloworld', templateData);
+});
+
+app.get('/weeknumber', function(req, res) {
+    let content = React.renderToString(<WeekNumber />);
+    var templateData = {
+        toolTitle: "Week number",
+        toolDescription: "Which week is it? Current week of the year is displayed.",
         reactContent: content
     };
     res.render('pages/helloworld', templateData);
