@@ -15,7 +15,7 @@ export default class WeekNumber extends React.Component {
         return (
         	<div> 
         		<p className="metaText">Current week: </p>
-        			<p className"bigtext">{weekday}</p>
+        		<p className="bigtext">{weekday}</p>
         	</div>);
     }
 }
