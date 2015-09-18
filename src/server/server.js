@@ -8,8 +8,6 @@ const app = express();
 app.set('views', './views');
 app.set('view engine', 'ejs');
 
-import routes from "../shared/routes";
-
 app.get('/', function (req, res) {
     let content = React.renderToString(<ToolTemp />);
     var templateData = {
@@ -30,7 +28,7 @@ app.get('/helloworld', function(req, res) {
     res.render('pages/helloworld', templateData);
 });
 
-var server = app.listen(3000, function () {
+var server = app.listen(7000, function () {
     var host = server.address().address;
     var port = server.address().port;
 
