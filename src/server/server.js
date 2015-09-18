@@ -2,6 +2,7 @@ import express from "express";
 import React from "react";
 import HelloWorld from "../shared/components/HelloWorld";
 import WeekNumber from "../shared/components/WeekNumber";
+import ImageConverter from "../shared/components/ImageConverter";
 import ToolTemp from "../shared/components/ToolTemp";
 const app = express();
 
@@ -34,6 +35,16 @@ app.get('/weeknumber', function(req, res) {
     var templateData = {
         toolTitle: "Week number",
         toolDescription: "Which week is it? Current week of the year is displayed.",
+        reactContent: content
+    };
+    res.render('pages/helloworld', templateData);
+});
+
+app.get('/imageconverter', function(req, res) {
+    let content = React.renderToString(<ImageConverter />);
+    var templateData = {
+        toolTitle: "Convert images",
+        toolDescription: "Convert your image.",
         reactContent: content
     };
     res.render('pages/helloworld', templateData);
