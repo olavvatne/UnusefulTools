@@ -1,15 +1,34 @@
 var webpack = require('webpack');
+var fs = require('fs');
+
+//TODO: js should preferrably be served from express port.
+//TODO: Make system production ready. webpack.config.prod.js?
+
+var createEntries = function() {
+    /*
+    Reads client folder and creates an entry for each of them. Each file in client treated
+    as a page that are going to run react in the front in any way.
+     */
+    var dir = './src/client';
+    var files = fs.readdirSync(dir);
+    var entries = {};
+    for (var i in files){
+        var page = files[i];
+        //TODO: What does webpack-dev-erver and only dev server do?
+        entries[page] = [
+            './src/client/ImageConverterClient',
+            'webpack-dev-server/client?http://localhost:8080',
+            'webpack/hot/only-dev-server']
+    }
+    return entries;
+};
 
 module.exports = {
     devtool: 'inline-source-map',
-    entry: [
-        'webpack-dev-server/client?http://localhost:8080',
-        'webpack/hot/only-dev-server',
-        './src/client/entry'
-    ],
+    entry: createEntries(),
     output: {
         path: __dirname + '/public/js/',
-        filename: 'app.js',
+        filename: '[name].entry.js',
         publicPath: 'http://localhost:8080/js/',
     },
     plugins: [

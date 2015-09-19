@@ -13,8 +13,6 @@ export default class ImageConverter extends React.Component {
 	}
 
 	componentDidMount() {
-		console.log("working!");
-		this.forceUpdate();
 	}
 
     render() {
