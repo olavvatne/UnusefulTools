@@ -27,7 +27,7 @@ app.get('/helloworld', function(req, res) {
         toolDescription: "First tool of many.",
         reactContent: content
     };
-    res.render('pages/helloworld', templateData);
+    res.render('pages/DefaultTool', templateData);
 });
 
 app.get('/weeknumber', function(req, res) {
@@ -35,9 +35,10 @@ app.get('/weeknumber', function(req, res) {
     var templateData = {
         toolTitle: "Week number",
         toolDescription: "Which week is it? Current week of the year is displayed.",
-        reactContent: content
+        reactContent: content,
+        reactScript: "WeekNumberClient"
     };
-    res.render('pages/helloworld', templateData);
+    res.render('pages/DefaultTool', templateData);
 });
 
 app.get('/imageconverter', function(req, res) {
@@ -45,9 +46,10 @@ app.get('/imageconverter', function(req, res) {
     var templateData = {
         toolTitle: "Convert images",
         toolDescription: "Convert your image.",
-        reactContent: content
+        reactContent: content,
+        reactScript: "ImageConverterClient"
     };
-    res.render('pages/helloworld', templateData);
+    res.render('pages/DefaultTool', templateData);
 });
 
 var server = app.listen(7000, function () {
