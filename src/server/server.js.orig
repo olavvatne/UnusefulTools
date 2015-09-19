@@ -20,6 +20,10 @@ app.use(sassMiddleware({
 }));
 app.use(express.static('./public')); //compiled sass put in here
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> develop
 app.get('/', function (req, res) {
     let content = React.renderToString(<ToolTemp />);
     var templateData = {
@@ -40,8 +44,11 @@ app.get('/helloworld', function(req, res) {
     res.render('pages/helloworld', templateData);
 });
 
+<<<<<<< HEAD
 
 //TODO: process.env.PORT || 3000
+var server = app.listen(3000, function () {
+=======
 app.get('/weeknumber', function(req, res) {
     let content = React.renderToString(<WeekNumber />);
     var templateData = {
@@ -63,6 +70,7 @@ app.get('/imageconverter', function(req, res) {
 });
 
 var server = app.listen(7000, function () {
+>>>>>>> develop
     var host = server.address().address;
     var port = server.address().port;
 

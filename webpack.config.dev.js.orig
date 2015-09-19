@@ -26,7 +26,14 @@ var createEntries = function() {
 
 module.exports = {
     devtool: 'inline-source-map',
+<<<<<<< HEAD
+    entry: [
+        'webpack-dev-server/client?http://localhost:8080',
+        'webpack/hot/only-dev-server'
+    ],
+=======
     entry: createEntries(),
+>>>>>>> develop
     output: {
         path: __dirname + '/public/js/',
         filename: '[name].entry.js',

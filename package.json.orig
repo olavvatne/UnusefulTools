@@ -33,7 +33,11 @@
     "webpack-dev-server": "^1.11.0"
   },
   "dependencies": {
+<<<<<<< HEAD
+    "moment": "^2.10.6"
+=======
     "moment": "^2.10.6",
     "react-dropzone-es6": "^1.0.1"
+>>>>>>> develop
   }
 }
