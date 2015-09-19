@@ -13,13 +13,14 @@ var createEntries = function() {
     var files = fs.readdirSync(dir);
     var entries = {};
     for (var i in files){
-        var page = files[i];
+        var page = files[i].split('.').shift(); //removes the extension.
         //TODO: What does webpack-dev-erver and only dev server do?
         entries[page] = [
-            './src/client/ImageConverterClient',
+            dir + '/' + page,
             'webpack-dev-server/client?http://localhost:8080',
             'webpack/hot/only-dev-server']
     }
+    console.log(entries);
     return entries;
 };
 
