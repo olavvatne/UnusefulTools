@@ -5,6 +5,7 @@ import HelloWorld from "../shared/components/HelloWorld";
 import WeekNumber from "../shared/components/WeekNumber";
 import ImageConverter from "../shared/components/ImageConverter";
 import BMI from "../shared/components/BMI";
+import Webcam from "../shared/components/Webcam";
 import ColorConverter from "../shared/components/ColorConverter";
 import ToolTemp from "../shared/components/ToolTemp";
 var sassMiddleware = require('node-sass-middleware');
@@ -62,6 +63,17 @@ app.get('/bmi', function(req, res) {
     res.render('pages/default-tool', templateData);
 });
 
+app.get('/webcam', function(req, res) {
+    let content = React.renderToString(<Webcam />);
+    //content = null;
+    var templateData = {
+        toolTitle: "Web camera",
+        toolDescription: "Capture images",
+        reactContent: content,
+        reactScript: "WebcamClient"
+    };
+    res.render('pages/default-tool', templateData);
+});
 
 //TODO: process.env.PORT || 3000
 app.get('/weeknumber', function(req, res) {
