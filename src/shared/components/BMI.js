@@ -4,6 +4,7 @@ import mui, { TextField, SelectField, RaisedButton } from 'material-ui';
 
 let ThemeManager = new mui.Styles.ThemeManager();
 
+injectTapEventPlugin();
 class BMI extends React.Component {
 
     constructor() {
@@ -32,9 +33,10 @@ class BMI extends React.Component {
 
     _validateNumber(stateName, errorName) {
         var v = this.refs[stateName].getValue();
-        var regex = /[0-9]|\./;
-
+        var regex = /^[0-9]+([,.][0-9]+)?$/g;
+        console.log(v);
         if(!regex.test(v) && v.length > 0) {
+            console.log("ERROR");
             this.setState({[errorName]: 'Not a number'});
         }
         else if(this.state[errorName]) {

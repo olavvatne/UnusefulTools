@@ -1,7 +1,17 @@
+@import url(https://fonts.googleapis.com/css?family=Sigmar+One);
+@import url(https://fonts.googleapis.com/css?family=Poiret+One);
 .header {
-  background-color: #78909C !important;
+  background-color: #262a2e !important;
+  font-family: 'Poiret One';
+}
+
+body,html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
 
 body {
-  background-color: #eee !important;
+  background-color: #E0E6EC !important;
+  font-family:'Roboto', "Helvetica Neue", Helvetica, Arial, Verdana, "Trebuchet MS" !important;
 }
