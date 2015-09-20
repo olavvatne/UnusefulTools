@@ -96,7 +96,7 @@ class BMI extends React.Component {
                         </div>
                     </div>
                     <div className="mui-col-sm-12">
-                        <RaisedButton label="Primary" primary={true} onClick={this._handleClick} />
+                        <RaisedButton label="Calculate" primary={true} onClick={this._handleClick} />
                     </div>
                 </div>
             </div>
