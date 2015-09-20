@@ -4,6 +4,7 @@ import React from "react";
 import HelloWorld from "../shared/components/HelloWorld";
 import WeekNumber from "../shared/components/WeekNumber";
 import ImageConverter from "../shared/components/ImageConverter";
+import BMI from "../shared/components/BMI";
 import ToolTemp from "../shared/components/ToolTemp";
 var sassMiddleware = require('node-sass-middleware');
 const app = express();
@@ -44,6 +45,18 @@ app.get('/helloworld', function(req, res) {
         toolTitle: "Tool #1",
         toolDescription: "First tool of many.",
         reactContent: content
+    };
+    res.render('pages/default-tool', templateData);
+});
+
+app.get('/bmi', function(req, res) {
+    let content = React.renderToString(<BMI />);
+    //content = null;
+    var templateData = {
+        toolTitle: "BMI calculator",
+        toolDescription: "The body mass index is a value based on an indviduals weight and height",
+        reactContent: content,
+        reactScript: "BMIClient"
     };
     res.render('pages/default-tool', templateData);
 });
