@@ -1,5 +1,5 @@
 import React from "react";
-import Webcamera from "react-webcam";
+import Webcamera from "./lib/ReactCam";
 import injectTapEventPlugin from "react-tap-event-plugin";
 import mui, { RaisedButton} from 'material-ui';
 
@@ -14,6 +14,7 @@ export default class Webcam extends React.Component {
 
     _captureImage() {
         var screenshot = this.refs.camscreen.getScreenshot();
+        console.log(screenshot)
         this.setState({screenshot: screenshot});
     }
 
@@ -26,12 +27,13 @@ export default class Webcam extends React.Component {
     {
         return { muiTheme: ThemeManager.getCurrentTheme() };
     }
-
+    
     render() {
         return (
             <div>
                 <Webcamera ref="camscreen"></Webcamera>
                 <RaisedButton label="Capture" primary={true} onClick={this._capture}/>
+                <a href={this.state.screenshot} download="download.png" target="_blank">Download</a>
                 { this.state.screenshot ? <img src={this.state.screenshot} /> : null }
             </div>
         );

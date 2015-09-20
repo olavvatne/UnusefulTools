@@ -3,7 +3,7 @@
  */
 
 import React from "react";
-import Webcamera from "react-webcam";
+import Webcamera from "../shared/components/lib/ReactCam";
 import injectTapEventPlugin from "react-tap-event-plugin";
 import mui, { RaisedButton} from 'material-ui';
 import Webcam from "../shared/components/Webcam";
