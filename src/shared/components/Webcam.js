@@ -1,5 +1,5 @@
 import React from "react";
-import Webcamera from "./lib/ReactCam";
+import Webcamera from "./libs/ReactCam";
 import injectTapEventPlugin from "react-tap-event-plugin";
 import mui, { RaisedButton} from 'material-ui';
 
