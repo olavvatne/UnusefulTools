@@ -6,6 +6,7 @@ import WeekNumber from "../shared/components/WeekNumber";
 import ImageConverter from "../shared/components/ImageConverter";
 import BMI from "../shared/components/BMI";
 import Webcam from "../shared/components/Webcam";
+import ColorConverter from "../shared/components/ColorConverter";
 import ToolTemp from "../shared/components/ToolTemp";
 var sassMiddleware = require('node-sass-middleware');
 const app = express();
@@ -93,6 +94,17 @@ app.get('/imageconverter', function(req, res) {
         toolDescription: "Convert your image.",
         reactContent: content,
         reactScript: "ImageConverterClient"
+    };
+    res.render('pages/default-tool', templateData);
+});
+
+app.get('/color-converter', function(req, res) {
+    let content = React.renderToString(<ColorConverter />);
+    var templateData = {
+        toolTitle: "Convert RGB to HEX",
+        toolDescription: "Convert color values: rgb to hex, rgb to cmyk etc.",
+        reactContent: content,
+        reactScript: "ColorConverterClient"
     };
     res.render('pages/default-tool', templateData);
 });

@@ -36,7 +36,6 @@
     "ejs-locals": "^1.0.2",
     "moment": "^2.10.6",
     "react-dropzone-es6": "^1.0.1",
-    "react-tap-event-plugin": "^0.1.7",
-    "react-webcam": "0.0.4"
+    "rgb-to-hex": "0.0.0"
   }
 }
