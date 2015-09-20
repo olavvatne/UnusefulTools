@@ -11,6 +11,7 @@ class BMI extends React.Component {
         this._handleChangedWeightUnit = this._handleChangedWeightUnit.bind(this);
         this._validateWeight = this._validateNumber.bind(this, 'weight', 'weightNotNumber');
         this._validateHeight = this._validateNumber.bind(this, 'height', 'heightNotNumber');
+        this._handleClick = this._computeBMI.bind(this);
         this.state = {weightUnit: '1', weightNotNumber: null, heightNotNumber: null, bmi: null};
     }
 
@@ -42,6 +43,7 @@ class BMI extends React.Component {
     }
 
     _computeBMI() {
+        console.log("HEI");
         if(!this.refs.weight  || !this.refs.height) {
             console.log("WTF");
             return null;
@@ -49,10 +51,11 @@ class BMI extends React.Component {
 
         var weight = this.refs.weight.getValue();
         var height = this.refs.height.getValue();
-
+        console.log(weight);
+        console.log(height);
         //TODO: convert lbs
         var BMI = weight/Math.pow(height, 2);
-        return BMI;
+        this.setState({bmi: BMI});
     }
 
     render() {
@@ -60,8 +63,7 @@ class BMI extends React.Component {
             { payload: '1', text: 'kg' },
             { payload: '2', text: 'lbs' },
         ];
-        console.log("---------");
-        console.log(this.state.bmi);
+
         return (
             <div>
                 <div className="mui-row">
@@ -94,7 +96,7 @@ class BMI extends React.Component {
                         </div>
                     </div>
                     <div className="mui-col-sm-12">
-                        <RaisedButton label="Primary" primary={true} />
+                        <RaisedButton label="Primary" primary={true} onClick={this._handleClick} />
                     </div>
                 </div>
             </div>
