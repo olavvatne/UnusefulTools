@@ -126,6 +126,15 @@ export default class ColorConverter extends React.Component {
                         </div>
                     </div>
                 </div>
+                <div className="ad-segment">
+                    <div className="mui-row">
+                        <div className="mui-col-md-12">
+                            <div className="mui-text-center">
+                                <img src="http://placehold.it/728x90" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }
