@@ -86,7 +86,7 @@ app.get('/imageconverter', function(req, res) {
     res.render('pages/default-tool', templateData);
 });
 
-app.get('/color-converter', function(req, res) {
+app.get('/rgb-to-hex', function(req, res) {
     let content = React.renderToString(<ColorConverter />);
     var templateData = {
         reactContent: content,
