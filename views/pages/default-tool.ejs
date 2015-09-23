@@ -1,8 +1,11 @@
 <% layout('../base') -%>
-<div >
-    <% include ../partials/tool-description.ejs %>
+<div class="mui-panel">
     <div id="app" >
         <%- reactContent %>
     </div>
+</div>
+
+<div class="ads mui-panel" >
+    <% include ../partials/ads.ejs %>
 </div>
 <script src="http://localhost:8080/js/<%= reactScript %>.entry.js"></script>
