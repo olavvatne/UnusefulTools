@@ -3,6 +3,7 @@
 @import 'config.scss';
 @import 'ads.scss';
 @import 'frontpage.scss';
+@import 'webcam.scss';
 @import 'colorConverter.scss';
 
 .header {
@@ -47,5 +48,14 @@ footer {
     margin-top: 5px;
     text-align: center;
   }
+}
+
+
+.mt10 {
+  margin-top: 10px;
+}
+
+.mb10 {
+  margin-bottom: 10px;
 }
 
