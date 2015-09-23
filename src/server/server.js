@@ -34,8 +34,6 @@ app.use(express.static('./public')); //compiled sass and other stuff put in here
 app.get('/', function (req, res) {
     let content = React.renderToString(<ToolTemp />);
     var templateData = {
-        toolTitle: "Tool #1",
-        toolDescription: "First tool of many.",
         reactContent: content
     };
     res.render('pages/home', templateData);
@@ -44,8 +42,6 @@ app.get('/', function (req, res) {
 app.get('/helloworld', function(req, res) {
     let content = React.renderToString(<HelloWorld />);
     var templateData = {
-        toolTitle: "Tool #1",
-        toolDescription: "First tool of many.",
         reactContent: content
     };
     res.render('pages/default-tool', templateData);
@@ -55,8 +51,6 @@ app.get('/bmi', function(req, res) {
     let content = React.renderToString(<BMI />);
     //content = null;
     var templateData = {
-        toolTitle: "BMI calculator",
-        toolDescription: "The body mass index is a value based on an indviduals weight and height",
         reactContent: content,
         reactScript: "BMIClient"
     };
@@ -67,8 +61,6 @@ app.get('/webcam', function(req, res) {
     let content = React.renderToString(<Webcam />);
     //content = null;
     var templateData = {
-        toolTitle: "Web camera",
-        toolDescription: "Capture images",
         reactContent: content,
         reactScript: "WebcamClient"
     };
@@ -79,8 +71,6 @@ app.get('/webcam', function(req, res) {
 app.get('/weeknumber', function(req, res) {
     let content = React.renderToString(<WeekNumber />);
     var templateData = {
-        toolTitle: "Week number",
-        toolDescription: "Which week is it? Current week of the year is displayed.",
         reactContent: content,
         reactScript: "WeekNumberClient"
     };
@@ -90,8 +80,6 @@ app.get('/weeknumber', function(req, res) {
 app.get('/imageconverter', function(req, res) {
     let content = React.renderToString(<ImageConverter />);
     var templateData = {
-        toolTitle: "Convert images",
-        toolDescription: "Convert your image.",
         reactContent: content,
         reactScript: "ImageConverterClient"
     };
@@ -101,8 +89,6 @@ app.get('/imageconverter', function(req, res) {
 app.get('/color-converter', function(req, res) {
     let content = React.renderToString(<ColorConverter />);
     var templateData = {
-        toolTitle: "Convert RGB to HEX",
-        toolDescription: "Convert color values: rgb to hex, rgb to cmyk etc.",
         reactContent: content,
         reactScript: "ColorConverterClient"
     };

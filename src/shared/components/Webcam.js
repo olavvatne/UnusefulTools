@@ -5,7 +5,7 @@ import mui, { RaisedButton} from 'material-ui';
 
 let ThemeManager = new mui.Styles.ThemeManager();
 
-export default class Webcam extends React.Component {
+class Webcam extends React.Component {
     constructor() {
         super();
         this._capture = this._captureImage.bind(this);
@@ -31,6 +31,10 @@ export default class Webcam extends React.Component {
     render() {
         return (
             <div>
+                <div className="mui-ro">
+                    <h1>{Webcam.toolTitle}</h1>
+                    <p>{Webcam.toolDescription}</p>
+                </div>
                 <Webcamera ref="camscreen"></Webcamera>
                 <RaisedButton label="Capture" primary={true} onClick={this._capture}/>
                 <a href={this.state.screenshot} download="download.png" target="_blank">Download</a>
@@ -39,3 +43,9 @@ export default class Webcam extends React.Component {
         );
     }
 }
+
+
+Webcam.toolTitle = "Webcam calculator";
+Webcam.toolDescription=  "The body mass index is a value based on an indviduals weight and height";
+
+module.exports = Webcam;

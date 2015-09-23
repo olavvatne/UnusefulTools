@@ -1,7 +1,7 @@
 import React from "react";
 import Moment from "moment";
 
-export default class WeekNumber extends React.Component {
+class WeekNumber extends React.Component {
     render() {
 
 
@@ -13,9 +13,18 @@ export default class WeekNumber extends React.Component {
     	//Client should inject correct day, location based.
 
         return (
-        	<div> 
+        	<div>
+				<div className="mui-ro">
+					<h1>{WeekNumber.toolTitle}</h1>
+					<p>{WeekNumber.toolDescription}</p>
+				</div>
         		<p className="metaText">Current week: </p>
         		<p className="bigtext">{weekday}</p>
         	</div>);
     }
 }
+
+WeekNumber.toolTitle = "WeekNumber calculator";
+WeekNumber.toolDescription=  "The body mass index is a value based on an indviduals weight and height";
+
+module.exports = WeekNumber;

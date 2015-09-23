@@ -9,10 +9,14 @@
     <title>Tools</title>
 </head>
 <body>
-<% include ./partials/header.ejs %>
-<div class="" style="margin-left:10px; margin-right:10px">
-    <%-body -%>
+<div id="wrapper" >
+    <% include ./partials/header.ejs %>
+
+    <div class="content mui-container" style="margin-top: 20px">
+        <%-body -%>
+    </div>
+
+    <% include ./partials/footer.ejs %>
 </div>
-<% include ./partials/footer.ejs %>
 </body>
 </html>
