@@ -5,7 +5,7 @@ import mui, { TextField, SelectField, RaisedButton } from "material-ui";
 
 let ThemeManager = new mui.Styles.ThemeManager();
 
-export default class ColorConverter extends React.Component {
+class ColorConverter extends React.Component {
 
     constructor() {
         super();
@@ -73,6 +73,10 @@ export default class ColorConverter extends React.Component {
     render() {
         return (
             <div>
+                <div className="mui-ro">
+                    <h1>{ColorConverter.toolTitle}</h1>
+                    <p>{ColorConverter.toolDescription}</p>
+                </div>
                 <div className="mui-row">
                     <div className="mui-col-md-6">
                         <div className="mui-row">
@@ -130,3 +134,8 @@ export default class ColorConverter extends React.Component {
         );
     }
 }
+
+ColorConverter.toolTitle = "ColorConverter calculator";
+ColorConverter.toolDescription=  "The body mass index is a value based on an indviduals weight and height";
+
+module.exports = ColorConverter;

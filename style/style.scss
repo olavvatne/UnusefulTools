@@ -1,7 +1,11 @@
 @import url(https://fonts.googleapis.com/css?family=Sigmar+One);
 @import url(https://fonts.googleapis.com/css?family=Poiret+One);
+@import 'config.scss';
+@import 'ads.scss';
+@import 'frontpage.scss';
+
 .header {
-  background-color: #262a2e !important;
+  background-color: transparent !important;
   font-family: 'Poiret One';
 }
 
@@ -11,7 +15,36 @@ body,html {
   height: 100%;
 }
 
+
 body {
-  background-color: #E0E6EC !important;
+  background-color: $bg-color !important;
   font-family:'Roboto', "Helvetica Neue", Helvetica, Arial, Verdana, "Trebuchet MS" !important;
 }
+
+.content {
+  padding-bottom:70px;
+}
+
+#wrapper {
+  min-height:100%;
+  position:relative;
+}
+
+footer {
+  padding:10px;
+
+  width:100%;
+  height:50px;
+  position:absolute;
+  bottom:0;
+  left:0;
+  color: #E0E6EC;
+
+  p {
+    font-weight: normal;
+    color: grey;
+    margin-top: 5px;
+    text-align: center;
+  }
+}
+

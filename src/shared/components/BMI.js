@@ -68,6 +68,10 @@ class BMI extends React.Component {
 
         return (
             <div>
+                <div className="mui-ro">
+                    <h1>{BMI.toolTitle}</h1>
+                    <p>{BMI.toolDescription}</p>
+                </div>
                 <div className="mui-row">
                     <div className="mui-col-sm-6">
                         <TextField ref="weight" hintText="Enter your weight."
@@ -105,5 +109,8 @@ class BMI extends React.Component {
         );
     }
 };
+
+BMI.toolTitle = "BMI calculator";
+BMI.toolDescription=  "The body mass index is a value based on an indviduals weight and height";
 
 module.exports = BMI;
