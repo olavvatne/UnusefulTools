@@ -46,10 +46,15 @@ class BMI extends React.Component {
         }
 
         var weight = this.refs.weight.getValue();
-        var height = this.refs.height.getValue()/100;
+        var height = this.refs.height.getValue();
 
-        //TODO: convert lbs
-        var BMI = weight/Math.pow(height, 2);
+        if(!weight || !height) {
+            //TODO: Set error state
+            console.log("No value");
+            return;
+        }
+
+        var BMI = weight/Math.pow(height/100, 2);
         this.setState({bmi: BMI});
     }
 
