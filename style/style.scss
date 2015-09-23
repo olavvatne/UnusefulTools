@@ -3,6 +3,7 @@
 @import 'config.scss';
 @import 'ads.scss';
 @import 'frontpage.scss';
+@import 'webcam.scss';
 
 .header {
   background-color: transparent !important;
@@ -46,5 +47,14 @@ footer {
     margin-top: 5px;
     text-align: center;
   }
+}
+
+
+.mt10 {
+  margin-top: 10px;
+}
+
+.mb10 {
+  margin-bottom: 10px;
 }
 
