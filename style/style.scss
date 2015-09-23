@@ -5,7 +5,7 @@
 @import 'frontpage.scss';
 
 .header {
-  background-color: $header-color !important;
+  background-color: transparent !important;
   font-family: 'Poiret One';
 }
 
@@ -31,7 +31,7 @@ body {
 
 footer {
   padding:10px;
-  background: $footer-color;
+
   width:100%;
   height:50px;
   position:absolute;
