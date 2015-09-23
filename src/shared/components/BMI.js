@@ -1,6 +1,8 @@
 import React from "react";
 import injectTapEventPlugin from "react-tap-event-plugin";
 import mui, { TextField, SelectField, RaisedButton } from 'material-ui';
+import WeightField from './libs/WeightField.js';
+import HeightField from './libs/HeightField.js';
 
 let ThemeManager = new mui.Styles.ThemeManager();
 
@@ -9,11 +11,9 @@ class BMI extends React.Component {
 
     constructor() {
         super();
-        this._handleChangedWeightUnit = this._handleChangedWeightUnit.bind(this);
-        this._validateWeight = this._validateNumber.bind(this, 'weight', 'weightNotNumber');
         this._validateHeight = this._validateNumber.bind(this, 'height', 'heightNotNumber');
         this._handleClick = this._computeBMI.bind(this);
-        this.state = {weightUnit: '1', weightNotNumber: null, heightNotNumber: null, bmi: null};
+        this.state = { heightNotNumber: null, bmi: null};
     }
 
     static get childContextTypes()
@@ -26,10 +26,6 @@ class BMI extends React.Component {
         return { muiTheme: ThemeManager.getCurrentTheme() };
     }
 
-    _handleChangedWeightUnit(event, selected) {
-        console.log(selected);
-        this.setState({weightUnit: selected+1 + ""})
-    }
 
     _validateNumber(stateName, errorName) {
         var v = this.refs[stateName].getValue();
@@ -45,64 +41,61 @@ class BMI extends React.Component {
     }
 
     _computeBMI() {
-        console.log("HEI");
         if(!this.refs.weight  || !this.refs.height) {
-            console.log("WTF");
             return null;
         }
 
         var weight = this.refs.weight.getValue();
-        var height = this.refs.height.getValue();
-        console.log(weight);
-        console.log(height);
+        var height = this.refs.height.getValue()/100;
+
         //TODO: convert lbs
         var BMI = weight/Math.pow(height, 2);
         this.setState({bmi: BMI});
     }
 
+    _getBMIText() {
+        var bmi = this.state.bmi;
+        if(!bmi) {
+            return null;
+        }
+
+        if(bmi < 18.5) {
+            return "Underweight";
+        }
+        else if(bmi <25) {
+            return "Healthy";
+        }
+        else if(bmi <30) {
+            return "Overweight";
+        }
+        else {
+            return "Obese";
+        }
+    }
+
     render() {
-        let weightUnits = [
-            { payload: '1', text: 'kg' },
-            { payload: '2', text: 'lbs' },
-        ];
 
         return (
             <div>
-                <div className="mui-ro">
-                    <h1>{BMI.toolTitle}</h1>
-                    <p>{BMI.toolDescription}</p>
-                </div>
                 <div className="mui-row">
-                    <div className="mui-col-sm-6">
-                        <TextField ref="weight" hintText="Enter your weight."
-                                   floatingLabelText="Weight"
-                                   errorText={this.state.weightNotNumber}
-                                   onChange={this._validateWeight}
-                            />
-                    </div>
-                    <div className="mui-col-sm-6">
-                        <SelectField
-                            value={this.state.weightUnit}
-                            onChange={this._handleChangedWeightUnit}
-                            hintText="Hint Text"
-                            menuItems={weightUnits}
-                            floatingLabelText="Unit"/>
-                    </div>
-                </div>
-                <div className="mui-row">
-                    <div className="mui-col-sm-6">
-                        <TextField ref="height" hintText="Enter your height."
-                                   floatingLabelText="Height"
-                                   errorText={this.state.heightNotNumber}
-                                   onChange={this._validateHeight}/>
-                    </div>
-                    <div className="mui-col-sm-6">
-                        <div className="mui-text-display4 mui-text-accent mui-text-center">
-                            { Math.round(this.state.bmi * 100)/100 }
+                    <div className="mui-col-md-6">
+                        <h1>{BMI.toolTitle}</h1>
+                        <p>{BMI.toolDescription}</p>
+                        <WeightField ref="weight" />
+                        <HeightField ref="height" />
+
+                        <div className="row">
+                            <RaisedButton label="Calculate" primary={true} onClick={this._handleClick} />
                         </div>
                     </div>
-                    <div className="mui-col-sm-12">
-                        <RaisedButton label="Calculate" primary={true} onClick={this._handleClick} />
+                    <div className="mui-col-md-6">
+                        <div className="mui-text-display4 mui-text-accent mui-text-center"
+                             style={{marginTop:"20px"}}>
+                            { Math.round(this.state.bmi * 100)/100 }
+                        </div>
+                        <p className="mui-text-display3 mui-text-accent mui-text-center">
+                            { this._getBMIText() }
+                        </p>
                     </div>
                 </div>
             </div>
