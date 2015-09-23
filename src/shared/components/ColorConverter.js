@@ -73,11 +73,11 @@ class ColorConverter extends React.Component {
     render() {
         return (
             <div>
-                <div className="mui-ro">
+                <div className="mui-ro" id="about">
                     <h1>{ColorConverter.toolTitle}</h1>
                     <p>{ColorConverter.toolDescription}</p>
                 </div>
-                <div className="mui-row">
+                <div className="mui-row" id="input-row">
                     <div className="mui-col-md-6">
                         <div className="mui-row">
                             <div className="mui-col-md-4">
@@ -120,12 +120,13 @@ class ColorConverter extends React.Component {
                     </div>
                 </div>
                 <div className="mui-row">
-                    <div className="mui-col-md-12">
-                        <div className="mui-text-center">
+                    <div className="mui-col-md-4">
+                        <div className="mui-text-right">
                             <RaisedButton
                                 label="Convert"
                                 primary={true}
                                 onClick={this._handleClick}
+                                id="btn-convert"
                                 />
                         </div>
                     </div>
@@ -135,7 +136,7 @@ class ColorConverter extends React.Component {
     }
 }
 
-ColorConverter.toolTitle = "ColorConverter calculator";
-ColorConverter.toolDescription=  "The body mass index is a value based on an indviduals weight and height";
+ColorConverter.toolTitle = "RGB to hex converter";
+ColorConverter.toolDescription=  "Convert RGB color values to hexadecimal color values";
 
 module.exports = ColorConverter;
