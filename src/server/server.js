@@ -29,7 +29,7 @@ app.use(sassMiddleware({
     prefix:  '/prefix'
 }));
 app.use(express.static('./public')); //compiled sass and other stuff put in here
-
+app.use(express.static('./images'));
 
 app.get('/', function (req, res) {
     let content = React.renderToString(<ToolTemp />);
