@@ -33,6 +33,7 @@ class Webcam extends React.Component {
     }
     
     render() {
+        //TODO: Dropdown, select filter.
         var downloadThumbs = this.state.screenshots.map((screenshot) => {
             return (
                 <a className="image-thumb" href={screenshot} download="download.png" target="_blank">
