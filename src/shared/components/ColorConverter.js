@@ -36,7 +36,7 @@ class ColorConverter extends React.Component {
 
     _validateRgb(color, errorName) {
         var value = this.refs[color].getValue();
-        var regex = /[0-9]|\./;
+        var regex = /^[0-9]+([,.][0-9]+)?$/g;
 
         if (!regex.test(value) && value.length > 0 || value < 0 || value > 255) {
             this.setState({
@@ -82,8 +82,8 @@ class ColorConverter extends React.Component {
                         <div className="mui-row">
                             <div className="mui-col-md-4">
                                 <TextField ref="red"
-                                           hintText="Red"
-                                           floatingLabeltext="Red"
+                                           hintText="Red value"
+                                           floatingLabelText="Red"
                                            errorText={this.state.invalidRed}
                                            onChange={this._validateRed}
                                            style={{width: "70%"}}
@@ -91,8 +91,8 @@ class ColorConverter extends React.Component {
                             </div>
                             <div className="mui-col-md-4">
                                 <TextField ref="green"
-                                           hintText="Green"
-                                           floatingLabeltext="Green"
+                                           hintText="Green value"
+                                           floatingLabelText="Green"
                                            errorText={this.state.invalidGreen}
                                            onChange={this._validateGreen}
                                            style={{width: "70%"}}
@@ -100,8 +100,8 @@ class ColorConverter extends React.Component {
                             </div>
                             <div className="mui-col-md-4">
                                 <TextField ref="blue"
-                                           hintText="Blue"
-                                           floatingLabeltext="Blue"
+                                           hintText="Blue value"
+                                           floatingLabelText="Blue"
                                            errorText={this.state.invalidBlue}
                                            onChange={this._validateBlue}
                                            style={{width: "70%"}}
