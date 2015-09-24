@@ -10,16 +10,21 @@ class ReactCam extends Component {
     constructor() {
         super();
         this.state = {
-            hasUserMedia: false
+            hasUserMedia: false,
+            src: null
         };
     }
 
     componentDidMount() {
-        if (!hasGetUserMedia()) return;
+        if (!hasGetUserMedia()) {
+            console.log("NOPE")
+            return;
+        }
 
         ReactCam.mountedInstances.push(this);
 
         if (!this.state.hasUserMedia && !ReactCam.userMediaRequested) {
+            console.log("REQUESTS!")
             this.requestUserMedia();
         }
     }
@@ -30,50 +35,20 @@ class ReactCam extends Component {
             navigator.mozGetUserMedia ||
             navigator.msGetUserMedia;
 
-        let sourceSelected = (audioSource, videoSource) => {
-            let constraints = {
-                video: {
-                    optional: [{sourceId: videoSource}]
-                }
-            };
+        var mediaOptions = { audio: false, video: true };
 
-            if (this.props.audio) {
-                constraints.audio = {
-                    optional: [{sourceId: audioSource}]
-                };
-            }
-
-            navigator.getUserMedia(constraints, (stream) => {
-                ReactCam.mountedInstances.forEach((instance) => instance.handleUserMedia(null, stream));
-            }, (e) => {
-                ReactCam.mountedInstances.forEach((instance) => instance.handleUserMedia(e));
-            });
-        };
-
-        if (this.props.audioSource && this.props.videoSource) {
-            sourceSelected(this.props.audioSource, this.props.videoSource);
-        } else {
-            MediaStreamTrack.getSources((sourceInfos) => {
-                let audioSource = null;
-                let videoSource = null;
-
-                sourceInfos.forEach((sourceInfo) => {
-                    if (sourceInfo.kind === 'audio') {
-                        audioSource = sourceInfo.id;
-                    } else if (sourceInfo.kind === 'video') {
-                        videoSource = sourceInfo.id;
-                    }
-                });
-
-                sourceSelected(audioSource, videoSource);
-            });
-        }
+        navigator.getUserMedia(mediaOptions, (stream) => {
+            ReactCam.mountedInstances.forEach((instance) => instance.handleUserMedia(null, stream));
+        }, (e) => {
+            ReactCam.mountedInstances.forEach((instance) => instance.handleUserMedia(e));
+        });
 
         ReactCam.userMediaRequested = true;
     }
 
     handleUserMedia(error, stream) {
         if (error) {
+            console.log("ERROR");
             this.setState({
                 hasUserMedia: false
             });
@@ -82,11 +57,11 @@ class ReactCam extends Component {
         }
 
         let src = window.URL.createObjectURL(stream);
-
+        console.log(src);
         this.stream = stream;
         this.setState({
             hasUserMedia: true,
-            src
+            src: src
         });
 
         if (this.props.onUserMedia) {
@@ -133,7 +108,7 @@ class ReactCam extends Component {
     render() {
         return (
             <video
-                autoPlay
+                autoPlay={true}
                 width={this.props.width}
                 height={this.props.height}
                 src={this.state.src}
