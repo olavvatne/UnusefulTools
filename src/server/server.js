@@ -11,6 +11,9 @@ import ToolTemp from "../shared/components/ToolTemp";
 var sassMiddleware = require('node-sass-middleware');
 const app = express();
 
+app.set("env", process.env.NODE_ENV || "development");
+app.set("port", process.env.PORT || 3000);
+
 app.engine('ejs', engine);//Support for layout for templates
 app.set('view engine', 'ejs');
 //TODO: New backend structure that makes more sense.
@@ -67,7 +70,7 @@ app.get('/webcam', function(req, res) {
     res.render('pages/default-tool', templateData);
 });
 
-//TODO: process.env.PORT || 3000
+
 app.get('/weeknumber', function(req, res) {
     let content = React.renderToString(<WeekNumber />);
     var templateData = {
@@ -95,7 +98,7 @@ app.get('/rgb-to-hex', function(req, res) {
     res.render('pages/default-tool', templateData);
 });
 
-var server = app.listen(7000, function () {
+var server = app.listen(app.get("port"), function () {
     var host = server.address().address;
     var port = server.address().port;
 
