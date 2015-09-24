@@ -20,7 +20,7 @@ class ColorConverter extends React.Component {
             redUnit: null,
             greenUnit: null,
             blueUnit: null,
-            hexValue: null,
+            hexValue: "# - - - - - -",
         }
     }
 
