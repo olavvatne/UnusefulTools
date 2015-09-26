@@ -23,6 +23,12 @@ app.set('views', './views');
 var srcPath = './style';
 var destPath = './public';
 
+var getScriptPath = function() {
+    if(app.get('env') === 'development') {
+        return 'http://localhost:8080';
+    }
+    return ''
+}
 app.use(sassMiddleware({
     /* Options */
     src: srcPath,
@@ -31,12 +37,16 @@ app.use(sassMiddleware({
     outputStyle: 'compressed',
     prefix:  '/prefix'
 }));
+
 app.use(express.static('./public')); //compiled sass and other stuff put in here
 app.use(express.static('./images'));
+
+
 
 app.get('/', function (req, res) {
     let content = React.renderToString(<ToolTemp />);
     var templateData = {
+        reactEntryPath: getScriptPath(),
         reactContent: content
     };
     res.render('pages/home', templateData);
@@ -45,6 +55,7 @@ app.get('/', function (req, res) {
 app.get('/helloworld', function(req, res) {
     let content = React.renderToString(<HelloWorld />);
     var templateData = {
+        reactEntryPath: getScriptPath(),
         reactContent: content
     };
     res.render('pages/default-tool', templateData);
@@ -55,6 +66,7 @@ app.get('/bmi', function(req, res) {
     //content = null;
     var templateData = {
         reactContent: content,
+        reactEntryPath: getScriptPath(),
         reactScript: "BMIClient"
     };
     res.render('pages/default-tool', templateData);
@@ -65,6 +77,7 @@ app.get('/webcam', function(req, res) {
     //content = null;
     var templateData = {
         reactContent: content,
+        reactEntryPath: getScriptPath(),
         reactScript: "WebcamClient"
     };
     res.render('pages/default-tool', templateData);
@@ -75,6 +88,7 @@ app.get('/weeknumber', function(req, res) {
     let content = React.renderToString(<WeekNumber />);
     var templateData = {
         reactContent: content,
+        reactEntryPath: getScriptPath(),
         reactScript: "WeekNumberClient"
     };
     res.render('pages/default-tool', templateData);
@@ -84,6 +98,7 @@ app.get('/imageconverter', function(req, res) {
     let content = React.renderToString(<ImageConverter />);
     var templateData = {
         reactContent: content,
+        reactEntryPath: getScriptPath(),
         reactScript: "ImageConverterClient"
     };
     res.render('pages/default-tool', templateData);
@@ -93,6 +108,7 @@ app.get('/rgb-to-hex', function(req, res) {
     let content = React.renderToString(<ColorConverter />);
     var templateData = {
         reactContent: content,
+        reactEntryPath: getScriptPath(),
         reactScript: "ColorConverterClient"
     };
     res.render('pages/default-tool', templateData);

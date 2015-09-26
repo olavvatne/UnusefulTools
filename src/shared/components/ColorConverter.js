@@ -4,7 +4,7 @@ import injectTapEventPlugin from "react-tap-event-plugin";
 import mui, { TextField, SelectField, RaisedButton } from "material-ui";
 
 let ThemeManager = new mui.Styles.ThemeManager();
-
+injectTapEventPlugin();
 class ColorConverter extends React.Component {
 
     constructor() {
