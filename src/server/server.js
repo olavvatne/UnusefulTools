@@ -1,5 +1,6 @@
 import express from "express";
 import engine  from "ejs-locals";
+import favicon from 'serve-favicon';
 import React from "react";
 import HelloWorld from "../shared/components/HelloWorld";
 import WeekNumber from "../shared/components/WeekNumber";
@@ -8,6 +9,7 @@ import BMI from "../shared/components/BMI";
 import Webcam from "../shared/components/Webcam";
 import ColorConverter from "../shared/components/ColorConverter";
 import ToolTemp from "../shared/components/ToolTemp";
+
 var sassMiddleware = require('node-sass-middleware'); //TODO: Do import instead
 var sass = require('node-sass'); //TODO: Move to build.js
 var fs = require('fs'); //TODO: Move to build.js
@@ -17,11 +19,14 @@ const app = express();
 app.set("env", process.env.NODE_ENV || "development");
 app.set("port", process.env.PORT || 3000);
 
+app.use(express.static('./public')); //compiled sass and other stuff put in here
+app.use(express.static('./images'));
+
 app.engine('ejs', engine);//Support for layout for templates
 app.set('view engine', 'ejs');
 //TODO: New backend structure that makes more sense.
 app.set('views', './views');
-
+app.use(favicon( './images/favicon/favicon.ico'));
 
 var srcPath = './style';
 var destPath = './public';
@@ -70,8 +75,7 @@ if(app.get('env') === 'production') {
 
 
 
-app.use(express.static('./public')); //compiled sass and other stuff put in here
-app.use(express.static('./images'));
+
 
 
 
