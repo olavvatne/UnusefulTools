@@ -2,13 +2,29 @@ import React from "react";
 import Moment from "moment";
 
 class WeekNumber extends React.Component {
+
+	constructor() {
+		super();
+
+		this.state = {
+			weeknumber: null
+		};
+	}
+
+	componentDidMount() {
+		// Update state to force re-render.
+		// This will ensure that the component is rendered on the client, potentially fixing timezone issues.
+		var date = new Date();
+		var weeknumber = Moment(date).isoWeek();
+		this.setState({
+			weeknumber: weeknumber
+		});
+	}
+
     render() {
 
-    	var date = new Date();
-    	var weeknumber = Moment(date).isoWeek();
-
-    	// TODO: Different week for people around the world. 
-    	//Client should inject correct day, location based.
+    	//var date = new Date();
+    	//var weeknumber = Moment(date).isoWeek();
 
         return (
         	<div>
@@ -20,7 +36,7 @@ class WeekNumber extends React.Component {
 				<div className="mui-row">
 					<div className="mui-col-md12">
 						<div className="mui-text-display4 mui-text-accent mui-text-center" id="weeknumber">
-							{{weeknumber}}
+							{this.state.weeknumber}
 						</div>
 					</div>
 				</div>
