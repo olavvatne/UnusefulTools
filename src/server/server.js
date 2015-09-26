@@ -8,7 +8,10 @@ import BMI from "../shared/components/BMI";
 import Webcam from "../shared/components/Webcam";
 import ColorConverter from "../shared/components/ColorConverter";
 import ToolTemp from "../shared/components/ToolTemp";
-var sassMiddleware = require('node-sass-middleware');
+var sassMiddleware = require('node-sass-middleware'); //TODO: Do import instead
+var sass = require('node-sass'); //TODO: Move to build.js
+var fs = require('fs'); //TODO: Move to build.js
+
 const app = express();
 
 app.set("env", process.env.NODE_ENV || "development");
@@ -29,14 +32,43 @@ var getScriptPath = function() {
     }
     return ''
 }
-app.use(sassMiddleware({
-    /* Options */
-    src: srcPath,
-    dest: destPath,
-    debug: true,
-    outputStyle: 'compressed',
-    prefix:  '/prefix'
-}));
+
+if(app.get('env') === 'development') {
+    app.use(sassMiddleware({
+        /* Options */
+        src: srcPath,
+        dest: destPath,
+        debug: true,
+        outputStyle: 'compressed',
+        prefix:  '/prefix'
+    }));
+}
+
+//TODO: Move to build.js
+if(app.get('env') === 'production') {
+    console.log("==== Render SASS =====")
+    sass.render({
+        file: srcPath + '/style.scss',
+            outputStyle: 'compressed'
+    },
+    function(err, result) {
+        if(err) {
+            console.log(err);
+            throw new Error("Could not render SASS")
+        }
+        else {
+            fs.writeFile(destPath + '/style.css', result.css, function(err) {
+                if(err) {
+                    return console.log(err);
+                    throw new Error("Could not write SASS")
+                }
+                console.log("The file was saved!");
+            });
+        }
+    });
+}
+
+
 
 app.use(express.static('./public')); //compiled sass and other stuff put in here
 app.use(express.static('./images'));
