@@ -1,5 +1,6 @@
 import express from "express";
 import engine  from "ejs-locals";
+import favicon from 'serve-favicon';
 import React from "react";
 import HelloWorld from "../shared/components/HelloWorld";
 import WeekNumber from "../shared/components/WeekNumber";
@@ -8,32 +9,80 @@ import BMI from "../shared/components/BMI";
 import Webcam from "../shared/components/Webcam";
 import ColorConverter from "../shared/components/ColorConverter";
 import ToolTemp from "../shared/components/ToolTemp";
-var sassMiddleware = require('node-sass-middleware');
+
+var sassMiddleware = require('node-sass-middleware'); //TODO: Do import instead
+var sass = require('node-sass'); //TODO: Move to build.js
+var fs = require('fs'); //TODO: Move to build.js
+
 const app = express();
+
+app.set("env", process.env.NODE_ENV || "development");
+app.set("port", process.env.PORT || 3000);
+
+app.use(express.static('./public')); //compiled sass and other stuff put in here
+app.use(express.static('./images'));
 
 app.engine('ejs', engine);//Support for layout for templates
 app.set('view engine', 'ejs');
 //TODO: New backend structure that makes more sense.
 app.set('views', './views');
-
+app.use(favicon( './images/favicon/favicon.ico'));
 
 var srcPath = './style';
 var destPath = './public';
 
-app.use(sassMiddleware({
-    /* Options */
-    src: srcPath,
-    dest: destPath,
-    debug: true,
-    outputStyle: 'compressed',
-    prefix:  '/prefix'
-}));
-app.use(express.static('./public')); //compiled sass and other stuff put in here
-app.use(express.static('./images'));
+var getScriptPath = function() {
+    if(app.get('env') === 'development') {
+        return 'http://localhost:8080';
+    }
+    return ''
+}
+
+if(app.get('env') === 'development') {
+    app.use(sassMiddleware({
+        /* Options */
+        src: srcPath,
+        dest: destPath,
+        debug: true,
+        outputStyle: 'compressed',
+        prefix:  '/prefix'
+    }));
+}
+
+//TODO: Move to build.js
+if(app.get('env') === 'production') {
+    console.log("==== Render SASS =====")
+    sass.render({
+        file: srcPath + '/style.scss',
+            outputStyle: 'compressed'
+    },
+    function(err, result) {
+        if(err) {
+            console.log(err);
+            throw new Error("Could not render SASS")
+        }
+        else {
+            fs.writeFile(destPath + '/style.css', result.css, function(err) {
+                if(err) {
+                    return console.log(err);
+                    throw new Error("Could not write SASS")
+                }
+                console.log("The file was saved!");
+            });
+        }
+    });
+}
+
+
+
+
+
+
 
 app.get('/', function (req, res) {
     let content = React.renderToString(<ToolTemp />);
     var templateData = {
+        reactEntryPath: getScriptPath(),
         reactContent: content
     };
     res.render('pages/home', templateData);
@@ -42,6 +91,7 @@ app.get('/', function (req, res) {
 app.get('/helloworld', function(req, res) {
     let content = React.renderToString(<HelloWorld />);
     var templateData = {
+        reactEntryPath: getScriptPath(),
         reactContent: content
     };
     res.render('pages/default-tool', templateData);
@@ -52,6 +102,7 @@ app.get('/bmi', function(req, res) {
     //content = null;
     var templateData = {
         reactContent: content,
+        reactEntryPath: getScriptPath(),
         reactScript: "BMIClient"
     };
     res.render('pages/default-tool', templateData);
@@ -62,16 +113,18 @@ app.get('/webcam', function(req, res) {
     //content = null;
     var templateData = {
         reactContent: content,
+        reactEntryPath: getScriptPath(),
         reactScript: "WebcamClient"
     };
     res.render('pages/default-tool', templateData);
 });
 
-//TODO: process.env.PORT || 3000
+
 app.get('/weeknumber', function(req, res) {
     let content = React.renderToString(<WeekNumber />);
     var templateData = {
         reactContent: content,
+        reactEntryPath: getScriptPath(),
         reactScript: "WeekNumberClient"
     };
     res.render('pages/default-tool', templateData);
@@ -81,6 +134,7 @@ app.get('/imageconverter', function(req, res) {
     let content = React.renderToString(<ImageConverter />);
     var templateData = {
         reactContent: content,
+        reactEntryPath: getScriptPath(),
         reactScript: "ImageConverterClient"
     };
     res.render('pages/default-tool', templateData);
@@ -90,12 +144,13 @@ app.get('/rgb-to-hex', function(req, res) {
     let content = React.renderToString(<ColorConverter />);
     var templateData = {
         reactContent: content,
+        reactEntryPath: getScriptPath(),
         reactScript: "ColorConverterClient"
     };
     res.render('pages/default-tool', templateData);
 });
 
-var server = app.listen(7000, function () {
+var server = app.listen(app.get("port"), function () {
     var host = server.address().address;
     var port = server.address().port;
 
