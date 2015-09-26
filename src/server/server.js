@@ -88,14 +88,14 @@ app.get('/', function (req, res) {
     res.render('pages/home', templateData);
 });
 
-app.get('/helloworld', function(req, res) {
+/*app.get('/helloworld', function(req, res) {
     let content = React.renderToString(<HelloWorld />);
     var templateData = {
         reactEntryPath: getScriptPath(),
         reactContent: content
     };
     res.render('pages/default-tool', templateData);
-});
+});*/
 
 app.get('/bmi', function(req, res) {
     let content = React.renderToString(<BMI />);
@@ -130,7 +130,7 @@ app.get('/weeknumber', function(req, res) {
     res.render('pages/default-tool', templateData);
 });
 
-app.get('/imageconverter', function(req, res) {
+/*app.get('/imageconverter', function(req, res) {
     let content = React.renderToString(<ImageConverter />);
     var templateData = {
         reactContent: content,
@@ -138,7 +138,7 @@ app.get('/imageconverter', function(req, res) {
         reactScript: "ImageConverterClient"
     };
     res.render('pages/default-tool', templateData);
-});
+});*/
 
 app.get('/rgb-to-hex', function(req, res) {
     let content = React.renderToString(<ColorConverter />);
