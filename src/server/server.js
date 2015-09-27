@@ -52,7 +52,7 @@ if(app.get('env') === 'development') {
 if(app.get('env') === 'production') {
     console.log("==== Render SASS =====")
     sass.render({
-        file: srcPath + '/style.scss',
+        file: srcPath + 'style/style.scss',
             outputStyle: 'compressed'
     },
     function(err, result) {
