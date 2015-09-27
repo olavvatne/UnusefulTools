@@ -81,7 +81,7 @@ class BMI extends React.Component {
     render() {
 
         return (
-            <div>
+            <div className="mui-container">
                 <div className="mui-row">
                     <div className="mui-col-md-6">
                         <h1>{BMI.toolTitle}</h1>
