@@ -1,14 +1,7 @@
 import express from "express";
 import engine  from "ejs-locals";
 import favicon from 'serve-favicon';
-import React from "react";
-import HelloWorld from "../shared/components/HelloWorld";
-import WeekNumber from "../shared/components/WeekNumber";
-import ImageConverter from "../shared/components/ImageConverter";
-import BMI from "../shared/components/BMI";
-import Webcam from "../shared/components/Webcam";
-import ColorConverter from "../shared/components/ColorConverter";
-import ToolTemp from "../shared/components/ToolTemp";
+import controllers from './controllers';
 //TODO: Save node-sass-middleware in package.json
 var sassMiddleware = require('node-sass-middleware'); //TODO: Do import instead
 var sass = require('node-sass'); //TODO: Move to build.js
@@ -30,12 +23,15 @@ app.use(favicon( './public/images/favicon/favicon.ico'));
 var srcPath = './';
 var destPath = './public';
 
-var getScriptPath = function() {
-    if(app.get('env') === 'development') {
-        return 'http://localhost:8080';
-    }
-    return ''
-}
+//Moving topcoat css into public style folder on start up
+
+/*fs.readFile('folder1/image.png', function (err, data) {
+    if (err) throw err;
+    fs.writeFile('folder2/image.png', data, function (err) {
+        if (err) throw err;
+        console.log('It\'s saved!');
+    });
+});*/
 
 if(app.get('env') === 'development') {
     app.use(sassMiddleware({
@@ -72,82 +68,7 @@ if(app.get('env') === 'production') {
     });
 }
 
-
-
-
-
-
-
-app.get('/', function (req, res) {
-    let content = React.renderToString(<ToolTemp />);
-    var templateData = {
-        reactEntryPath: getScriptPath(),
-        reactContent: content
-    };
-    res.render('pages/home', templateData);
-});
-
-/*app.get('/helloworld', function(req, res) {
-    let content = React.renderToString(<HelloWorld />);
-    var templateData = {
-        reactEntryPath: getScriptPath(),
-        reactContent: content
-    };
-    res.render('pages/default-tool', templateData);
-});*/
-
-app.get('/bmi', function(req, res) {
-    let content = React.renderToString(<BMI />);
-    //content = null;
-    var templateData = {
-        reactContent: content,
-        reactEntryPath: getScriptPath(),
-        reactScript: "BMIClient"
-    };
-    res.render('pages/default-tool', templateData);
-});
-
-app.get('/webcam', function(req, res) {
-    let content = React.renderToString(<Webcam />);
-    //content = null;
-    var templateData = {
-        reactContent: content,
-        reactEntryPath: getScriptPath(),
-        reactScript: "WebcamClient"
-    };
-    res.render('pages/default-tool', templateData);
-});
-
-
-app.get('/weeknumber', function(req, res) {
-    let content = React.renderToString(<WeekNumber />);
-    var templateData = {
-        reactContent: content,
-        reactEntryPath: getScriptPath(),
-        reactScript: "WeekNumberClient"
-    };
-    res.render('pages/default-tool', templateData);
-});
-
-/*app.get('/imageconverter', function(req, res) {
-    let content = React.renderToString(<ImageConverter />);
-    var templateData = {
-        reactContent: content,
-        reactEntryPath: getScriptPath(),
-        reactScript: "ImageConverterClient"
-    };
-    res.render('pages/default-tool', templateData);
-});*/
-
-app.get('/rgb-to-hex', function(req, res) {
-    let content = React.renderToString(<ColorConverter />);
-    var templateData = {
-        reactContent: content,
-        reactEntryPath: getScriptPath(),
-        reactScript: "ColorConverterClient"
-    };
-    res.render('pages/default-tool', templateData);
-});
+controllers.set(app);
 
 var server = app.listen(app.get("port"), function () {
     var host = server.address().address;
