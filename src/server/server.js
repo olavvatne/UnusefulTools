@@ -52,6 +52,7 @@ if(app.get('env') === 'development') {
 //TODO: Move to build.js
 if(app.get('env') === 'production') {
     console.log("==== Render SASS =====")
+    //TODO: Dest in public not in public/style in production. Fix
     sass.render({
         file: srcPath + '/style/style.scss',
             outputStyle: 'compressed'
