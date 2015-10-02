@@ -10,11 +10,12 @@
 .header {
   background-color: transparent !important;
   padding-right: 30px;
+  padding-left: 30px;
   margin-bottom: 20px;
   padding-top: 10px;
 
   .header__title {
-    text-align: right;
+    //text-align: right;
     font-weight: 400;
     font-size: 34px;
     line-height: 40px;
@@ -56,6 +57,11 @@ body {
   position:relative;
 }
 
+//set form comps to 256px width, similar to material ui react do it.
+.mui-select, .mui-form-group {
+  display: inline-block !important;
+  width: 256px !important;
+}
 footer {
   padding:10px;
 

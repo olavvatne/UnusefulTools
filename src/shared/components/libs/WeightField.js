@@ -1,10 +1,6 @@
 import React from "react";
-import injectTapEventPlugin from "react-tap-event-plugin";
-import mui, { TextField, SelectField } from 'material-ui';
-
-let ThemeManager = new mui.Styles.ThemeManager();
-
-injectTapEventPlugin();
+import UIText from '../mui/UIText.js';
+import UISelect from '../mui/UISelect.js';
 
 class WeightField extends React.Component {
 
@@ -13,16 +9,6 @@ class WeightField extends React.Component {
         this._handleChangedWeightUnit = this._handleChangedWeightUnit.bind(this);
         this._validateWeight = this._validateNumber.bind(this, 'weight', 'weightNotNumber');
         this.state = {weightUnit: WeightField.KG, weightNotNumber: null};
-    }
-
-    static get childContextTypes()
-    {
-        return { muiTheme: React.PropTypes.object };
-    }
-
-    getChildContext()
-    {
-        return { muiTheme: ThemeManager.getCurrentTheme() };
     }
 
     _handleChangedWeightUnit(event, selected) {
@@ -68,18 +54,15 @@ class WeightField extends React.Component {
 
         return (
             <div style={{display: "inline-block"}}>
-                    <TextField ref="weight" hintText="Enter your weight."
-                               floatingLabelText="Weight"
-                               errorText={this.state.weightNotNumber}
-                               onChange={this._validateWeight}
-                               style={{paddingBottom:"15px"}}
+                    <UIText labelText="Weight" ref="weight"
+                            errorText={this.state.weightNotNumber}
+                            onChange={this._validateWeight}
+                            validationPattern="\d+(\.\d*)?"
                         />
-
-                    <SelectField
-                        value={this.state.weightUnit}
-                        onChange={this._handleChangedWeightUnit}
-                        menuItems={weightUnits}
-                        floatingLabelText="Unit"/>
+                    <UISelect menuItems={weightUnits}
+                              value={this.state.heightUnit}
+                              onChange={this._handleChangedWeightUnit}
+                              labelText="Unit"/>
             </div>
         );
     }
