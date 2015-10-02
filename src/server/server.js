@@ -19,8 +19,6 @@ const app = express();
 app.set("env", process.env.NODE_ENV || "development");
 app.set("port", process.env.PORT || 3000);
 
-app.use(express.static('./public')); //compiled sass and other stuff put in here
-
 app.engine('ejs', engine);//Support for layout for templates
 app.set('view engine', 'ejs');
 //TODO: New backend structure that makes more sense.
@@ -46,10 +44,11 @@ if(app.get('env') === 'development') {
         outputStyle: 'compressed',
         prefix:  '/prefix'
     }));
+    app.use(express.static('./public')); //compiled sass and other stuff put in here
 }
 
 //TODO: Move to build.js
-if(app.get('env') === 'production') {
+if(app.get('env') === 'producti1on') {
     console.log("==== Render SASS =====")
     sass.render({
         file: srcPath + 'style/style.scss',
@@ -96,7 +95,7 @@ app.get('/', function (req, res) {
     res.render('pages/default-tool', templateData);
 });*/
 
-app.get('/bmi', function(req, res) {
+app.get('/bmi-calculator', function(req, res) {
     let content = React.renderToString(<BMI />);
     //content = null;
     var templateData = {
