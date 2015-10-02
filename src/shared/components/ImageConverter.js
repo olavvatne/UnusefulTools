@@ -30,6 +30,7 @@ class ImageConverter extends React.Component {
 
 
 ImageConverter.toolTitle = "ImageConverter calculator";
-ImageConverter.toolDescription=  "The body mass index is a value based on an indviduals weight and height";
+ImageConverter.toolDescription =  "The body mass index is a value based on an indviduals weight and height";
+ImageConverter.toolMetaDescription = "TODO"
 
 module.exports = ImageConverter;

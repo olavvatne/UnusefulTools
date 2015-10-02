@@ -106,7 +106,7 @@ class ColorConverter extends React.Component {
                 </div>
                 <div className="mui-row">
                     <div className="mui-col-md-4">
-                        <div className="mui-text-right">
+                        <div className="mui-text-left">
                             <UIButton label="Convert" primary={true} onClick={this._handleClick} id="btn-convert"/>
                         </div>
                     </div>
@@ -117,6 +117,7 @@ class ColorConverter extends React.Component {
 }
 
 ColorConverter.toolTitle = "RGB to hex converter";
-ColorConverter.toolDescription=  "Convert RGB color values to hexadecimal color values";
+ColorConverter.toolDescription =  "Convert RGB color values to hexadecimal color values";
+ColorConverter.toolMetaDescription = "Simple and easy online calculator tool that converts RGB color values to HEX color values"
 
 module.exports = ColorConverter;

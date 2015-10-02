@@ -22,7 +22,7 @@ var srcPath = './';
 var destPath = './public';
 
 var moveFile = function(from, to) {
-    if(fs.lstatSync(to).isFile()) {
+    if(fs.existsSync(to)) {
         return;
     }
     fs.readFile(from, function (err, data) {

@@ -50,6 +50,7 @@ class WeekNumber extends React.Component {
 }
 
 WeekNumber.toolTitle = "What week is it?";
-WeekNumber.toolDescription=  "This is the current ISO week of the year.";
+WeekNumber.toolDescription =  "This is the current ISO week of the year.";
+WeekNumber.toolMetaDescription = "Find the current week number of the year online. Displayed in ISO format";
 
 module.exports = WeekNumber;

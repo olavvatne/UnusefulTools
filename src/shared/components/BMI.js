@@ -95,7 +95,8 @@ class BMI extends React.Component {
     }
 };
 
-BMI.toolTitle = "BMI calculator";
-BMI.toolDescription=  "The body mass index is a value based on an indviduals weight and height";
+BMI.toolTitle = "BMI Calculator";
+BMI.toolDescription =  "The body mass index is a value based on an individual's weight and height";
+BMI.toolMetaDescription = "Simple online BMI calculator. Compatible units include kilograms (kg) and lbs (pounds) for weight, centimetres (cm) and inches for height"
 
 module.exports = BMI;
