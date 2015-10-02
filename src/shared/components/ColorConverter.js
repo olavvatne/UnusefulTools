@@ -121,7 +121,7 @@ class ColorConverter extends React.Component {
                 </div>
                 <div className="mui-row">
                     <div className="mui-col-md-4">
-                        <div className="mui-text-right">
+                        <div className="mui-text-left">
                             <RaisedButton
                                 label="Convert"
                                 primary={true}

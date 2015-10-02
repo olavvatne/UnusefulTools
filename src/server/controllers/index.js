@@ -37,7 +37,7 @@ module.exports.set = function(app) {
      res.render('pages/default-tool', templateData);
      });*/
 
-    app.get('/bmi', function(req, res) {
+    app.get('/bmi-calculator', function(req, res) {
         let content = React.renderToString(<BMI />);
         //content = null;
         var templateData = {
