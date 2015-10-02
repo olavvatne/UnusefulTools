@@ -1,12 +1,9 @@
 import React from "react";
-import injectTapEventPlugin from "react-tap-event-plugin";
-import mui, { TextField, SelectField, RaisedButton } from 'material-ui';
 import WeightField from './libs/WeightField.js';
 import HeightField from './libs/HeightField.js';
+import UIButton from './mui/UIButton.js';
 
-let ThemeManager = new mui.Styles.ThemeManager();
 
-injectTapEventPlugin();
 class BMI extends React.Component {
 
     constructor() {
@@ -16,17 +13,7 @@ class BMI extends React.Component {
         this.state = { heightNotNumber: null, bmi: null};
     }
 
-    static get childContextTypes()
-    {
-        return { muiTheme: React.PropTypes.object };
-    }
-
-    getChildContext()
-    {
-        return { muiTheme: ThemeManager.getCurrentTheme() };
-    }
-
-
+    //TODO: remove, validation inside component
     _validateNumber(stateName, errorName) {
         var v = this.refs[stateName].getValue();
         var regex = /^[0-9]+([,.][0-9]+)?$/g;
@@ -90,7 +77,7 @@ class BMI extends React.Component {
                         <HeightField ref="height" />
 
                         <div className="row">
-                            <RaisedButton label="Calculate" primary={true} onClick={this._handleClick} />
+                            <UIButton label="Calculate" primary={true} onClick={this._handleClick} />
                         </div>
                     </div>
                     <div className="mui-col-md-6">

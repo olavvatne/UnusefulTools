@@ -1,9 +1,6 @@
 import React from "react";
+import UIButton from './mui/UIButton.js';
 import Webcamera from "./libs/ReactCam";
-import injectTapEventPlugin from "react-tap-event-plugin";
-import mui, { RaisedButton} from 'material-ui';
-
-let ThemeManager = new mui.Styles.ThemeManager();
 
 class Webcam extends React.Component {
     constructor() {
@@ -20,16 +17,6 @@ class Webcam extends React.Component {
             screenshots.shift();
         }
         this.setState({screenshots: screenshots});
-    }
-
-    static get childContextTypes()
-    {
-        return { muiTheme: React.PropTypes.object };
-    }
-
-    getChildContext()
-    {
-        return { muiTheme: ThemeManager.getCurrentTheme() };
     }
     
     render() {
@@ -50,7 +37,7 @@ class Webcam extends React.Component {
                         <p>{Webcam.toolDescription}</p>
                     </div>
                     <div >
-                        <RaisedButton label="Capture" primary={true} onClick={this._capture}/>
+                        <UIButton label="Capture" primary={true} onClick={this._capture} />
                     </div>
                     <div className="mt10 mb10">
                         { downloadThumbs ? downloadThumbs: null }

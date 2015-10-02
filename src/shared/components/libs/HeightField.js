@@ -1,10 +1,7 @@
 import React from "react";
-import injectTapEventPlugin from "react-tap-event-plugin";
-import mui, { TextField, SelectField } from 'material-ui';
+import UIText from '../mui/UIText.js';
+import UISelect from '../mui/UISelect.js';
 
-let ThemeManager = new mui.Styles.ThemeManager();
-
-injectTapEventPlugin();
 
 class HeightField extends React.Component {
 
@@ -13,16 +10,6 @@ class HeightField extends React.Component {
         this._handleChangedHeightUnit = this._handleChangedHeightUnit.bind(this);
         this._validateHeight = this._validateNumber.bind(this, 'height', 'heightNotNumber');
         this.state = {heightUnit: HeightField.CM, heightNotNumber: null};
-    }
-
-    static get childContextTypes()
-    {
-        return { muiTheme: React.PropTypes.object };
-    }
-
-    getChildContext()
-    {
-        return { muiTheme: ThemeManager.getCurrentTheme() };
     }
 
     _handleChangedHeightUnit(event, selected) {
@@ -69,18 +56,15 @@ class HeightField extends React.Component {
 
         return (
             <div style={{display: "inline-block"}}>
-                <TextField ref="height" hintText="Enter your height."
-                           floatingLabelText="Height"
-                           errorText={this.state.heightNotNumber}
-                           onChange={this._validateHeight}
-                           style={{paddingBottom:"15px"}}
-                    />
-
-                <SelectField
-                    value={this.state.heightUnit}
-                    onChange={this._handleChangedHeightUnit}
-                    menuItems={heightUnits}
-                    floatingLabelText="Unit"/>
+                <UIText labelText="Height" ref="height"
+                        errorText={this.state.heightNotNumber}
+                        onChange={this._validateHeight}
+                        validationPattern="\d+(\.\d*)?"
+                        />
+                <UISelect menuItems={heightUnits}
+                          value={this.state.heightUnit}
+                          onChange={this._handleChangedHeightUnit}
+                          labelText="Unit"/>
             </div>
         );
     }
