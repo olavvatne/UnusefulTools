@@ -137,6 +137,7 @@ class ColorConverter extends React.Component {
 }
 
 ColorConverter.toolTitle = "RGB to hex converter";
-ColorConverter.toolDescription=  "Convert RGB color values to hexadecimal color values";
+ColorConverter.toolDescription =  "Convert RGB color values to hexadecimal color values";
+ColorConverter.toolMetaDescription = "Simple and easy online calculator tool that converts RGB color values to HEX color values"
 
 module.exports = ColorConverter;

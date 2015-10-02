@@ -17,14 +17,17 @@
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
-    <title>Unuseful Tools</title>
+    <title><%= blocks.title%>Unuseful Tools</title>
+
+    <meta name="description" content="<%- blocks.metaDescription%>" />
+
 </head>
 <body>
 <div id="wrapper" >
     <% include ./partials/header.ejs %>
 
     <div class="content">
-        <%-body -%>
+        <%-body %>
     </div>
 
     <% include ./partials/footer.ejs %>

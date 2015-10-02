@@ -41,6 +41,8 @@ module.exports.set = function(app) {
         let content = React.renderToString(<BMI />);
         //content = null;
         var templateData = {
+            toolTitle: BMI.toolTitle,
+            toolMetaDescription: BMI.toolMetaDescription,
             reactContent: content,
             reactEntryPath: getScriptPath(),
             reactScript: "BMIClient"
@@ -52,6 +54,8 @@ module.exports.set = function(app) {
         let content = React.renderToString(<Webcam />);
         //content = null;
         var templateData = {
+            toolTitle: Webcam.toolTitle,
+            toolMetaDescription: Webcam.toolMetaDescription,
             reactContent: content,
             reactEntryPath: getScriptPath(),
             reactScript: "WebcamClient"
@@ -63,6 +67,8 @@ module.exports.set = function(app) {
     app.get('/weeknumber', function(req, res) {
         let content = React.renderToString(<WeekNumber />);
         var templateData = {
+            toolTitle: WeekNumber.toolTitle,
+            toolMetaDescription: WeekNumber.toolMetaDescription,
             reactContent: content,
             reactEntryPath: getScriptPath(),
             reactScript: "WeekNumberClient"
@@ -83,6 +89,8 @@ module.exports.set = function(app) {
     app.get('/rgb-to-hex', function(req, res) {
         let content = React.renderToString(<ColorConverter />);
         var templateData = {
+            toolTitle: ColorConverter.toolTitle,
+            toolMetaDescription: ColorConverter.toolMetaDescription,
             reactContent: content,
             reactEntryPath: getScriptPath(),
             reactScript: "ColorConverterClient"
