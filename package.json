@@ -40,7 +40,6 @@
     "react-router": "^0.13.3",
     "react-tap-event-plugin": "^0.1.7",
     "rgb-to-hex": "0.0.0",
-    "serve-favicon": "^2.3.0",
-    "topcoat": "^0.7.5"
+    "serve-favicon": "^2.3.0"
   }
 }

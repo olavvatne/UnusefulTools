@@ -11,7 +11,7 @@ import ColorConverter from "../../shared/components/ColorConverter";
 import ToolTemp from "../../shared/components/ToolTemp";
 
 module.exports.set = function(app) {
-    
+
     var getScriptPath = function() {
         if(app.get('env') === 'development') {
             return 'http://localhost:8080';

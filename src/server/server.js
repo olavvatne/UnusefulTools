@@ -2,11 +2,11 @@ import express from "express";
 import engine  from "ejs-locals";
 import favicon from 'serve-favicon';
 import controllers from './controllers';
-//TODO: Save node-sass-middleware in package.json
-var sassMiddleware = require('node-sass-middleware'); //TODO: Do import instead
-var sass = require('node-sass'); //TODO: Move to build.js
-var fs = require('fs'); //TODO: Move to build.js
+import sassMiddleware from 'node-sass-middleware';
+import sass from 'node-sass';
+import fs from 'fs';
 
+//TODO: Better build /dev configuration
 const app = express();
 
 app.set("env", process.env.NODE_ENV || "development");
@@ -16,22 +16,28 @@ app.use(express.static('./public')); //compiled sass and other stuff put in here
 
 app.engine('ejs', engine);//Support for layout for templates
 app.set('view engine', 'ejs');
-//TODO: New backend structure that makes more sense.
+
 app.set('views', './views');
 app.use(favicon( './public/images/favicon/favicon.ico'));
 
 var srcPath = './';
 var destPath = './public';
 
-//Moving topcoat css into public style folder on start up
-
-/*fs.readFile('folder1/image.png', function (err, data) {
-    if (err) throw err;
-    fs.writeFile('folder2/image.png', data, function (err) {
+var moveFile = function(from, to) {
+    if(fs.lstatSync(to).isFile()) {
+        return;
+    }
+    fs.readFile(from, function (err, data) {
         if (err) throw err;
-        console.log('It\'s saved!');
+        fs.writeFile(to, data, function (err) {
+            if (err) throw err;
+            console.log('It\'s saved! ' + to);
+        });
     });
-});*/
+}
+moveFile('./node_modules/muicss/dist/css/mui.min.css', './public/style/mui.min.css');
+moveFile('./node_modules/muicss/dist/js/mui.min.js', './public/js/mui.min.js');
+
 
 if(app.get('env') === 'development') {
     app.use(sassMiddleware({
