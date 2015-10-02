@@ -97,4 +97,11 @@ module.exports.set = function(app) {
         };
         res.render('pages/default-tool', templateData);
     });
+
+
+
+    // ===== KEEP THIS AT THE BOTTOM ======= , handles 404 errors
+    app.use(function(req, res, next){
+        res.status(404).render('pages/404', {title: "Page not found"});
+    });
 }
