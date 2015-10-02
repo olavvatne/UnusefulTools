@@ -30,7 +30,8 @@ class UIText extends React.Component {
                        className="mui-form-control"
                        value={this.state.value}
                        onChange={this._handle}
-                    pattern={this.props.validationPattern}/>
+                       pattern={this.props.validationPattern}
+                       style={this.props.style}/>
                     <label className="mui-form-floating-label">{this.props.labelText}</label>
 
             </div>

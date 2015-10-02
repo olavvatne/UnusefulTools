@@ -1,10 +1,8 @@
 import React from "react";
+import UIButton from './mui/UIButton.js';
+import UIText from './mui/UIText.js';
 import rgbToHex from "rgb-to-hex";
-import injectTapEventPlugin from "react-tap-event-plugin";
-import mui, { TextField, SelectField, RaisedButton } from "material-ui";
 
-let ThemeManager = new mui.Styles.ThemeManager();
-injectTapEventPlugin();
 class ColorConverter extends React.Component {
 
     constructor() {
@@ -22,16 +20,6 @@ class ColorConverter extends React.Component {
             blueUnit: null,
             hexValue: "# - - - - - -",
         }
-    }
-
-    static get childContextTypes()
-    {
-        return { muiTheme: React.PropTypes.object };
-    }
-
-    getChildContext()
-    {
-        return { muiTheme: ThemeManager.getCurrentTheme() };
     }
 
     _validateRgb(color, errorName) {
@@ -81,30 +69,27 @@ class ColorConverter extends React.Component {
                     <div className="mui-col-md-6">
                         <div className="mui-row">
                             <div className="mui-col-md-4">
-                                <TextField ref="red"
-                                           hintText="Red value"
-                                           floatingLabelText="Red"
-                                           errorText={this.state.invalidRed}
-                                           onChange={this._validateRed}
-                                           style={{width: "70%"}}
+                                <UIText labelText="Red" ref="red"
+                                        errorText={this.state.invalidRed}
+                                        onChange={this._validateRed}
+                                        validationPattern="\d+(\.\d*)?"
+                                        style={{width: "70%"}}
                                     />
                             </div>
                             <div className="mui-col-md-4">
-                                <TextField ref="green"
-                                           hintText="Green value"
-                                           floatingLabelText="Green"
-                                           errorText={this.state.invalidGreen}
-                                           onChange={this._validateGreen}
-                                           style={{width: "70%"}}
+                                <UIText labelText="Green" ref="green"
+                                        errorText={this.state.invalidGreen}
+                                        onChange={this._validateGreen}
+                                        validationPattern="\d+(\.\d*)?"
+                                        style={{width: "70%"}}
                                     />
                             </div>
                             <div className="mui-col-md-4">
-                                <TextField ref="blue"
-                                           hintText="Blue value"
-                                           floatingLabelText="Blue"
-                                           errorText={this.state.invalidBlue}
-                                           onChange={this._validateBlue}
-                                           style={{width: "70%"}}
+                                <UIText labelText="Blue" ref="blue"
+                                        errorText={this.state.invalidBlue}
+                                        onChange={this._validateBlue}
+                                        validationPattern="\d+(\.\d*)?"
+                                        style={{width: "70%"}}
                                     />
                             </div>
                         </div>
@@ -122,12 +107,7 @@ class ColorConverter extends React.Component {
                 <div className="mui-row">
                     <div className="mui-col-md-4">
                         <div className="mui-text-right">
-                            <RaisedButton
-                                label="Convert"
-                                primary={true}
-                                onClick={this._handleClick}
-                                id="btn-convert"
-                                />
+                            <UIButton label="Convert" primary={true} onClick={this._handleClick} id="btn-convert"/>
                         </div>
                     </div>
                 </div>
