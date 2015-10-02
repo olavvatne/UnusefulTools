@@ -8,7 +8,6 @@ import ImageConverter from "../../shared/components/ImageConverter";
 import BMI from "../../shared/components/BMI";
 import Webcam from "../../shared/components/Webcam";
 import ColorConverter from "../../shared/components/ColorConverter";
-import ToolTemp from "../../shared/components/ToolTemp";
 
 module.exports.set = function(app) {
 
@@ -20,7 +19,7 @@ module.exports.set = function(app) {
     }
 
     app.get('/', function (req, res) {
-        let content = React.renderToString(<ToolTemp />);
+        let content = null;
         var templateData = {
             reactEntryPath: getScriptPath(),
             reactContent: content
