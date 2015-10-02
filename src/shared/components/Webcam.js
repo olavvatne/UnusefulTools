@@ -68,8 +68,9 @@ class Webcam extends React.Component {
 }
 
 
-Webcam.toolTitle = "Web camera";
-Webcam.toolDescription=  "Capture tool for web camera. Click capture, and download. Easy peasy." +
-    "Pretty much useless for most browsers because of compability issues, but oh how it works in Chrome.";
+Webcam.toolTitle = "Web Camera";
+Webcam.toolDescription =  "Capture tool for web camera. Click capture, and download. Easy peasy. " +
+    "Pretty much useless for most browsers because of compatibility issues, but oh how it works in Chrome.";
+Webcam.toolMetaDescription = "Capture images online with your webcam. Download captured images directly to your device after taking a snapshot with your web camera.";
 
 module.exports = Webcam;

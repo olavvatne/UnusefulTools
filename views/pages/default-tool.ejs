@@ -1,4 +1,6 @@
 <% layout('../base') -%>
+<% block('title', toolTitle + " - ") %>
+<% block('metaDescription', toolMetaDescription)%>
 <div>
     <div class="mui-panel">
         <div id="app"><%- reactContent %></div>
