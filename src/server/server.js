@@ -48,7 +48,7 @@ if(app.get('env') === 'development') {
 }
 
 //TODO: Move to build.js
-if(app.get('env') === 'producti1on') {
+if(app.get('env') === 'production') {
     console.log("==== Render SASS =====")
     sass.render({
         file: srcPath + 'style/style.scss',
