@@ -73,7 +73,86 @@ if(app.get('env') === 'production') {
     });
 }
 
+<<<<<<< HEAD
 controllers.set(app);
+=======
+
+
+
+
+
+
+app.get('/', function (req, res) {
+    let content = React.renderToString(<ToolTemp />);
+    var templateData = {
+        reactEntryPath: getScriptPath(),
+        reactContent: content
+    };
+    res.render('pages/home', templateData);
+});
+
+/*app.get('/helloworld', function(req, res) {
+    let content = React.renderToString(<HelloWorld />);
+    var templateData = {
+        reactEntryPath: getScriptPath(),
+        reactContent: content
+    };
+    res.render('pages/default-tool', templateData);
+});*/
+
+app.get('/bmi-calculator', function(req, res) {
+    let content = React.renderToString(<BMI />);
+    //content = null;
+    var templateData = {
+        reactContent: content,
+        reactEntryPath: getScriptPath(),
+        reactScript: "BMIClient"
+    };
+    res.render('pages/default-tool', templateData);
+});
+
+app.get('/webcam', function(req, res) {
+    let content = React.renderToString(<Webcam />);
+    //content = null;
+    var templateData = {
+        reactContent: content,
+        reactEntryPath: getScriptPath(),
+        reactScript: "WebcamClient"
+    };
+    res.render('pages/default-tool', templateData);
+});
+
+
+app.get('/weeknumber', function(req, res) {
+    let content = React.renderToString(<WeekNumber />);
+    var templateData = {
+        reactContent: content,
+        reactEntryPath: getScriptPath(),
+        reactScript: "WeekNumberClient"
+    };
+    res.render('pages/default-tool', templateData);
+});
+
+/*app.get('/imageconverter', function(req, res) {
+    let content = React.renderToString(<ImageConverter />);
+    var templateData = {
+        reactContent: content,
+        reactEntryPath: getScriptPath(),
+        reactScript: "ImageConverterClient"
+    };
+    res.render('pages/default-tool', templateData);
+});*/
+
+app.get('/rgb-to-hex', function(req, res) {
+    let content = React.renderToString(<ColorConverter />);
+    var templateData = {
+        reactContent: content,
+        reactEntryPath: getScriptPath(),
+        reactScript: "ColorConverterClient"
+    };
+    res.render('pages/default-tool', templateData);
+});
+>>>>>>> develop
 
 var server = app.listen(app.get("port"), function () {
     var host = server.address().address;

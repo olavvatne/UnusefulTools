@@ -9,7 +9,30 @@
 
 .header {
   background-color: transparent !important;
-  font-family: 'Poiret One';
+  padding-right: 30px;
+  margin-bottom: 20px;
+  padding-top: 10px;
+
+  .header__title {
+    text-align: right;
+    font-weight: 400;
+    font-size: 34px;
+    line-height: 40px;
+    text-decoration-color: black !important;
+    font-family: 'Poiret One';
+    text-decoration: none;
+
+    :hover {
+      color: $element-main-color !important;
+    }
+
+
+    h1 {
+      color: black !important;
+      margin: 0px !important;
+    }
+
+  }
 }
 
 body,html {

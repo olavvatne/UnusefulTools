@@ -27,7 +27,7 @@ class WeekNumber extends React.Component {
     	//var weeknumber = Moment(date).isoWeek();
 
         return (
-        	<div>
+        	<div className="mui-container">
 				<div className="mui-row">
 					<div className="mui-col-md12 mui-text-center">
 						<h1>{WeekNumber.toolTitle}</h1>

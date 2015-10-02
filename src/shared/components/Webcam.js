@@ -42,6 +42,7 @@ class Webcam extends React.Component {
             )
         });
         return (
+            <div className="mui-container">
             <div className="mui-row">
                 <div className="mui-col-md-4">
                     <div>
@@ -60,6 +61,7 @@ class Webcam extends React.Component {
                     <Webcamera ref="camscreen" width="100%"></Webcamera>
                 </div>
 
+            </div>
             </div>
         );
     }
