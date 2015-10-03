@@ -7,7 +7,7 @@ class UISelect extends React.Component {
     constructor() {
         super();
         this._handle = this._handleChange.bind(this);
-        this.state = { value: ''};
+        this.state = { value: 1};
     }
 
     _handleChange(event) {
@@ -26,7 +26,7 @@ class UISelect extends React.Component {
         //TODO: Change state!
         return (
              <div className="mui-select">
-                 <select onChange={this._handleChange}>
+                 <select onChange={this._handle}>
                      {items}
                  </select>
             </div>
