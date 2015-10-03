@@ -8,6 +8,7 @@ import ImageConverter from "../../shared/components/ImageConverter";
 import BMI from "../../shared/components/BMI";
 import Webcam from "../../shared/components/Webcam";
 import ColorConverter from "../../shared/components/ColorConverter";
+import Dice from "../../shared/components/Dice";
 
 module.exports.set = function(app) {
 
@@ -98,6 +99,18 @@ module.exports.set = function(app) {
             reactContent: content,
             reactEntryPath: getScriptPath(),
             reactScript: "ColorConverterClient"
+        };
+        res.render('pages/default-tool', templateData);
+    });
+
+    app.get('/dice-roll', function(req, res) {
+        let content = React.renderToString(<Dice />);
+        var templateData = {
+            toolTitle: Dice.toolTitle,
+            toolMetaDescription: Dice.toolMetaDescription,
+            reactContent: content,
+            reactEntryPath: getScriptPath(),
+            reactScript: "DiceClient"
         };
         res.render('pages/default-tool', templateData);
     });
