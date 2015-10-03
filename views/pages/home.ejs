@@ -13,41 +13,16 @@
 </div>
 <div class="mui-container">
     <div class="row">
+        <% for(var i=0; i < tools.length; i++) { %>
         <div class="mui-col-md-3 mui-col-sm-4  tool-thumb">
-            <div>
-                <a href="/bmi-calculator">
-                <img src="images/scale.svg">
-                <a href="/bmi-calculator">BMI calculator</a>
-            </a>
-            </div>
-        </div>
-
-        <div class="mui-col-md-3 mui-col-sm-4  tool-thumb" >
-            <a href="/rgb-to-hex">
-            <div>
-                <img src="images/color.svg">
-                <a href="/rgb-to-hex" style="display:block">Convert color RGB to hex</a>
-            </div>
-            </a>
-        </div>
-
-        <div class="mui-col-md-3 mui-col-sm-4  tool-thumb">
-            <div>
-                <a href="/webcam">
-                    <img src="images/camera.svg">
-                    <a href="/webcam" style="display:block">Browser webcamera</a>
-                </a>
-            </div>
-
-        </div>
-
-        <div class="mui-col-md-3 mui-col-sm-4  tool-thumb">
-            <div>
-                <a href="/weeknumber">
-                    <img src="images/calendar.svg">
-                    <a href="/weeknumber" style="display:block">Week number</a>
+                <div>
+                <a href="<%= tools[i].url %>" class="tool-thumb__content">
+                    <object data="<%= tools[i].image %>" type="image/svg+xml" ></object>
+                    <p><%= tools[i].title %></p>
                 </a>
             </div>
         </div>
+        <% } %>
+
     </div>
 </div>

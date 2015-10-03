@@ -3,7 +3,17 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="533.333px" height="533.333px" viewBox="0 0 533.333 533.333" style="enable-background:new 0 0 533.333 533.333;"
-	 xml:space="preserve">
+	 xml:space="preserve" preserveAspectRatio="xMaxYmax">
+	 <style type="text/css" media="screen">
+         <![CDATA[
+         svg {
+             fill: #7A7777;
+         }
+         svg:hover {
+             fill: #6B6B6B;
+         }
+         ]]>
+	 </style>
 <g>
 	<path d="M158.333,300c0,59.831,48.502,108.333,108.333,108.333S375,359.831,375,300s-48.502-108.333-108.333-108.333
 		S158.333,240.169,158.333,300z M500,116.667H383.333C375,83.333,366.667,50,333.333,50H200c-33.333,0-41.667,33.333-50,66.667
