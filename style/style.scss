@@ -13,26 +13,29 @@
   padding-left: 30px;
   margin-bottom: 20px;
   padding-top: 10px;
+  overflow:auto;
 
   .header__title {
-    //text-align: right;
-    font-weight: 400;
-    font-size: 34px;
-    line-height: 40px;
-    text-decoration-color: black !important;
-    font-family: 'Poiret One';
-    text-decoration: none;
+    float: left;
 
-    :hover {
-      color: $element-main-color !important;
+    a {
+      font-weight: 400;
+      font-size: 34px;
+      line-height: 40px;
+      text-decoration-color: black !important;
+      font-family: 'Poiret One';
+      text-decoration: none;
+
+      :hover {
+        color: $element-main-color !important;
+      }
+
+
+      h1 {
+        color: black !important;
+        margin: 0px !important;
+      }
     }
-
-
-    h1 {
-      color: black !important;
-      margin: 0px !important;
-    }
-
   }
 }
 
