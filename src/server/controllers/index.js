@@ -25,7 +25,8 @@ module.exports.set = function(app) {
                 {url: "/rgb-to-hex", image: "images/paint.svg", title: "Convert color RGB to hex"},
                 {url: "/webcam", image: "images/camera.svg", title: "Browser webcamera"},
                 {url: "/bmi-calculator", image: "images/scale.svg", title: "BMI calculator"},
-                {url: "/weeknumber", image: "images/calendar.svg", title: "Week number"}
+                {url: "/weeknumber", image: "images/calendar.svg", title: "Week number"},
+                {url: "/dice-roll", image: "images/die.svg", title: "Dice roll"}
             ]
         };
         res.render('pages/home', templateData);
