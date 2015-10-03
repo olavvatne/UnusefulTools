@@ -6,14 +6,10 @@ class WeightField extends React.Component {
 
     constructor() {
         super();
-        this._handleChangedWeightUnit = this._handleChangedWeightUnit.bind(this);
         this._validateWeight = this._validateNumber.bind(this, 'weight', 'weightNotNumber');
-        this.state = {weightUnit: WeightField.KG, weightNotNumber: null};
+        this.state = {weightNotNumber: null};
     }
 
-    _handleChangedWeightUnit(event, selected) {
-        this.setState({weightUnit: selected+1 + ""})
-    }
 
     //TODO: Create generalized operation class; Duplicate!
     _validateNumber(stateName, errorName) {
@@ -33,12 +29,12 @@ class WeightField extends React.Component {
         if(!this.refs.weight) {
             return null;
         }
-
+        var unit = this.refs.unit.getValue();
         var weight = this.refs.weight.getValue();
-        if(this.state.weightUnit === WeightField.KG) {
+        if(unit === WeightField.KG) {
             return weight;
         }
-        else if(this.state.weightUnit === WeightField.LBS) {
+        else if(unit === WeightField.LBS) {
             return weight * 0.45359237;
         }
         else {
@@ -59,9 +55,8 @@ class WeightField extends React.Component {
                             onChange={this._validateWeight}
                             validationPattern="\d+(\.\d*)?"
                         />
-                    <UISelect menuItems={weightUnits}
-                              value={this.state.heightUnit}
-                              onChange={this._handleChangedWeightUnit}
+                    <UISelect menuItems={weightUnits} ref="unit"
+                              value={this.state.heightUnit} //Not used
                               labelText="Unit"/>
             </div>
         );

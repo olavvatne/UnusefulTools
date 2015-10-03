@@ -7,15 +7,10 @@ class HeightField extends React.Component {
 
     constructor() {
         super();
-        this._handleChangedHeightUnit = this._handleChangedHeightUnit.bind(this);
         this._validateHeight = this._validateNumber.bind(this, 'height', 'heightNotNumber');
-        this.state = {heightUnit: HeightField.CM, heightNotNumber: null};
+        this.state = {heightNotNumber: null};
     }
 
-    _handleChangedHeightUnit(event, selected) {
-        console.log(selected);
-        this.setState({heightUnit: selected+1 + ""})
-    }
 
     //TODO: Create generalized operation class; Duplicate!
     _validateNumber(stateName, errorName) {
@@ -37,10 +32,11 @@ class HeightField extends React.Component {
         }
 
         var height = this.refs.height.getValue();
-        if(this.state.heightUnit === HeightField.CM) {
+        var unit = this.refs.unit.getValue();
+        if(unit === HeightField.CM) {
             return height;
         }
-        else if(this.state.heightUnit === HeightField.INCHES) {
+        else if(unit === HeightField.INCHES) {
             return height * 2.54;
         }
         else {
@@ -61,9 +57,8 @@ class HeightField extends React.Component {
                         onChange={this._validateHeight}
                         validationPattern="\d+(\.\d*)?"
                         />
-                <UISelect menuItems={heightUnits}
-                          value={this.state.heightUnit}
-                          onChange={this._handleChangedHeightUnit}
+                <UISelect menuItems={heightUnits} ref="unit"
+                          value={this.state.heightUnit} //not used
                           labelText="Unit"/>
             </div>
         );
