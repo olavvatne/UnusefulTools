@@ -6,10 +6,9 @@
 		<![CDATA[
 		svg {
 		  fill: #7A7777;
+		  pointer-events: none;
 		}
-		svg:hover {
-		  fill: #6B6B6B;
-		}
+
 		]]>
 	</style>
 <g>
