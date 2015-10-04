@@ -12,7 +12,7 @@ class Weather extends React.Component {
     constructor() {
         super();
         this._handleGeo = this._handleGeoPosition.bind(this);
-        this.state = {coords: {}}
+        this.state = {coords: {}, location: null, hasGeo: true, visible: false}
     }
 
     _handleGeoPosition(position) {
@@ -21,11 +21,10 @@ class Weather extends React.Component {
         console.log(position.coords);
         var succ = function (data) {
             console.log(data);
-            //TODO: Handle . A lot of data coming here. What to chose.
-            this.setState({coords: position.coords, location: data.results[0].address_components[3].long_name})
+            this.setState({coords: position.coords, location: data.location, forecast: JSON.parse(data.forecast)})
         }.bind(this);
         reqwest({
-            url: '/getlocation',
+            url: '/getweather',
             type: 'json',
              contentType: 'application/json',
              method: 'post',
@@ -37,19 +36,45 @@ class Weather extends React.Component {
     }
 
     componentDidMount() {
+        setTimeout(function(){
+            this.setState({visible: true});
+        }.bind(this), 700);
         console.log("TEST");
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(this._handleGeo);
+            navigator.geolocation.getCurrentPosition(this._handleGeo, function(error) {
+                this.setState({hasGeo: false})
+            });
+        }
+        else {
+            this.setState({hasGeo: false})
         }
     }
 
     render() {
-        console.log("render");
+        var img = null;
+        var info = null;
+        if(this.state.forecast) {
+            var url = "/images/weather/" + this.state.forecast.weather[0].icon + ".png";
+            img = <img src={url} alt="weather icon"/>
+            info = (<p>{this.state.forecast.weather[0].description}</p>);
+        }
         return (
-            <div className="mui-container">
-                <div className="mui-row">
-                    <h2><p>{this.state.location}</p></h2>
-
+            <div>
+                <div className="mui-container">
+                    <div className="mui-row" style={{minHeight: "200px"}}>
+                        {!this.state.location && this.state.visible ?
+                            <p className="fade-in" style={{textAlign: "center", fontSize: "1.5em"}}>Please share your current location.</p>
+                        : null}
+                        {!this.state.hasGeo ?
+                            <p>It seems like your browser does not support geolocation. Please upgrade your browser.</p>:
+                            null
+                        }
+                        <div className="fade-in">
+                        <h2>{this.state.location}</h2>
+                        {img}
+                        {info}
+                        </div>
+                    </div>
                 </div>
             </div>
         );

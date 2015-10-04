@@ -29,26 +29,28 @@ class Webcam extends React.Component {
             )
         });
         return (
-            <div className="mui-container">
-            <div className="mui-row">
-                <div className="mui-col-md-4">
-                    <div>
-                        <h1 style={{marginTop: "0px"}}>{Webcam.toolTitle}</h1>
-                        <p>{Webcam.toolDescription}</p>
-                    </div>
-                    <div >
-                        <UIButton label="Capture" primary={true} onClick={this._capture} />
-                    </div>
-                    <div className="mt10 mb10">
-                        { downloadThumbs ? downloadThumbs: null }
-                    </div>
+            <div className="mui-panel">
+                <div className="mui-container">
+                    <div className="mui-row">
+                        <div className="mui-col-md-4">
+                            <div>
+                                <h1 style={{marginTop: "0px"}}>{Webcam.toolTitle}</h1>
+                                <p>{Webcam.toolDescription}</p>
+                            </div>
+                            <div >
+                                <UIButton label="Capture" primary={true} onClick={this._capture} />
+                            </div>
+                            <div className="mt10 mb10">
+                                { downloadThumbs ? downloadThumbs: null }
+                            </div>
 
-                </div>
-                <div className="mui-col-md-8" style={{paddingTop: "10px"}}>
-                    <Webcamera ref="camscreen" width="100%"></Webcamera>
-                </div>
+                        </div>
+                        <div className="mui-col-md-8" style={{paddingTop: "10px"}}>
+                            <Webcamera ref="camscreen" width="100%"></Webcamera>
+                        </div>
 
-            </div>
+                    </div>
+                </div>
             </div>
         );
     }

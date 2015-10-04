@@ -60,6 +60,7 @@ class ColorConverter extends React.Component {
 
     render() {
         return (
+            <div className="mui-panel">
             <div className="mui-container">
                 <div className="mui-row" id="about">
                     <h1>{ColorConverter.toolTitle}</h1>
@@ -111,6 +112,7 @@ class ColorConverter extends React.Component {
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         );
     }
