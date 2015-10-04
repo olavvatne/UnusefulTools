@@ -9,6 +9,8 @@ import BMI from "../../shared/components/BMI";
 import Webcam from "../../shared/components/Webcam";
 import ColorConverter from "../../shared/components/ColorConverter";
 import Dice from "../../shared/components/Dice";
+import Weather from "../../shared/components/Weather";
+import request from "request";
 
 module.exports.set = function(app) {
 
@@ -115,7 +117,37 @@ module.exports.set = function(app) {
         res.render('pages/default-tool', templateData);
     });
 
+    app.get('/weather', function(req, res) {
+        console.log("THIS WORKS!")
+        let content = React.renderToString(<Weather />);
+        var templateData = {
+            toolTitle: Weather.toolTitle,
+            toolMetaDescription: Weather.toolMetaDescription,
+            reactContent: content,
+            reactEntryPath: getScriptPath(),
+            reactScript: "WeatherClient"
+        };
+        res.render('pages/default-tool', templateData);
+    });
 
+    app.post('/getlocation', function(req, res) {
+        console.log("INSIDE");
+        var api = "AIzaSyChxs1Xua4N7TM107GjkytH_pdWlvzvOTA";
+        var lat = req.body.lat;
+        var lon = req.body.lon;
+        console.log(req.body);
+        console.log(lat);
+        console.log(lon);
+        var base = "https://maps.googleapis.com/maps/api/geocode/json?latlng=";
+        var url = base + lat + "," + lon +"&key=" + api;
+        console.log(url);
+        request(url, function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                // from within the callback, write data to response, essentially returning it.
+                res.send(body);
+            }
+        })
+    });
 
     // ===== KEEP THIS AT THE BOTTOM ======= , handles 404 errors
     app.use(function(req, res, next){

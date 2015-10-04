@@ -5,12 +5,15 @@ import controllers from './controllers';
 import sassMiddleware from 'node-sass-middleware';
 import sass from 'node-sass';
 import fs from 'fs';
+var bodyParser = require('body-parser');
 
 //TODO: Better build /dev configuration
 const app = express();
 
 app.set("env", process.env.NODE_ENV || "development");
 app.set("port", process.env.PORT || 3000);
+
+app.use(bodyParser.json());
 
 app.engine('ejs', engine);//Support for layout for templates
 app.set('view engine', 'ejs');
