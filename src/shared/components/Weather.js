@@ -56,27 +56,57 @@ class Weather extends React.Component {
 
         var img = null;
         var info = null;
+        var temperature = null;
         if(this.state.forecast) {
-            var url = "/images/weather/" + this.state.forecast.weather[0].icon + ".png";
-            img = <img src={url} alt="weather icon"/>
+            var url = "/images/weather/" + this.state.forecast.weather[0].icon + ".svg";
+            img = <img className="weather-content__image" src={url} alt="weather icon"/>
+                    console.log(this.state.forecast);
+            temperature = (this.state.forecast.main.temp - 273.15).toFixed(1);;
             info = (<p>{this.state.forecast.weather[0].description}</p>);
         }
         return (
             <div>
                 <div className="mui-container">
-                    <div className="mui-row" style={{minHeight: "200px"}}>
-                        {!this.state.location && this.state.visible ?
-                            <p className="fade-in" style={{textAlign: "center", fontSize: "1.5em"}}>Please share your current location.</p>
-                        : null}
-                        {!this.state.hasGeo ?
-                            <p>It seems like your browser does not support geolocation. Please upgrade your browser.</p>:
-                            null
-                        }
-                        <div className="fade-in">
-                        <h2>{this.state.location}</h2>
-                        {img}
-                        {info}
+                    <div className="mui-row">
+                        <div className="weather-content mui-text-center">
+                            {!this.state.location && this.state.visible ?
+                                <p className="fade-in" style={{textAlign: "center", fontSize: "1.5em"}}>Please share your current location.</p>
+                            : null}
 
+                            {!this.state.hasGeo ?
+                                <p>It seems like your browser does not support geolocation. Please upgrade your browser.</p>:
+                                null
+                            }
+
+                            <div className="fade-in">
+
+                                <h2>{this.state.location}</h2>
+                                { this.state.forecast ?
+                                    <table className="weather-content__data">
+                                        <tr>
+                                            <td>
+                                                <img src="/images/weather/Cloud-Download.svg" alt="Pressure"/>
+                                                <p>{this.state.forecast.main.pressure} hpa</p>
+                                            </td>
+                                            <td>
+                                                <img src="/images/weather/Wind.svg" alt="Wind"/>
+                                                <p>{this.state.forecast.wind.speed} m/s</p>
+                                            </td>
+                                            <td>
+                                                <img src="/images/weather/Raindrop.svg" alt="Humidity"/>
+                                                <p>{this.state.forecast.main.humidity} %</p>
+                                            </td>
+                                            <td>
+                                                <img src="/images/weather/Thermometer-25.svg" alt="Temperature"/>
+                                                <p>{temperature} &deg;C</p>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    :null}
+                                {img}
+                                <p  className="weather-content__description">{info}</p>
+
+                            </div>
                         </div>
                     </div>
                 </div>

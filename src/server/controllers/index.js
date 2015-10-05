@@ -31,7 +31,7 @@ module.exports.set = function(app) {
                 {url: "/bmi-calculator", image: "images/scale.svg", title: "BMI calculator"},
                 {url: "/dice-roll", image: "images/die.svg", title: "Dice roll"},
                 {url: "/rgb-to-hex", image: "images/paint.svg", title: "Convert color RGB to hex"},
-                {url: "/weather", image: "images/weather.svg", title: "Weather forecast"}
+                {url: "/weather", image: "images/weather.svg", title: "Current weather"}
             ]
         };
         res.render('pages/home', templateData);

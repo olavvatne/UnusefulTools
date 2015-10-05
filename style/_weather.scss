@@ -1,0 +1,31 @@
+.weather-content {
+  margin: auto 0;
+
+  img, svg {
+    opacity: 0.5;
+    filter: alpha(opacity=60);
+  }
+  .weather-content__data {
+    width: 100%;
+
+    p {
+      display: inline-block;
+    }
+
+    img {
+      max-width: 100px;
+      height: 100px;
+      width: 100%;
+    }
+  }
+  .weather-content__image {
+    width: 70%;
+    height: 200px;
+  }
+  h2 {
+    font-size: 2.2em;
+  }
+  .weather-content__description {
+    font-size: 1.2em;
+  }
+}
