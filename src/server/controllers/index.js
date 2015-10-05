@@ -11,6 +11,7 @@ import ColorConverter from "../../shared/components/ColorConverter";
 import Dice from "../../shared/components/Dice";
 import weatherController from "./weather.js";
 
+
 module.exports.set = function(app) {
 
     var getScriptPath = function() {
@@ -25,11 +26,11 @@ module.exports.set = function(app) {
 
         var templateData = {
             tools: [
-                {url: "/rgb-to-hex", image: "images/paint.svg", title: "Convert color RGB to hex"},
+                {url: "/weeknumber", image: "images/calendar.svg", title: "Week number"},
                 {url: "/webcam", image: "images/camera.svg", title: "Browser webcamera"},
                 {url: "/bmi-calculator", image: "images/scale.svg", title: "BMI calculator"},
-                {url: "/weeknumber", image: "images/calendar.svg", title: "Week number"},
                 {url: "/dice-roll", image: "images/die.svg", title: "Dice roll"},
+                {url: "/rgb-to-hex", image: "images/paint.svg", title: "Convert color RGB to hex"},
                 {url: "/weather", image: "images/weather.svg", title: "Weather forecast"}
             ]
         };

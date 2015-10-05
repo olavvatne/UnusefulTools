@@ -5,7 +5,9 @@ import React from "react";
 import Weather from "../../shared/components/Weather";
 import request from "request";
 import async from "async";
-var parseString = require('xml2js').parseString;
+import geoip from "geoip-lite";
+import api from "../../../apikey.js";
+//var parseString = require('xml2js').parseString;
 
 module.exports.set = function(app, path) {
 
@@ -24,14 +26,24 @@ module.exports.set = function(app, path) {
     });
 
     app.post('/getweather', function(req, res) {
+        var lat = req.body.lat;
+        var lon = req.body.lon;
+        if(!lat || !lon) {
+            var ip = req.headers['x-forwarded-for'] ||
+                req.connection.remoteAddress ||
+                req.socket.remoteAddress ||
+                req.connection.socket.remoteAddress;
+            var geo = geoip.lookup(ip);
+            if(geo) {
+                lat = geo.ll[0];
+                lon = geo.ll[1];
+            }
+        }
         async.parallel([
             function(callback) {
                 //TODO: Terms and agreement better
-                var api = "AIzaSyChxs1Xua4N7TM107GjkytH_pdWlvzvOTA";
-                var lat = req.body.lat;
-                var lon = req.body.lon;
                 var base = "https://maps.googleapis.com/maps/api/geocode/json?latlng=";
-                var url = base + lat + "," + lon +"&key=" + api;
+                var url = base + lat + "," + lon +"&key=" + api.geocode;
                 request(url, function (error, response, body) {
                     if(error) { console.log(error); callback(true); return; }
                     if (!error && response.statusCode == 200) {
@@ -42,11 +54,7 @@ module.exports.set = function(app, path) {
 
             function(callback) {
                 //TODO: Read terms and agreement better, need to cache results or something.
-                //TODO: YR delivers a lot a data, try openweathermap instead!
-                var api = "cf065e318acf8be8da6e4b4c354a5fef";
-                var lat = req.body.lat;
-                var lon = req.body.lon;
-                var url = "http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon="+ lon + "&APPID=" + api ;
+                var url = "http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon="+ lon + "&APPID=" + api.openWeatherMap ;
                 //var url = "http://api.yr.no/weatherapi/locationforecast/1.9/?lat=" + lat + ";lon=" + lon
                 request(url, function (error, response, body) {
                     if(error) { console.log(error); callback(true); return; }

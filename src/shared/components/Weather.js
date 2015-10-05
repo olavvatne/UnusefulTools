@@ -16,9 +16,11 @@ class Weather extends React.Component {
     }
 
     _handleGeoPosition(position) {
-        console.log("POSITION");
         console.log(position);
-        console.log(position.coords);
+        var payload = {};
+        if(!position.code) {
+            payload = { lat: position.coords.latitude, lon: position.coords.longitude };
+        }
         var succ = function (data) {
             console.log(data);
             this.setState({coords: position.coords, location: data.location, forecast: JSON.parse(data.forecast)})
@@ -28,11 +30,9 @@ class Weather extends React.Component {
             type: 'json',
              contentType: 'application/json',
              method: 'post',
-             data: JSON.stringify({ lat: position.coords.latitude, lon: position.coords.longitude }),
+             data: JSON.stringify(payload),
              success: succ
-        })
-        //this.setState({coords: position.coords});
-        //this.props.getCoords(position.coords);
+        });
     }
 
     componentDidMount() {
@@ -41,9 +41,10 @@ class Weather extends React.Component {
         }.bind(this), 700);
         console.log("TEST");
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(this._handleGeo, function(error) {
-                this.setState({hasGeo: false})
-            });
+            //HandleGeo is run whether it can retrieve a geolocation or not.
+            //In case the browser is to old, node.js does a ip lookup
+            //but with a less accurate result
+            navigator.geolocation.getCurrentPosition(this._handleGeo, this._handleGeo);
         }
         else {
             this.setState({hasGeo: false})
@@ -51,6 +52,8 @@ class Weather extends React.Component {
     }
 
     render() {
+
+
         var img = null;
         var info = null;
         if(this.state.forecast) {
@@ -73,6 +76,7 @@ class Weather extends React.Component {
                         <h2>{this.state.location}</h2>
                         {img}
                         {info}
+
                         </div>
                     </div>
                 </div>
