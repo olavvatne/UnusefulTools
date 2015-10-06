@@ -36,6 +36,8 @@ class Weather extends React.Component {
     }
 
     componentDidMount() {
+        document.body.style.backgroundImage = 'url(/images/umbrella.jpg)';
+        document.getElementById("header__id").style.color = "white";
         setTimeout(function(){
             this.setState({visible: true});
         }.bind(this), 700);
@@ -64,6 +66,7 @@ class Weather extends React.Component {
             temperature = (this.state.forecast.main.temp - 273.15).toFixed(1);;
             info = (<p>{this.state.forecast.weather[0].description}</p>);
         }
+
         return (
             <div>
                 <div className="mui-container">

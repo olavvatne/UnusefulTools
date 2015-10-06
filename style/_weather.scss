@@ -1,14 +1,18 @@
 .weather-content {
   margin: auto 0;
 
+  p, h2, img {
+    color: white;
+  }
   img, svg {
-    opacity: 0.5;
-    filter: alpha(opacity=60);
+    opacity: 0.7;
+    filter: alpha(opacity=70);
   }
   .weather-content__data {
     width: 100%;
 
     p {
+      font-size: 1.1em;
       display: inline-block;
     }
 
@@ -26,6 +30,6 @@
     font-size: 2.2em;
   }
   .weather-content__description {
-    font-size: 1.2em;
+    font-size: 1.4em;
   }
 }
