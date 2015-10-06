@@ -80,7 +80,8 @@ class Dice extends React.Component {
         return (
             <div className="mui-container">
                 <div className="mui-row" id="about-row">
-
+                    <h1>{Dice.toolTitle}</h1>
+                    <p>{Dice.toolDescription}</p>
                 </div>
                 <div className="mui-row" id="die-options-row">
                     <div className="mui-col-md-12">
@@ -142,7 +143,7 @@ Die.defaultProps = {
 
 
 Dice.toolTitle = "Dice roll";
-Dice.toolDescription = "Add as many dice and roll them. Totally legit digital replacement for board game dice!";
-Dice.toolMetaDescription = "Online dice roll for board games like yatzy, Dungeons and Dragons and many more. Add dice with appropriate amount of eyes and roll.";
+Dice.toolDescription = "Add dice and roll, as easy as it gets! You can even choose how many eyes the dice shall possess. Totally legit digital replacement for board game dice!";
+Dice.toolMetaDescription = "Online dice roll tool. Can be used with board games like Yatzy, Yahtzee, Dungeons and Dragons and other dice based games. Add dice with appropriate amount of eyes and roll. Available dice includes 4-sided dice, 6-sided dice, 8-sided dice, 10-sided dice, 12-sided dice and 20-sided dice.";
 
 module.exports = Dice;
