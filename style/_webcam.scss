@@ -1,8 +1,21 @@
 .image-thumb {
   margin: 5px;
   display: inline-block;
+  border: 4px solid white;
+  position: relative;
 
-  :hover {
-    opacity: .5;
-  }
 }
+
+.image-thumb:hover {
+  border: 4px solid $sanmarino;
+
+
+}
+
+/*.image-thumb:before {
+  position: absolute;
+  top: 0px;
+  left: 0;
+  width: 100%;
+  content: "Download";
+}*/

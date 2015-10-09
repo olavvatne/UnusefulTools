@@ -4,12 +4,14 @@ class HelloWorld extends React.Component {
 
     render() {
         return (
+            <div className="mui-panel">
             <div className="mui-container">
                 <div className="mui-ro">
                     <h1>{HelloWorld.toolTitle}</h1>
                     <p>{HelloWorld.toolDescription}</p>
                 </div>
                 Hello World
+            </div>
             </div>
         );
     }

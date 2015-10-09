@@ -9,6 +9,9 @@ import BMI from "../../shared/components/BMI";
 import Webcam from "../../shared/components/Webcam";
 import ColorConverter from "../../shared/components/ColorConverter";
 import Dice from "../../shared/components/Dice";
+import SpecialCharacters from "../../shared/components/SpecialCharacters.js";
+import weatherController from "./weather.js";
+
 
 module.exports.set = function(app) {
 
@@ -22,16 +25,19 @@ module.exports.set = function(app) {
                 environment: 'production'
         };
     }
+    weatherController.set(app, getEnvironment);
 
     app.get('/', function (req, res) {
 
         var templateData = {
             tools: [
-                {url: "/rgb-to-hex", image: "images/paint.svg", title: "Convert color RGB to hex"},
+                {url: "/weeknumber", image: "images/calendar.svg", title: "Week number"},
                 {url: "/webcam", image: "images/camera.svg", title: "Browser webcamera"},
                 {url: "/bmi-calculator", image: "images/scale.svg", title: "BMI calculator"},
-                {url: "/weeknumber", image: "images/calendar.svg", title: "Week number"},
-                {url: "/dice-roll", image: "images/die.svg", title: "Dice roll"}
+                {url: "/dice-roll", image: "images/die.svg", title: "Dice roll"},
+                {url: "/rgb-to-hex", image: "images/paint.svg", title: "Convert color RGB to hex"},
+                {url: "/weather", image: "images/weather.svg", title: "Current weather"},
+                {url: "/special-characters", image: "images/keyboard.svg", title: "Special characters"}
             ],
             environment: getEnvironment().environment
         };
@@ -131,7 +137,19 @@ module.exports.set = function(app) {
         res.render('pages/default-tool', templateData);
     });
 
-
+    app.get('/special-characters', function(req, res) {
+        let content = React.renderToString(<SpecialCharacters />);
+        var environment = getEnvironment();
+        var templateData = {
+            toolTitle: SpecialCharacters.toolTitle,
+            toolMetaDescription: SpecialCharacters.toolMetaDescription,
+            reactContent: content,
+            reactEntryPath: environment.scriptPath,
+            reactScript: "SpecialCharactersClient",
+            environment: environment.environment
+        };
+        res.render('pages/special-tool', templateData);
+    });
 
     // ===== KEEP THIS AT THE BOTTOM ======= , handles 404 errors
     app.use(function(req, res, next){
