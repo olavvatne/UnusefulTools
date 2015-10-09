@@ -71,7 +71,7 @@ class SpecialCharacters extends React.Component {
         var is_chrome = navigator.userAgent.indexOf('Chrome') > -1;
         var is_safari = navigator.userAgent.indexOf("Safari") > -1;
         if ((is_chrome)&&(is_safari)) {is_safari=false;}
-        if(isSafari) {
+        if(is_safari) {
             this.setState({hide: true});
         }
     }
