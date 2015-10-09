@@ -12,11 +12,15 @@ import Dice from "../../shared/components/Dice";
 
 module.exports.set = function(app) {
 
-    var getScriptPath = function() {
+    var getEnvironment = function() {
         if(app.get('env') === 'development') {
-            return 'http://localhost:8080';
+            return {scriptPath: 'http://localhost:8080',
+                    environment: 'development'
+            };
         }
-        return ''
+        return {scriptPath: '',
+                environment: 'production'
+        };
     }
 
     app.get('/', function (req, res) {
@@ -28,7 +32,8 @@ module.exports.set = function(app) {
                 {url: "/bmi-calculator", image: "images/scale.svg", title: "BMI calculator"},
                 {url: "/weeknumber", image: "images/calendar.svg", title: "Week number"},
                 {url: "/dice-roll", image: "images/die.svg", title: "Dice roll"}
-            ]
+            ],
+            environment: getEnvironment().environment
         };
         res.render('pages/home', templateData);
     });
@@ -36,7 +41,7 @@ module.exports.set = function(app) {
     /*app.get('/helloworld', function(req, res) {
      let content = React.renderToString(<HelloWorld />);
      var templateData = {
-     reactEntryPath: getScriptPath(),
+     reactEntryPath: getEnvironment()(),
      reactContent: content
      };
      res.render('pages/default-tool', templateData);
@@ -45,12 +50,15 @@ module.exports.set = function(app) {
     app.get('/bmi-calculator', function(req, res) {
         let content = React.renderToString(<BMI />);
         //content = null;
+        var environment = getEnvironment();
         var templateData = {
             toolTitle: BMI.toolTitle,
             toolMetaDescription: BMI.toolMetaDescription,
             reactContent: content,
-            reactEntryPath: getScriptPath(),
-            reactScript: "BMIClient"
+            reactEntryPath: environment.scriptPath,
+            reactScript: "BMIClient",
+            environment: environment.environment
+
         };
         res.render('pages/default-tool', templateData);
     });
@@ -58,12 +66,14 @@ module.exports.set = function(app) {
     app.get('/webcam', function(req, res) {
         let content = React.renderToString(<Webcam />);
         //content = null;
+        var environment = getEnvironment();
         var templateData = {
             toolTitle: Webcam.toolTitle,
             toolMetaDescription: Webcam.toolMetaDescription,
             reactContent: content,
-            reactEntryPath: getScriptPath(),
-            reactScript: "WebcamClient"
+            reactEntryPath: environment.scriptPath,
+            reactScript: "WebcamClient",
+            environment: environment.environment
         };
         res.render('pages/default-tool', templateData);
     });
@@ -71,12 +81,14 @@ module.exports.set = function(app) {
 
     app.get('/weeknumber', function(req, res) {
         let content = React.renderToString(<WeekNumber />);
+        var environment = getEnvironment();
         var templateData = {
             toolTitle: WeekNumber.toolTitle,
             toolMetaDescription: WeekNumber.toolMetaDescription,
             reactContent: content,
-            reactEntryPath: getScriptPath(),
-            reactScript: "WeekNumberClient"
+            reactEntryPath: environment.scriptPath,
+            reactScript: "WeekNumberClient",
+            environment: environment.environment
         };
         res.render('pages/default-tool', templateData);
     });
@@ -85,7 +97,7 @@ module.exports.set = function(app) {
      let content = React.renderToString(<ImageConverter />);
      var templateData = {
      reactContent: content,
-     reactEntryPath: getScriptPath(),
+     reactEntryPath: getEnvironment()(),
      reactScript: "ImageConverterClient"
      };
      res.render('pages/default-tool', templateData);
@@ -93,24 +105,28 @@ module.exports.set = function(app) {
 
     app.get('/rgb-to-hex', function(req, res) {
         let content = React.renderToString(<ColorConverter />);
+        var environment = getEnvironment();
         var templateData = {
             toolTitle: ColorConverter.toolTitle,
             toolMetaDescription: ColorConverter.toolMetaDescription,
             reactContent: content,
-            reactEntryPath: getScriptPath(),
-            reactScript: "ColorConverterClient"
+            reactEntryPath: environment.scriptPath,
+            reactScript: "ColorConverterClient",
+            environment: environment.environment
         };
         res.render('pages/default-tool', templateData);
     });
 
     app.get('/dice-roll', function(req, res) {
         let content = React.renderToString(<Dice />);
+        var environment = getEnvironment();
         var templateData = {
             toolTitle: Dice.toolTitle,
             toolMetaDescription: Dice.toolMetaDescription,
             reactContent: content,
-            reactEntryPath: getScriptPath(),
-            reactScript: "DiceClient"
+            reactEntryPath: environment.scriptPath,
+            reactScript: "DiceClient",
+            environment: environment.environment
         };
         res.render('pages/default-tool', templateData);
     });
