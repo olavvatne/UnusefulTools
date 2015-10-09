@@ -49,15 +49,17 @@ class WeightField extends React.Component {
         ];
 
         return (
-            <div style={{display: "inline-block"}}>
+            <div >
                     <UIText labelText="Weight" ref="weight"
                             errorText={this.state.weightNotNumber}
                             onChange={this._validateWeight}
                             validationPattern="\d+(\.\d*)?"
+                            style={{display: "inline-block"}}
                         />
                     <UISelect menuItems={weightUnits} ref="unit"
                               value={this.state.heightUnit} //Not used
-                              labelText="Unit"/>
+                              labelText="Unit"
+                              style={{display: "inline-block"}}/>
             </div>
         );
     }

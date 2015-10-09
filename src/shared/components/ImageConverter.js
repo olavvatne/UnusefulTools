@@ -17,6 +17,7 @@ class ImageConverter extends React.Component {
 
     render() {
         return (
+			<div className="mui-panel">
         	<div className="mui-container">
 				<div className="mui-ro">
 					<h1>{ImageConverter.toolTitle}</h1>
@@ -24,6 +25,7 @@ class ImageConverter extends React.Component {
 				</div>
         		<Dropzone onDrop={this.onDrop} />
         	</div>
+			</div>
         	);
     }
 }

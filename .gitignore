@@ -4,3 +4,5 @@ lib
 node_modules
 public/js
 public/style
+apikey.js
+Thumbs.db

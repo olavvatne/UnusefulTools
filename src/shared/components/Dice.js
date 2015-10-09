@@ -83,6 +83,7 @@ class Dice extends React.Component {
         })
 
         return (
+            <div className="mui-panel">
             <div className="mui-container">
                 <div className="mui-row" id="about-row">
                     <h1>{Dice.toolTitle}</h1>
@@ -116,6 +117,7 @@ class Dice extends React.Component {
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         );
     }

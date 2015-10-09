@@ -68,6 +68,7 @@ class BMI extends React.Component {
     render() {
 
         return (
+            <div className="mui-panel">
             <div className="mui-container">
                 <div className="mui-row">
                     <div className="mui-col-md-6">
@@ -90,6 +91,7 @@ class BMI extends React.Component {
                         </p>
                     </div>
                 </div>
+            </div>
             </div>
         );
     }
