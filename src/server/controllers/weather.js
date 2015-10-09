@@ -13,7 +13,6 @@ module.exports.set = function(app, path) {
 
 
     app.get('/weather', function(req, res) {
-        console.log("THIS WORKS!")
         let content = React.renderToString(<Weather />);
         var templateData = {
             toolTitle: Weather.toolTitle,

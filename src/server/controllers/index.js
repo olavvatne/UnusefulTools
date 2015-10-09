@@ -9,6 +9,7 @@ import BMI from "../../shared/components/BMI";
 import Webcam from "../../shared/components/Webcam";
 import ColorConverter from "../../shared/components/ColorConverter";
 import Dice from "../../shared/components/Dice";
+import SpecialCharacters from "../../shared/components/SpecialCharacters.js";
 import weatherController from "./weather.js";
 
 
@@ -31,7 +32,8 @@ module.exports.set = function(app) {
                 {url: "/bmi-calculator", image: "images/scale.svg", title: "BMI calculator"},
                 {url: "/dice-roll", image: "images/die.svg", title: "Dice roll"},
                 {url: "/rgb-to-hex", image: "images/paint.svg", title: "Convert color RGB to hex"},
-                {url: "/weather", image: "images/weather.svg", title: "Current weather"}
+                {url: "/weather", image: "images/weather.svg", title: "Current weather"},
+                {url: "/special-characters", image: "images/keyboard.svg", title: "Special characters"}
             ]
         };
         res.render('pages/home', templateData);
@@ -119,6 +121,17 @@ module.exports.set = function(app) {
         res.render('pages/default-tool', templateData);
     });
 
+    app.get('/special-characters', function(req, res) {
+        let content = React.renderToString(<SpecialCharacters />);
+        var templateData = {
+            toolTitle: SpecialCharacters.toolTitle,
+            toolMetaDescription: SpecialCharacters.toolMetaDescription,
+            reactContent: content,
+            reactEntryPath: getScriptPath(),
+            reactScript: "SpecialCharactersClient"
+        };
+        res.render('pages/special-tool', templateData);
+    });
 
     // ===== KEEP THIS AT THE BOTTOM ======= , handles 404 errors
     app.use(function(req, res, next){

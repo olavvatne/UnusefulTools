@@ -21,10 +21,12 @@ class Weather extends React.Component {
         if(!position.code) {
             payload = { lat: position.coords.latitude, lon: position.coords.longitude };
         }
+
         var succ = function (data) {
             console.log(data);
             this.setState({coords: position.coords, location: data.location, forecast: JSON.parse(data.forecast)})
         }.bind(this);
+
         reqwest({
             url: '/getweather',
             type: 'json',
@@ -36,12 +38,13 @@ class Weather extends React.Component {
     }
 
     componentDidMount() {
-        document.body.style.backgroundImage = 'url(/images/umbrella.jpg)';
+        document.body.style.backgroundImage = 'url(/images/bokeh.jpg)';
         document.getElementById("header__id").style.color = "white";
+
+        //If no timeout, cause blinking text for browsers that already have accepted geolocation
         setTimeout(function(){
             this.setState({visible: true});
         }.bind(this), 700);
-        console.log("TEST");
         if (navigator.geolocation) {
             //HandleGeo is run whether it can retrieve a geolocation or not.
             //In case the browser is to old, node.js does a ip lookup

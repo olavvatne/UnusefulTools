@@ -1,0 +1,118 @@
+/**
+ * Created by Olav on 10/8/2015.
+ */
+import React from "react";
+
+class SpecialCharacters extends React.Component {
+
+    constructor() {
+        super();
+        this.state = {selection: null, hide: false};
+        this._onCopyHandler = this._onCopy.bind(this);
+    }
+
+    _getCharacters() {
+        return [
+            {name: "For all", code: "8704"},
+            {name: "Sum", code: "8721"},
+            {name: "Exists", code: "8707"},
+            {name: "Union", code: "8745"},
+            {name: "Intersection", code: "8746"},
+            {name: "Omega", code: "937"},
+            {name: "Phi", code: "934"},
+            {name: "Theta", code: "952"},
+            {name: "Eta", code: "951"},
+            {name: "Mu", code: "956"},
+            {name: "Empty", code: "8709"},
+            {name: "Copyright", code: "169"},
+            {name: "Trade mark", code: "8482"},
+            {name: "Registered", code: "174"},
+            {name: "Almost equal", code: "8776"},
+            {name: "Subset", code: "8838"},
+            {name: "Superset", code: "8839"},
+            {name: "Logical and", code: "8743"},
+            {name: "Logical not", code: "8744"},
+            {name: "Micro", code: "181"},
+            {name: "Per mille", code: "8240"},
+            {name: "Divide", code: "126"},
+        ];
+    }
+
+    _onCopy(char) {
+        this.setState({selection: char})
+    }
+
+    componentDidMount() {
+        var is_chrome = navigator.userAgent.indexOf('Chrome') > -1;
+        var is_safari = navigator.userAgent.indexOf("Safari") > -1;
+        if ((is_chrome)&&(is_safari)) {is_safari=false;}
+        if(isSafari) {
+            this.setState({hide: true});
+        }
+    }
+    render() {
+        var data = this._getCharacters();
+        var characters =  data.map(char => {
+           return (
+               <Character char={char} onCopy={this._onCopyHandler}></Character>
+           )
+        });
+        //TODO: Pass down a className instead, for easier styling.
+        var s = "view";
+        return (
+            <div>
+                <div className="mui-container">
+                    <div className="mui-row">
+                        <div className="mui-col-md-8">
+
+                            <h1>{SpecialCharacters.toolTitle}</h1>
+                            <p>{SpecialCharacters.toolDescription}</p>
+                        </div>
+                        <div className="mui-col-md-4">
+                            {!this.state.hide?
+                            <Character char={this.state.selection} className={s}></Character>
+                            : null}
+                        </div>
+                    </div>
+                    <div className="mui-row">
+                        {characters}
+                    </div>
+
+                </div>
+            </div>
+        );
+    }
+}
+
+class Character extends React.Component {
+
+    constructor() {
+        super();
+        this._handle = this._copy.bind(this)
+    }
+
+    _copy(event) {
+        //TODO: Somehow import clipboard instead of include using scripttag in html.
+        clipboard.copy(String.fromCharCode(this.props.char.code));
+        this.props.onCopy(this.props.char);
+    }
+    render() {
+        //TODO: Click to copy and select-right-click and copy possible for both pc and smartphones?
+        return (
+            <div className={this.props.className + ' character-container'} onClick={this._handle} style={this.props.style}>
+                {this.props.char ?
+                    [<p className="character-container__img">{String.fromCharCode(this.props.char.code)}</p>,
+                    <p className="character-container__description">
+                        {this.props.char.name}
+                    </p>]
+                :<p style={{marginTop: '20px'}}>No selection in your clipboard</p> }
+            </div>
+        );
+    }
+}
+
+SpecialCharacters.toolTitle = "Copy paste special characters";
+SpecialCharacters.toolDescription =  "Damn son, can't find that character of yours? Find it here";
+SpecialCharacters.toolMetaDescription = "Copy a special character to your clipboard and paste. Online tool and no flash required.";
+SpecialCharacters.clipboard = null;
+module.exports = SpecialCharacters;
