@@ -9,6 +9,7 @@ import BMI from "../../shared/components/BMI";
 import Webcam from "../../shared/components/Webcam";
 import ColorConverter from "../../shared/components/ColorConverter";
 import Dice from "../../shared/components/Dice";
+import LoremIpsum from "../../shared/components/LoremIpsum";
 import SpecialCharacters from "../../shared/components/SpecialCharacters.js";
 import weatherController from "./weather.js";
 
@@ -37,7 +38,8 @@ module.exports.set = function(app) {
                 {url: "/dice-roll", image: "images/die.svg", title: "Dice roll"},
                 {url: "/rgb-to-hex", image: "images/paint.svg", title: "Convert color RGB to hex"},
                 {url: "/weather", image: "images/weather.svg", title: "Current weather"},
-                {url: "/special-characters", image: "images/keyboard.svg", title: "Special characters"}
+                {url: "/special-characters", image: "images/keyboard.svg", title: "Special characters"},
+                {url: "/lorem-ipsum", image: "images/lorumipsum.svg", title: "Lorem ipsum"}
             ],
             environment: getEnvironment().environment
         };
@@ -151,8 +153,22 @@ module.exports.set = function(app) {
         res.render('pages/special-tool', templateData);
     });
 
+    app.get('/lorem-ipsum', function(req, res) {
+        let content = React.renderToString(<LoremIpsum />);
+        var environment = getEnvironment();
+        var templateData = {
+            toolTitle: LoremIpsum.toolTitle,
+            toolMetaDescription: LoremIpsum.toolMetaDescription,
+            reactContent: content,
+            reactEntryPath: environment.scriptPath,
+            reactScript: "LoremIpsumClient",
+            environment: environment.environment
+        };
+        res.render('pages/special-tool', templateData);
+    });
+
     // ===== KEEP THIS AT THE BOTTOM ======= , handles 404 errors
     app.use(function(req, res, next){
-        res.status(404).render('pages/404', {title: "Page not found"});
+        res.status(404).render('pages/404', {title: "Page not found", environment: getEnvironment().environment });
     });
 }
