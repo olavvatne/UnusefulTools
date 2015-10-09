@@ -139,6 +139,8 @@ class Die extends React.Component {
     }
 }
 
+
+
 Die.PropTypes = {
     number: React.PropTypes.number.isRequired
 }
@@ -153,4 +155,5 @@ Dice.toolMetaDescription = "Online dice roll tool. Can be used with board games 
 
 module.exports = Dice;
 
+//
 // <!--<h1>{this.props.number}</h1>-->
