@@ -10,13 +10,9 @@ class LoremIpsum extends React.Component {
     constructor() {
         super();
         this._generate = this._handleClick.bind(this);
-
-        this._generate = this._handleClick.bind(this);
-        //TODO: Create libs component for up down inc
-        this._up = this._adjustParagraphCount.bind(this, 1);
-        this._down = this._adjustParagraphCount.bind(this, -1);
         this._handleAdjust = this._adjustParagraphCount.bind(this);
-        this.state = {text: null, count: 2, type: LoremIpsum.TYPE.PARAGRAPH};
+        this._copyHandler = this._copy.bind(this);
+        this.state = {text: null, type: LoremIpsum.TYPE.PARAGRAPH};
     }
 
     _randomInt(min, max) {
@@ -28,12 +24,12 @@ class LoremIpsum extends React.Component {
         this.setState({text: text});
     }
 
+    _copy() {
+        clipboard.copy(this.state.text.join('\n'));
+    }
+
     _adjustParagraphCount(inc) {
-        //TODO: FIX this shit!
-        //var count = Math.max(1,this.state.count + inc);
         var paragraphs = this.state.text;
-        var value = this.refs.incrementer.getValue()
-        var inc = paragraphs.length - value ;
         switch(inc) {
             case -1:
                 if(paragraphs.length > 1) {
@@ -47,7 +43,7 @@ class LoremIpsum extends React.Component {
     }
 
     _handleClick() {
-        var text = this._createText(this.state.count, this.state.type);
+        var text = this._createText(this.refs.incrementer.getValue(), this.state.type);
 
         this.setState({text: text});
 
@@ -118,17 +114,14 @@ class LoremIpsum extends React.Component {
                                 minimum="1"
                                 ref="incrementer"
                                 />
-
-                            <UIButton
-                                label="-"
-                                primary={false}
-                                onClick={this._down} />
-                            <UIButton
-                                label="+"
-                                primary={false}
-                                onClick={this._up} />
                         </div>
                         <div className="mui-col-md-8" style={{marginTop: "25px"}}>
+                            { text?
+                                <UIButton
+                                label="Copy to clipboard"
+                                primary={false}
+                                onClick={this._copyHandler} />
+                            :null}
                             <p>{text}</p>
                         </div>
 

@@ -9,11 +9,12 @@ class UIIncrementButton extends React.Component {
         super();
         this._up = this._adjustParagraphCount.bind(this, 1);
         this._down = this._adjustParagraphCount.bind(this, -1);
-        this.state = {count: 0, minimum: 0}
+        this.state = {count: 0}
     }
 
-    componentWilLMount() {
-        this.setState({count: this.props.initvalue})
+    componentWillMount() {
+        console.log(this.props.initvalue);
+        this.setState({count: Number.parseInt(this.props.initvalue)});
     }
 
     _adjustParagraphCount(inc) {
@@ -21,7 +22,7 @@ class UIIncrementButton extends React.Component {
         var count = Math.max(this.props.minimum,this.state.count + inc);
 
         this.setState({count: count});
-        this.props.onAdjust();
+        this.props.onAdjust(inc);
     }
 
     getValue() {
@@ -29,12 +30,12 @@ class UIIncrementButton extends React.Component {
     }
 
     render() {
-        return (<span>
+        return (<span style={{margin: "5px"}}>
             <UIButton
                 label="-"
                 primary={false}
                 onClick={this._down} />
-                <span style={{marginLeft: "5px", marginRight: "5px"}}>{this.state.count}</span>
+                <span style={{marginLeft: "5px", marginRight: "5px", fontSize: "1.5em"}}>{this.state.count}</span>
             <UIButton
             label="+"
             primary={false}
