@@ -81,7 +81,7 @@ class Dice extends React.Component {
             return (
                 <Die number={d.number} imagePath={d.imagePath}/>
             );
-        })
+        });
 
         return (
             <div className="mui-panel">
@@ -143,10 +143,10 @@ class Die extends React.Component {
 
 Die.PropTypes = {
     number: React.PropTypes.number.isRequired
-}
+};
 Die.defaultProps = {
     number: 1
-}
+};
 
 
 Dice.toolTitle = "Dice roll";
