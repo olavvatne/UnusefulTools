@@ -89,7 +89,7 @@ class Dice extends React.Component {
                     <p>{Dice.toolDescription}</p>
                 </div>
                 <div className="mui-row" id="die-options-row">
-                    <div className="mui-col-md-12">
+                    <div className="mui-col-md-6">
                         <UIButton
                             label="Add die"
                             primary={true}
@@ -101,6 +101,13 @@ class Dice extends React.Component {
                             labelText="Eyes"
                             style={{width: "100px", marginLeft: "30px"}}/>
                     </div>
+                    <div className="mui-col-md-6">
+                        <UIButton
+                            label="Roll"
+                            primary={true}
+                            onClick={this._handleRoll}
+                            id="btn-roll" />
+                    </div>
                 </div>
                 <div className="mui-row">
                     <div className="mui-text-center">
@@ -108,16 +115,6 @@ class Dice extends React.Component {
                             {dice}
                         </div>
                     </div>
-                </div>
-                <div className="mui-row" id="roll-row">
-                    <div className="mui-col-md-12">
-                        <UIButton
-                            label="Roll"
-                            primary={true}
-                            onClick={this._handleRoll}
-                            id="btn-roll" />
-                        </div>
-
                 </div>
             </div>
         );
@@ -133,7 +130,7 @@ class Die extends React.Component {
     render() {
         return (
             <div className="dice-row">
-                <img src={this.props.imagePath} alt={this.props.number} width="50" height="50"/>
+                <img src={this.props.imagePath} alt={this.props.number} width="60" height="60"/>
             </div>
         );
     }
