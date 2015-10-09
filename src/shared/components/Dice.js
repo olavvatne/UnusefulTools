@@ -92,7 +92,7 @@ class Dice extends React.Component {
                     <div className="mui-col-md-6">
                         <UIButton
                             label="Add die"
-                            primary={true}
+                            primary={false}
                             onClick={this._handleAddDie} />
                         <UISelect
                             menuItems={dieEyes}
@@ -106,7 +106,7 @@ class Dice extends React.Component {
                             label="Roll"
                             primary={true}
                             onClick={this._handleRoll}
-                            id="btn-roll" />
+                            style={{width: "150px"}}/>
                     </div>
                 </div>
                 <div className="mui-row">
