@@ -5,7 +5,9 @@
 * login server 
 * pull master 
 * npm install
-* build (npm run build) 
+* add apikey.js to root folder, if first time deploying
+* occasionally update geoip-lite ip-address mapping
+* build (npm run build)
 * restart node (restart unuseful-app-1)
 
 ## New component
