@@ -51,15 +51,16 @@ class HeightField extends React.Component {
         ];
 
         return (
-            <div style={{display: "inline-block"}}>
+            <div>
                 <UIText labelText="Height" ref="height"
                         errorText={this.state.heightNotNumber}
                         onChange={this._validateHeight}
                         validationPattern="\d+(\.\d*)?"
-                        />
+                        style={{display: "inline-block"}}/>
                 <UISelect menuItems={heightUnits} ref="unit"
                           value={this.state.heightUnit} //not used
-                          labelText="Unit"/>
+                          labelText="Unit"
+                          style={{display: "inline-block"}}/>
             </div>
         );
     }
