@@ -16,7 +16,7 @@ class Dice extends React.Component {
     }
 
     _getImagePath(eyes, number) {
-        return "/images/dice/" + eyes + "-256/" + eyes + "-" + number + ".png";
+        return "/images/dice/" + eyes + "-128/" + eyes + "-" + number + ".png";
     }
 
     _addDie() {
