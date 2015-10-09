@@ -40,13 +40,14 @@ class Dice extends React.Component {
     _handleRoll() {
 
         var dice = this.state.dice;
-        if (dice.length == 0) {
+        if (dice.length === 0) {
             return;
         }
 
-        var newDice = []
-        var d;
-        for (d of dice){
+        var newDice = [];
+
+        for (var i = 0; i < dice.length; i++) {
+            var d = dice[i];
             var number = (Math.floor(Math.random() * d.eyes) + 1);
             //console.log("new die: ", d.eyes, "number: ", number);
             var eyes = d.eyes;
