@@ -14,12 +14,15 @@ module.exports.set = function(app, path) {
 
     app.get('/weather', function(req, res) {
         let content = React.renderToString(<Weather />);
+        var environment = path();
+
         var templateData = {
             toolTitle: Weather.toolTitle,
             toolMetaDescription: Weather.toolMetaDescription,
             reactContent: content,
-            reactEntryPath: path(),
-            reactScript: "WeatherClient"
+            reactEntryPath: environment.scriptPath,
+            reactScript: "WeatherClient",
+            environment: environment.environment
         };
         res.render('pages/default-tool', templateData);
     });

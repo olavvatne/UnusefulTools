@@ -25,7 +25,7 @@ module.exports.set = function(app) {
                 environment: 'production'
         };
     }
-    weatherController.set(app, getScriptPath);
+    weatherController.set(app, getEnvironment);
 
     app.get('/', function (req, res) {
 
@@ -139,12 +139,14 @@ module.exports.set = function(app) {
 
     app.get('/special-characters', function(req, res) {
         let content = React.renderToString(<SpecialCharacters />);
+        var environment = getEnvironment();
         var templateData = {
             toolTitle: SpecialCharacters.toolTitle,
             toolMetaDescription: SpecialCharacters.toolMetaDescription,
             reactContent: content,
-            reactEntryPath: getScriptPath(),
-            reactScript: "SpecialCharactersClient"
+            reactEntryPath: environment.scriptPath,
+            reactScript: "SpecialCharactersClient",
+            environment: environment.environment
         };
         res.render('pages/special-tool', templateData);
     });
