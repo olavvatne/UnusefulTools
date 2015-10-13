@@ -10,6 +10,8 @@ import Webcam from "../../shared/components/Webcam";
 import ColorConverter from "../../shared/components/ColorConverter";
 import Dice from "../../shared/components/Dice";
 import SpecialCharacters from "../../shared/components/SpecialCharacters.js";
+import RandomMovie from "../../shared/components/RandomMovie.js";
+
 import weatherController from "./weather.js";
 
 
@@ -150,6 +152,27 @@ module.exports.set = function(app) {
         };
         res.render('pages/special-tool', templateData);
     });
+
+    app.get('/random-movie', function(req, res) {
+        console.log("indexin..")
+        let content = React.renderToString(<RandomMovie />);
+        console.log("contetn ok")
+        var environment = getEnvironment();
+        console.log("env ok")
+        var templateData = {
+            toolTitle: RandomMovie.toolTitle,
+            toolMetaDescription: RandomMovie.toolMetaDescription,
+            reactContent: content,
+            reactEntryPath: environment.scriptPath,
+            reactScript: "RandomMovieClient",
+            environment: environment.environment
+        };
+        console.log("tplate data ok")
+        res.render('pages/default-tool', templateData);
+    });
+
+
+
 
     // ===== KEEP THIS AT THE BOTTOM ======= , handles 404 errors
     app.use(function(req, res, next){
