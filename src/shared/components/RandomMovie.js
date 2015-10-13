@@ -67,10 +67,10 @@ class RandomMovie extends React.Component {
                             <div className="about-movie fade-in">
                                 <h2>{this.state.pickedMovie.title}</h2>
                                 <div className="mui-row">
-                                    <div className="mui-col-md-6">
+                                    <div className="mui-col-md-6 mui-text-right">
                                         <img src="https://placehold.it/150x200" alt=""/>
                                     </div>
-                                    <div className="mui-col-md-6">
+                                    <div className="stat-list mui-col-md-6 mui-text-left">
                                         <ul>
                                             <li>Rating: {this.state.pickedMovie.rating}</li>
                                             <li>Year: {this.state.pickedMovie.year}</li>
@@ -78,6 +78,9 @@ class RandomMovie extends React.Component {
                                         </ul>
                                     </div>
                                 </div>
+                            </div>
+                            <div className="get-new-movie mui-row">
+                                    <UIButton label="Give me another!" primary={true} onClick={this._handleRandomMovie}/>
                             </div>
                         </div>
                     </div>
