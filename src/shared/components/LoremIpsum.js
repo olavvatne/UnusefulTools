@@ -12,7 +12,7 @@ class LoremIpsum extends React.Component {
         this._generate = this._handleClick.bind(this);
         this._handleAdjust = this._adjustParagraphCount.bind(this);
         this._copyHandler = this._copy.bind(this);
-        this.state = {text: null, type: LoremIpsum.TYPE.PARAGRAPH};
+        this.state = {text: null, type: LoremIpsum.TYPE.PARAGRAPH, hide: false};
     }
 
     _randomInt(min, max) {
@@ -21,8 +21,16 @@ class LoremIpsum extends React.Component {
 
     componentDidMount() {
         var text = this._createText(2, LoremIpsum.TYPE.PARAGRAPH);
+
+        var is_chrome = navigator.userAgent.indexOf('Chrome') > -1;
+        var is_safari = navigator.userAgent.indexOf("Safari") > -1;
+        if ((is_chrome)&&(is_safari)) {is_safari=false;}
+        if(is_safari) {
+            this.setState({text: text, hide: true});
+        }
         this.setState({text: text});
     }
+
 
     _copy() {
         clipboard.copy(this.state.text.join('\n'));
@@ -92,6 +100,11 @@ class LoremIpsum extends React.Component {
         //TODO: Put all style tags in style sheet.
         var text = null;
         if(this.state.text) {
+            var wordCount = 0;
+            for(var i = 0; i<this.state.text.length; i++) {
+                var words = this.state.text[i].split(' ');
+                wordCount += words.length;
+            }
             var text = this.state.text.map(paragraph => {
                 return (<p style={{textAlign: "justify"}}>{paragraph}</p>)
             });
@@ -114,9 +127,10 @@ class LoremIpsum extends React.Component {
                                 minimum="1"
                                 ref="incrementer"
                                 />
+                            {text ? <p>Words: {wordCount}</p>: null}
                         </div>
                         <div className="mui-col-md-8" style={{marginTop: "25px"}}>
-                            { text?
+                            { text && !this.state.hide ?
                                 <UIButton
                                 label="Copy to clipboard"
                                 primary={false}
@@ -135,8 +149,7 @@ class LoremIpsum extends React.Component {
 
 
 LoremIpsum.toolTitle = "Lorem Ipsum";
-LoremIpsum.toolDescription =  "A simple lorem ipsum generator. Choose the number of words or number of paragrahps and " +
-    "copy  your clipboard (For supported devices. Sorry Safari!).";
+LoremIpsum.toolDescription =  "A simple lorem ipsum generator. Adjust the number of paragraphs and copy that text!";
 LoremIpsum.toolMetaDescription = "Online lorem ipsum generator. Perfect as placeholder text for graphic design and web development projects. Easy to copy into clipboard. lorum ipsum.";
 LoremIpsum.IMAGE = 1;
 LoremIpsum.TEXT = 2;
