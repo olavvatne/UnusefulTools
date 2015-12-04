@@ -75,6 +75,7 @@ class SpecialCharacters extends React.Component {
             this.setState({hide: true});
         }
     }
+
     render() {
         var data = this._getCharacters();
         var characters =  data.map(char => {
