@@ -12,7 +12,6 @@ class UIButton extends React.Component {
     render() {
 
         var primary = this.props.primary ? "primary" : "";
-
         return (
             <button className="mui-btn"
                     data-mui-color={primary}

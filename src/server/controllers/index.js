@@ -3,6 +3,7 @@
  */
 import React from "react";
 import HelloWorld from "../../shared/components/HelloWorld";
+import WhiteNoise from "../../shared/components/WhiteNoise";
 import WeekNumber from "../../shared/components/WeekNumber";
 import ImageConverter from "../../shared/components/ImageConverter";
 import BMI from "../../shared/components/BMI";
@@ -165,6 +166,20 @@ module.exports.set = function(app) {
             environment: environment.environment
         };
         res.render('pages/special-tool', templateData);
+    });
+
+    app.get('/white-noise', function(req, res) {
+        let content = React.renderToString(<WhiteNoise />);
+        var environment = getEnvironment();
+        var templateData = {
+            toolTitle: WhiteNoise.toolTitle,
+            toolMetaDescription: WhiteNoise.toolMetaDescription,
+            reactContent: content,
+            reactEntryPath: environment.scriptPath,
+            reactScript: "WhiteNoiseClient",
+            environment: environment.environment
+        };
+        res.render('pages/default-tool', templateData);
     });
 
     // ===== KEEP THIS AT THE BOTTOM ======= , handles 404 errors
