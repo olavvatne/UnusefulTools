@@ -3,7 +3,6 @@
  */
 
 import React from "react";
-import reqwest from "reqwest";
 var XMLHttpRequest = require('xhr2');
 import WhiteNoise from "../shared/components/WhiteNoise";
 

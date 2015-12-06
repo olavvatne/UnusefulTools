@@ -40,7 +40,8 @@ module.exports.set = function(app) {
                 {url: "/weather", image: "images/weather.svg", title: "Current weather"},
                 {url: "/special-characters", image: "images/keyboard.svg", title: "Special characters"},
                 {url: "/lorem-ipsum", image: "images/lorumipsum.svg", title: "Lorem ipsum"},
-                {url: "/rgb-to-hex", image: "images/paint.svg", title: "Convert color RGB to hex"}
+                {url: "/rgb-to-hex", image: "images/paint.svg", title: "Convert color RGB to hex"},
+                {url: "/white-noise", image: "images/noise.svg", title: "Pleasant sounds"}
             ],
             environment: getEnvironment().environment
         };

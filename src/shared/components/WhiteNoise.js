@@ -9,11 +9,116 @@ class WhiteNoise extends React.Component {
         this._toggle = this._handleClick.bind(this);
         this._volume = this._changeVolume.bind(this);
 
+        this.sounds = [
+            {name: "Brown noise", source: "sound/brown.mp3", image: "images/noise/ocean.jpg"},
+            {name: "Ocean", source: "sound/ocean.mp3", image: "images/noise/ocean.jpg"}
+        ]
         this.state = {
-            play: false,
+            mute: false,
             volume: 100,
-            browserSupport: true
+            browserSupport: true,
+            context: null,
+            masterGain: null
         };
+    }
+
+    _changeVolume(event, test) {
+        var fraction = event.target.value / 100;
+        this.state.masterGain.gain.value = fraction * fraction;
+        this.setState({volume: event.target.value});
+    }
+
+    _handleClick() {
+        if(this.state.mute) {
+            this.state.masterGain.connect(this.state.context.destination);
+            this.setState({mute: false});
+        }
+        else {
+            this.state.masterGain.disconnect();
+            this.setState({mute: true});
+        }
+
+    }
+
+
+    componentDidMount() {
+        /* --- set up web audio --- */
+        try {
+            var context =  new (window.AudioContext || window.webkitAudioContext)();
+            var gainNode = context.createGain();
+            gainNode.connect(context.destination);
+            if(!context) {
+                throw Error();
+            }
+            this.setState({context: context, masterGain: gainNode});
+        }
+        catch(err) {
+            this.setState({browserSupport: false});
+        }
+
+
+    }
+
+    render() {
+        var sounds = this.sounds.map(sound => {
+            return <Sound
+                    name={sound.name}
+                    source={sound.source}
+                    context={this.state.context}
+                    drain={this.state.masterGain}></Sound>
+        });
+        var label = this.state.mute ? "unmute" : "mute";
+        return (
+
+            <div>
+                <div className="mui-container pleasant-sound">
+                    <h1>{WhiteNoise.toolTitle}</h1>
+                   {WhiteNoise.toolDescription.map(line => {
+                       return <p>{line}</p>
+                   })}
+                    {this.state.browserSupport ?
+
+                        <div>
+
+
+                            <input type="range" min="0" max="100" value={this.state.volume} onChange={this._volume} />
+                            <button onClick={this._toggle}>{label}</button>
+                            {sounds}
+                        </div>
+                    :<p>Web Audio API required. Some browser do not have support for this. Use chrome or firefox</p>}
+                </div>
+            </div>
+
+        );
+    }
+}
+
+
+class Sound extends React.Component {
+
+    constructor() {
+        super();
+        this._volume = this._changeVolume.bind(this);
+        this.state = {
+            volume: 0
+        };
+    }
+
+    componentWillReceiveProps(props) {
+        if(!this.received) {
+            console.log("TEST");
+            this.gainNode = props.context.createGain();
+            this.source = props.context.createBufferSource();
+            this.source.connect(this.gainNode);
+            this.gainNode.connect(props.drain);
+            this.gainNode.gain.value = 0;
+            this._getAudio(props.context);
+            this.received = true;
+        }
+
+    }
+    componentDidMount() {
+
     }
 
     _changeVolume(event, test) {
@@ -22,21 +127,10 @@ class WhiteNoise extends React.Component {
         this.setState({volume: event.target.value});
     }
 
-    _handleClick() {
-        if(this.state.play) {
-            console.log(this.source);
-            this.source.stop();
-            this.setState({play: false});
-            return
-        }
+    _getAudio(context) {
+        var url  = this.props.source;
 
-        this._getAudio();
-    }
-
-    _getAudio() {
-        var url  = 'images/ocean.mp3';
-
-        var context = this.context;
+        //var context = this.props.context;
         var source  = this.source;
         var that = this;
 
@@ -59,55 +153,20 @@ class WhiteNoise extends React.Component {
         request.send();
     }
 
-    componentDidMount() {
-        /* --- set up web audio --- */
-        try {
-            this.context = new AudioContext();
-            this.gainNode = this.context.createGain();
-            this.source = this.context.createBufferSource();
-            this.source.connect(this.gainNode);
-            this.gainNode.connect(this.context.destination);
-            if(!this.context) {
-                throw Error();
-            }
-        }
-        catch(err) {
-            this.setState({browserSupport: false});
-        }
-
-
-    }
-
     render() {
-
-        var label = this.state.play ? "pause" : "play";
         return (
-
-            <div className="mui-panel">
-                <div className="mui-container">
-                    <h1>{WhiteNoise.toolTitle}</h1>
-                    <p>{WhiteNoise.toolDescription}</p>
-                    {this.state.browserSupport ?
-                        <div>
-
-
-                            <UIButton
-                                label={label}
-                                primary={true}
-                                onClick={this._toggle} />
-                            <input type="range" min="0" max="100" value={this.state.volume} onChange={this._volume} />
-
-                        </div>
-                    :<p>Web Audio API required. Some browser do not have support for this. Use chrome or firefox</p>}
-                </div>
+            <div className="mui-col-md-3 mui-col-sm-4">
+                <img src={this.props.image} alt=""/>
+                <p>{this.props.name}</p>
+                <input type="range" min="0" max="100" value={this.state.volume} onChange={this._volume} />
             </div>
-
         );
     }
 }
 
 WhiteNoise.toolTitle = "Pleasant noise";
-WhiteNoise.toolDescription =  "Some noises";
-WhiteNoise.toolMetaDescription = "Pleasant noise generator. Audio loop";
+WhiteNoise.toolDescription =  ["Need total focus and an productivity boost?", "Cancel out the environment by mixing different pleasant sounds"];
+WhiteNoise.toolMetaDescription = "Pleasant noise generator. Sounds played in a loop. Rainy, ocean, brown noise, white noise " +
+    "and other sounds.";
 
 module.exports = WhiteNoise;
