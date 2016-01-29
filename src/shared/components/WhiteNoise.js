@@ -10,8 +10,10 @@ class WhiteNoise extends React.Component {
         this._volume = this._changeVolume.bind(this);
 
         this.sounds = [
-            {name: "Brown noise", source: "sound/brown.mp3", image: "images/noise/ocean.jpg"},
-            {name: "Ocean", source: "sound/ocean.mp3", image: "images/noise/ocean.jpg"}
+            {name: "Brown noise", source: "sound/brown.mp3", image: "images/noise/noise.svg"},
+            {name: "Ocean", source: "sound/ocean.mp3", image: "images/noise/ocean.svg"},
+            {name: "Rain", source: "sound/rain.mp3", image: "images/noise/rain.svg"},
+            {name: "Forest", source: "sound/forest.mp3", image: "images/noise/tree.svg"}
         ]
         this.state = {
             mute: false,
@@ -64,10 +66,11 @@ class WhiteNoise extends React.Component {
             return <Sound
                     name={sound.name}
                     source={sound.source}
+                    image={sound.image}
                     context={this.state.context}
                     drain={this.state.masterGain}></Sound>
         });
-        var label = this.state.mute ? "unmute" : "mute";
+        var label = this.state.mute ? "fa fa-2x fa-volume-off" : "fa fa-2x fa-volume-up";
         return (
 
             <div>
@@ -79,10 +82,14 @@ class WhiteNoise extends React.Component {
                     {this.state.browserSupport ?
 
                         <div>
+                            <div className="pleasant-sound__master">
+                                <input className="input-range" type="range" min="0" max="100" value={this.state.volume} onChange={this._volume} />
+                                <a className="button" onClick={this._toggle}>
+                                    <i className={label}></i>
+                                </a>
 
+                            </div>
 
-                            <input type="range" min="0" max="100" value={this.state.volume} onChange={this._volume} />
-                            <button onClick={this._toggle}>{label}</button>
                             {sounds}
                         </div>
                     :<p>Web Audio API required. Some browser do not have support for this. Use chrome or firefox</p>}
@@ -155,10 +162,10 @@ class Sound extends React.Component {
 
     render() {
         return (
-            <div className="mui-col-md-3 mui-col-sm-4">
-                <img src={this.props.image} alt=""/>
+            <div className="mui-col-md-3 mui-col-sm-4 pleasant-sound__thumb">
+                <img src={this.props.image} alt={'icon of ' + this.props.name}/>
                 <p>{this.props.name}</p>
-                <input type="range" min="0" max="100" value={this.state.volume} onChange={this._volume} />
+                <input className="input-range" type="range" min="0" max="100" value={this.state.volume} onChange={this._volume} />
             </div>
         );
     }
