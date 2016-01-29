@@ -106,13 +106,22 @@ class ReactCam extends Component {
     }
 
     render() {
+        var errorText = null;
+        if(!this.state.hasUserMedia && ReactCam.userMediaRequested) {
+            errorText = "No camera available."
+        }
+
         return (
-            <video
-                autoPlay={true}
-                width={this.props.width}
-                height={this.props.height}
+            <div>
+                <video
+                        autoPlay={true}
+                        width={this.props.width}
+                    height={this.props.height}
                 src={this.state.src}
-                />
+
+                ></video>
+                <p>{errorText}</p>
+            </div>
         );
     }
 }
