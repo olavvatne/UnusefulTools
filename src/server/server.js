@@ -5,15 +5,19 @@ import controllers from './controllers';
 import sassMiddleware from 'node-sass-middleware';
 import sass from 'node-sass';
 import fs from 'fs';
+import mongo from 'mongod';
+import monk from 'monk';
 var bodyParser = require('body-parser');
 
 //TODO: Better build /dev configuration
+const db = monk('localhost:27017/unusefuldb');
 const app = express();
 
 app.set("env", process.env.NODE_ENV || "development");
 app.set("port", process.env.PORT || 3000);
 
 app.use(bodyParser.json());
+
 
 app.engine('ejs', engine);//Support for layout for templates
 app.set('view engine', 'ejs');
@@ -36,6 +40,17 @@ var moveFile = function(from, to) {
         });
     });
 }
+
+var createFolder = function(path, name) {
+    console.log("CREATE FOLDER: " + path + name );
+    var dir = path + name;
+    if (!fs.existsSync(dir)){
+        fs.mkdirSync(dir);
+    }
+};
+
+createFolder('./public/', 'style');
+createFolder('./public/', 'js');
 moveFile('./node_modules/muicss/dist/css/mui.min.css', './public/style/mui.min.css');
 moveFile('./node_modules/muicss/dist/js/mui.min.js', './public/js/mui.min.js');
 moveFile('./node_modules/normalize.css/normalize.css', './public/style/normalize.css');
@@ -67,7 +82,7 @@ if(app.get('env') === 'production') {
             throw new Error("Could not render SASS")
         }
         else {
-            fs.writeFile(destPath + '/style.css', result.css, function(err) {
+            fs.writeFile(destPath + 'style/style.css', result.css, function(err) {
                 if(err) {
                     return console.log(err);
                     throw new Error("Could not write SASS")
@@ -77,6 +92,11 @@ if(app.get('env') === 'production') {
         }
     });
 }
+
+app.use(function(req,res,next){
+    req.db = db;
+    next();
+});
 
 controllers.set(app);
 
