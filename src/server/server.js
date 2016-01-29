@@ -2,6 +2,7 @@ import express from "express";
 import engine  from "ejs-locals";
 import favicon from 'serve-favicon';
 import controllers from './controllers';
+import api from './api';
 import sassMiddleware from 'node-sass-middleware';
 import sass from 'node-sass';
 import fs from 'fs';
@@ -98,7 +99,9 @@ app.use(function(req,res,next){
     next();
 });
 
+api.set(app);
 controllers.set(app);
+
 
 var server = app.listen(app.get("port"), function () {
     var host = server.address().address;
