@@ -18,3 +18,12 @@
 * Create metadescription
 * Update sitemap
 * Icon for frontpage
+
+## Debug
+* move style.css to style/style.css (should be fixed)
+* Show output: (node might use the port already) NODE_ENV=production PORT=5000 npm run server
+* ps aux | grep node (and kill node with kill -9 PID if node is running)
+* /etc/init/unuseful-app-1.conf
+* /etc/nginx/sites-enabled/unuseful-app
+* add location to nginx if new folder in public
+
