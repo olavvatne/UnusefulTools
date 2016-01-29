@@ -27,3 +27,17 @@
 * /etc/nginx/sites-enabled/unuseful-app
 * add location to nginx if new folder in public
 
+##MongoDB ubuntu server
+* Digital Ocean provides mean stack instance that include MongoDB.
+* If not follow this [guide]{https://www.digitalocean.com/community/tutorials/how-to-install-mongodb-on-ubuntu-14-04}
+* Add official MongoDB repository: sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+* Add MongoDB repository details: echo "deb http://repo.mongodb.org/apt/ubuntu "$(lsb_release -sc)"/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list
+* Update packages list: sudo apt-get update
+* Install MongoDB: sudo apt-get install -y mongodb-org
+* Check if mongodb is running: service mongod status
+* Update packages in production: npm install
+* Create database for unuseful. First enter: "mongo". Then: "use unusefuldb"
+* Then create a collection for movies: "db.createCollection("movies")
+* Insert dummy data by: db.movies.insert({"title": "The godfather"}
+
+To stop/restart/start do: service mongod stop/restart/start
