@@ -3,12 +3,14 @@
  */
 import React from "react";
 import HelloWorld from "../../shared/components/HelloWorld";
+import WhiteNoise from "../../shared/components/WhiteNoise";
 import WeekNumber from "../../shared/components/WeekNumber";
 import ImageConverter from "../../shared/components/ImageConverter";
 import BMI from "../../shared/components/BMI";
 import Webcam from "../../shared/components/Webcam";
 import ColorConverter from "../../shared/components/ColorConverter";
 import Dice from "../../shared/components/Dice";
+import LoremIpsum from "../../shared/components/LoremIpsum";
 import SpecialCharacters from "../../shared/components/SpecialCharacters.js";
 import RandomMovie from "../../shared/components/RandomMovie.js";
 
@@ -37,9 +39,11 @@ module.exports.set = function(app) {
                 {url: "/webcam", image: "images/camera.svg", title: "Browser webcamera"},
                 {url: "/bmi-calculator", image: "images/scale.svg", title: "BMI calculator"},
                 {url: "/dice-roll", image: "images/die.svg", title: "Dice roll"},
-                {url: "/rgb-to-hex", image: "images/paint.svg", title: "Convert color RGB to hex"},
                 {url: "/weather", image: "images/weather.svg", title: "Current weather"},
-                {url: "/special-characters", image: "images/keyboard.svg", title: "Special characters"}
+                {url: "/special-characters", image: "images/keyboard.svg", title: "Special characters"},
+                {url: "/lorem-ipsum", image: "images/lorumipsum.svg", title: "Lorem ipsum"},
+                {url: "/rgb-to-hex", image: "images/paint.svg", title: "Convert color RGB to hex"},
+                {url: "/white-noise", image: "images/noise.svg", title: "Pleasant sounds"}
             ],
             environment: getEnvironment().environment
         };
@@ -171,11 +175,37 @@ module.exports.set = function(app) {
         res.render('pages/default-tool', templateData);
     });
 
+    app.get('/lorem-ipsum', function(req, res) {
+        let content = React.renderToString(<LoremIpsum />);
+        var environment = getEnvironment();
+        var templateData = {
+            toolTitle: LoremIpsum.toolTitle,
+            toolMetaDescription: LoremIpsum.toolMetaDescription,
+            reactContent: content,
+            reactEntryPath: environment.scriptPath,
+            reactScript: "LoremIpsumClient",
+            environment: environment.environment
+        };
+        res.render('pages/special-tool', templateData);
+    });
 
+    app.get('/white-noise', function(req, res) {
+        let content = React.renderToString(<WhiteNoise />);
+        var environment = getEnvironment();
+        var templateData = {
+            toolTitle: WhiteNoise.toolTitle,
+            toolMetaDescription: WhiteNoise.toolMetaDescription,
+            reactContent: content,
+            reactEntryPath: environment.scriptPath,
+            reactScript: "WhiteNoiseClient",
+            environment: environment.environment
+        };
+        res.render('pages/default-tool', templateData);
+    });
 
 
     // ===== KEEP THIS AT THE BOTTOM ======= , handles 404 errors
     app.use(function(req, res, next){
-        res.status(404).render('pages/404', {title: "Page not found"});
+        res.status(404).render('pages/404', {title: "Page not found", environment: getEnvironment().environment });
     });
 }

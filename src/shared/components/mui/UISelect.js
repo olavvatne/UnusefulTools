@@ -24,6 +24,7 @@ class UISelect extends React.Component {
     getValue() {
         return this.state.value;
     }
+
     render() {
         //TODO: Value
         let items = this.props.menuItems.map(menu => {
