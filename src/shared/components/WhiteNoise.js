@@ -46,7 +46,8 @@ class WhiteNoise extends React.Component {
     componentDidMount() {
         /* --- set up web audio --- */
         try {
-            var context =  new (window.AudioContext || window.webkitAudioContext)();
+            window.AudioContext =  window.AudioContext || window.webkitAudioContext;
+            var context = new window.AudioContext();
             var gainNode = context.createGain();
             gainNode.connect(context.destination);
             if(!context) {
@@ -57,8 +58,6 @@ class WhiteNoise extends React.Component {
         catch(err) {
             this.setState({browserSupport: false});
         }
-
-
     }
 
     render() {
@@ -107,18 +106,17 @@ class Sound extends React.Component {
         super();
         this._volume = this._changeVolume.bind(this);
         this.state = {
-            volume: 0
+            volume: 50 //TEMP
         };
     }
 
     componentWillReceiveProps(props) {
         if(!this.received) {
-            console.log("TEST");
             this.gainNode = props.context.createGain();
             this.source = props.context.createBufferSource();
             this.source.connect(this.gainNode);
             this.gainNode.connect(props.drain);
-            this.gainNode.gain.value = 0;
+            this.gainNode.gain.value = 1; //TEMP
             this._getAudio(props.context);
             this.received = true;
         }
@@ -172,7 +170,7 @@ class Sound extends React.Component {
 }
 
 WhiteNoise.toolTitle = "Pleasant noise";
-WhiteNoise.toolDescription =  ["Need total focus and an productivity boost?", "Cancel out the environment by mixing different pleasant sounds"];
+WhiteNoise.toolDescription =  ["Need total focus and a productivity boost?", "Cancel out the environment by mixing different pleasant sounds"];
 WhiteNoise.toolMetaDescription = "Pleasant noise generator. Sounds played in a loop. Rainy, ocean, brown noise, white noise " +
     "and other sounds.";
 
