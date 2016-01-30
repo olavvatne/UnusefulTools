@@ -86,14 +86,18 @@ class WhiteNoise extends React.Component {
                                 <a className="button" onClick={this._toggle}>
                                     <i className={label}></i>
                                 </a>
-                            </div>
 
+                            </div>
+                            <div className="pleasant-sound__controls">
+                                <UIButton
+                                    label="Random"
+                                    onClick={this._generate} />
+                            </div>
                             {sounds}
                         </div>
                     :<p>Web Audio API required. Some browser do not have support for this. Use chrome or firefox</p>}
                 </div>
             </div>
-
         );
     }
 }

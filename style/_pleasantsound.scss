@@ -4,10 +4,13 @@ $accent-color: #e06161;
 .pleasant-sound {
   > p {
     text-align: center;
+    font-size: 1.2em;
   }
 
   > h1 {
     text-align: center;
+    font-size: 4em;
+    margin-bottom: 15px;
   }
 
   .button {
@@ -21,12 +24,17 @@ $accent-color: #e06161;
     }
   }
 
+  .pleasant-sound__controls {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
   .pleasant-sound__master {
     text-align: center;
-    margin-bottom: 30px;
+    //margin-bottom: 10px;
+
     * {
       margin: 10px;
-
     }
 
     button {
@@ -35,7 +43,7 @@ $accent-color: #e06161;
   }
 
   .pleasant-sound__thumb {
-    //margin: 10px;
+    margin-bottom: 30px;
 
     img {
       width: 150px;
@@ -48,6 +56,9 @@ $accent-color: #e06161;
     }
     p {
       text-align: center;
+      font-size: 1.2em;
+      font-weight: bold;
+      color: grey;
     }
     input[type='range'] {
       width: 100%;
