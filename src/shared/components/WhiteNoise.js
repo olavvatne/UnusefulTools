@@ -86,7 +86,6 @@ class WhiteNoise extends React.Component {
                                 <a className="button" onClick={this._toggle}>
                                     <i className={label}></i>
                                 </a>
-
                             </div>
 
                             {sounds}
@@ -106,7 +105,7 @@ class Sound extends React.Component {
         super();
         this._volume = this._changeVolume.bind(this);
         this.state = {
-            volume: 50 //TEMP
+            volume: 0
         };
     }
 
@@ -116,17 +115,19 @@ class Sound extends React.Component {
             this.source = props.context.createBufferSource();
             this.source.connect(this.gainNode);
             this.gainNode.connect(props.drain);
-            this.gainNode.gain.value = 1; //TEMP
+            this.gainNode.gain.value = 0;
             this._getAudio(props.context);
             this.received = true;
         }
 
     }
-    componentDidMount() {
-
-    }
 
     _changeVolume(event, test) {
+        //IOS web audio require user action before playing sound...
+        if(!this.state.play) {
+            this.source.start(0);
+            this.setState({play: true})
+        }
         var fraction = event.target.value / 100;
         this.gainNode.gain.value = fraction * fraction;
         this.setState({volume: event.target.value});
@@ -134,25 +135,16 @@ class Sound extends React.Component {
 
     _getAudio(context) {
         var url  = this.props.source;
-
-        //var context = this.props.context;
         var source  = this.source;
         var that = this;
 
         var request = new XMLHttpRequest();
-
         request.open('GET', url, true);
-
         request.responseType = 'arraybuffer';
         request.onload = function() {
             context.decodeAudioData(request.response, function(response) {
-                /* --- play the sound AFTER the buffer loaded --- */
-                //set the buffer to the response we just received.
                 source.buffer = response;
-                //start(0) should play asap.
-                source.start(0);
                 source.loop = true;
-                that.setState({play: true})
             }, function () { console.error('The request failed.'); } );
         };
         request.send();
