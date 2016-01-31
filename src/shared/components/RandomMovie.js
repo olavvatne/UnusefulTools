@@ -3,6 +3,7 @@
  */
 
 import React from 'react';
+import reqwest from 'reqwest';
 import UIButton from './mui/UIButton.js';
 
 class RandomMovie extends React.Component {
@@ -13,49 +14,60 @@ class RandomMovie extends React.Component {
         this._handleRandomMovie = this._pickMovie.bind(this);
 
         this.state = {
-            // TODO: Get from db!!
-            randomCollection: [
-                {
-                    title: "The Shawshank Redemption",
-                    rating: 9.2,
-                    votes: 1530885,
-                    year: 1994
-                },
-                {
-                    title: "The Godfather",
-                    rating: 9.2,
-                    votes: 1049046,
-                    year: 1972
-                }
-            ],
-            pickedMovie: {}
+            movies: [],
+            movieIndex: -1,
         };
     }
 
     _pickMovie() {
-        var choice = this.state.randomCollection[0]; // TODO: pick a random movie
-        var title = choice.title;
-        var rating = choice.rating;
-        var year = choice.year;
-        var votes = choice.votes;
+        if (this.state.movieIndex < this.state.movies.length) {
+            var index = this.state.movieIndex + 1
+        }
+
+        // get new movies if index is near end
+        var length = this.state.movies.length;
+        if (length > 0 && index > length - 3) {
+            this._retrieveMoreMovies()
+        }
 
         this.setState({
-            pickedMovie: {
-                title: title,
-                rating: rating,
-                votes: votes,
-                year: year
-            }
+            movieIndex: index
         })
 
     }
 
-    componentDidMount() {
-        this._pickMovie();
+    _retrieveMoreMovies() {
+        reqwest({
+            url: "/api/v1/random-movies",
+            type: 'json',
+            contentType: 'application/json',
+            method: 'get',
+            success: (success) => {
+                var currentMovies = this.state.movies;
+                currentMovies.push.apply(currentMovies, success);
+                this.setState({
+                    movies: currentMovies
+                })
+            }
+        });
     }
 
+    componentWillMount() {
+        var movies = JSON.parse(this.props.data);
+        this.setState({
+            movies: movies
+        });
+        this._pickMovie()
+    }
 
     render() {
+
+        var movie = this.state.movies[this.state.movieIndex];
+        if (movie.Poster == 'N/A') {
+            movie.Poster = "http://placehold.it/300x425";
+        }
+        var imdbUrl = "http://www.imdb.com/title/" + movie.imdbID + "/";
+
         return (
             <div>
                 <div className="mui-container">
@@ -65,17 +77,29 @@ class RandomMovie extends React.Component {
                                 <h1>{RandomMovie.toolTitle}</h1>
                             </div>
                             <div className="about-movie fade-in">
-                                <h2>{this.state.pickedMovie.title}</h2>
                                 <div className="mui-row">
-                                    <div className="mui-col-md-6 mui-text-right">
-                                        <img src="https://placehold.it/150x200" alt=""/>
+                                    <div className="mui-col-md-6 poster-right-aligned">
+                                        <img src={movie.Poster} alt="Movie poster"/>
                                     </div>
-                                    <div className="stat-list mui-col-md-6 mui-text-left">
-                                        <ul>
-                                            <li>Rating: {this.state.pickedMovie.rating}</li>
-                                            <li>Year: {this.state.pickedMovie.year}</li>
-                                            <li>Votes on IMDB: {this.state.pickedMovie.votes}</li>
-                                        </ul>
+                                    <div className="mui-col-md-6" id="movie-facts">
+                                        <table width="100%">
+                                            <tr>
+                                                <td id="movie-title" colSpan="3"><h2>{movie.Title}</h2></td>
+                                            </tr>
+                                            <tr>
+                                                <td className="short-cell">IMDB rating: {movie.imdbRating}</td>
+                                                <td>{movie.Genre}</td>
+                                                <td className="short-cell">{movie.Year}</td>
+                                            </tr>
+                                            <tr>
+                                                <td className="short-cell">Meatscore: {movie.Metascore}</td>
+                                                <td>{movie.Language}</td>
+                                                <td className="short-cell">{movie.Runtime}</td>
+                                            </tr>
+                                            <tr>
+                                                <td id="imdb-link" colSpan="3"><a href={imdbUrl} target="_blank">View on IMDB</a></td>
+                                            </tr>
+                                        </table>
                                     </div>
                                 </div>
                             </div>

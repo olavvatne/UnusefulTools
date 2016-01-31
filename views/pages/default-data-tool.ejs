@@ -1,0 +1,15 @@
+<% layout('../base') -%>
+<% block('title', toolTitle + " - ") %>
+<% block('metaDescription', toolMetaDescription)%>
+<div>
+    <div id="app"><%- reactContent %></div>
+</div>
+
+<!--
+<div class="ads mui-panel" >
+    <% include ../partials/ads.ejs %>
+</div>
+-->
+
+<script async src="<%= reactEntryPath %>/js/<%= reactScript %>.entry.js"></script>
+<script id="init"><%- data%></script> <!-- Lets react render in the same state on frontend, prevents rerender -->

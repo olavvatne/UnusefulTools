@@ -1,20 +1,67 @@
 
 .random-movie-content {
 
-  h2 {
-    margin: 2em;
-  }
+  .about-movie {
 
-  .stat-list {
-    height: 200px;
 
-    ul {
-      list-style-type: none;
+    img {
+      width: 300px;
+      height: 423px;
+      background-color: black;
+    }
 
-      li {
-        margin: 2em;
+    .poster-right-aligned {
+      text-align: center;
+      background-color: $shark;
+      padding-top: 20px !important;
+      @media(min-width:992px) {
+        text-align: right !important;
+        background-color: transparent;
+        padding-top: 0px !important;
       }
     }
+
+    table {
+      height: 100%;
+      background-color: $shark;
+      border-bottom: 2px solid dimgray;
+    }
+    h2 {
+      color: white;
+      font-size: 40px;
+    }
+
+    td {
+      height: 50px;
+      color: white;
+      background-color: #343838;
+    }
+    #movie-title {
+      text-align: center;
+      background-color: $shark;
+      border-bottom: 1px ridge #00DFFC;
+
+      height: 150px;
+    }
+
+    .short-cell {
+      width: 20%;
+    }
+
+    #imdb-link {
+      text-align: center;
+      height: 100px;
+      background-color: $shark;
+      border-top: 1px ridge grey;
+      font-size: 1.2em;
+    }
+    .mui-col-md-6 {
+      padding: 0px;
+    }
+    #movie-facts {
+      height: 425px;
+    }
+
   }
 }
 
