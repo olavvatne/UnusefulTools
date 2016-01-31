@@ -13,7 +13,11 @@ class WhiteNoise extends React.Component {
             {name: "Brown noise", source: "sound/brown.mp3", image: "images/noise/noise.svg"},
             {name: "Ocean", source: "sound/ocean.mp3", image: "images/noise/ocean.svg"},
             {name: "Rain", source: "sound/rain.mp3", image: "images/noise/rain.svg"},
-            {name: "Forest", source: "sound/forest.mp3", image: "images/noise/tree.svg"}
+            {name: "Forest", source: "sound/forest.mp3", image: "images/noise/tree.svg"},
+            {name: "Fire", source: "sound/fireplace.mp3", image: "images/noise/fireplace.svg"},
+            {name: "Leaves", source: "sound/leaf.mp3", image: "images/noise/leaf.svg"},
+            {name: "People", source: "sound/people.mp3", image: "images/noise/people.svg"},
+            {name: "Cantina", source: "sound/cantina.mp3", image: "images/noise/cantina.svg"}
         ]
         this.state = {
             mute: false,
