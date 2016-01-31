@@ -42,7 +42,7 @@ module.exports.set = function(app) {
                 {url: "/special-characters", image: "images/keyboard.svg", title: "Special characters"},
                 {url: "/lorem-ipsum", image: "images/lorumipsum.svg", title: "Lorem ipsum"},
                 {url: "/rgb-to-hex", image: "images/paint.svg", title: "Convert color RGB to hex"},
-                {url: "/white-noise", image: "images/noise.svg", title: "Pleasant sounds"}
+                {url: "/noise-mixer", image: "images/noise.svg", title: "Noise mixer"}
             ],
             environment: getEnvironment().environment
         };
@@ -170,7 +170,7 @@ module.exports.set = function(app) {
         res.render('pages/special-tool', templateData);
     });
 
-    app.get('/white-noise', function(req, res) {
+    app.get('/noise-mixer', function(req, res) {
         let content = React.renderToString(<WhiteNoise />);
         var environment = getEnvironment();
         var templateData = {
