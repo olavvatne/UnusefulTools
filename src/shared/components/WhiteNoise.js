@@ -166,8 +166,8 @@ class Sound extends React.Component {
     }
 }
 
-WhiteNoise.toolTitle = "Pleasant noise";
-WhiteNoise.toolDescription =  ["Need total focus and a productivity boost?", "Cancel out the environment by mixing different pleasant sounds"];
+WhiteNoise.toolTitle = "Noise mixer";
+WhiteNoise.toolDescription =  ["Need total focus and a productivity boost?", "Cancel out the environment by pleasant sounds"];
 WhiteNoise.toolMetaDescription = "Pleasant noise generator. Sounds played in a loop. Rainy, ocean, brown noise, white noise " +
     "and other sounds.";
 
