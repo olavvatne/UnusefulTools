@@ -13,7 +13,11 @@ class WhiteNoise extends React.Component {
             {name: "Brown noise", source: "sound/brown.mp3", image: "images/noise/noise.svg"},
             {name: "Ocean", source: "sound/ocean.mp3", image: "images/noise/ocean.svg"},
             {name: "Rain", source: "sound/rain.mp3", image: "images/noise/rain.svg"},
-            {name: "Forest", source: "sound/forest.mp3", image: "images/noise/tree.svg"}
+            {name: "Forest", source: "sound/forest.mp3", image: "images/noise/tree.svg"},
+            {name: "Fire", source: "sound/fireplace.mp3", image: "images/noise/fireplace.svg"},
+            {name: "Leaves", source: "sound/leaf.mp3", image: "images/noise/leaf.svg"},
+            {name: "People", source: "sound/people.mp3", image: "images/noise/people.svg"},
+            {name: "Cantina", source: "sound/cantina.mp3", image: "images/noise/cantina.svg"}
         ]
         this.state = {
             mute: false,
@@ -46,7 +50,8 @@ class WhiteNoise extends React.Component {
     componentDidMount() {
         /* --- set up web audio --- */
         try {
-            var context =  new (window.AudioContext || window.webkitAudioContext)();
+            window.AudioContext =  window.AudioContext || window.webkitAudioContext;
+            var context = new window.AudioContext();
             var gainNode = context.createGain();
             gainNode.connect(context.destination);
             if(!context) {
@@ -57,8 +62,6 @@ class WhiteNoise extends React.Component {
         catch(err) {
             this.setState({browserSupport: false});
         }
-
-
     }
 
     render() {
@@ -89,13 +92,13 @@ class WhiteNoise extends React.Component {
                                 </a>
 
                             </div>
-
+                            <div className="pleasant-sound__controls">
+                            </div>
                             {sounds}
                         </div>
                     :<p>Web Audio API required. Some browser do not have support for this. Use chrome or firefox</p>}
                 </div>
             </div>
-
         );
     }
 }
@@ -113,7 +116,6 @@ class Sound extends React.Component {
 
     componentWillReceiveProps(props) {
         if(!this.received) {
-            console.log("TEST");
             this.gainNode = props.context.createGain();
             this.source = props.context.createBufferSource();
             this.source.connect(this.gainNode);
@@ -124,11 +126,13 @@ class Sound extends React.Component {
         }
 
     }
-    componentDidMount() {
-
-    }
 
     _changeVolume(event, test) {
+        //IOS web audio require user action before playing sound...
+        if(!this.state.play) {
+            this.source.start(0);
+            this.setState({play: true})
+        }
         var fraction = event.target.value / 100;
         this.gainNode.gain.value = fraction * fraction;
         this.setState({volume: event.target.value});
@@ -136,25 +140,16 @@ class Sound extends React.Component {
 
     _getAudio(context) {
         var url  = this.props.source;
-
-        //var context = this.props.context;
         var source  = this.source;
         var that = this;
 
         var request = new XMLHttpRequest();
-
         request.open('GET', url, true);
-
         request.responseType = 'arraybuffer';
         request.onload = function() {
             context.decodeAudioData(request.response, function(response) {
-                /* --- play the sound AFTER the buffer loaded --- */
-                //set the buffer to the response we just received.
                 source.buffer = response;
-                //start(0) should play asap.
-                source.start(0);
                 source.loop = true;
-                that.setState({play: true})
             }, function () { console.error('The request failed.'); } );
         };
         request.send();
@@ -171,8 +166,8 @@ class Sound extends React.Component {
     }
 }
 
-WhiteNoise.toolTitle = "Pleasant noise";
-WhiteNoise.toolDescription =  ["Need total focus and an productivity boost?", "Cancel out the environment by mixing different pleasant sounds"];
+WhiteNoise.toolTitle = "Noise mixer";
+WhiteNoise.toolDescription =  ["Need total focus and a productivity boost?", "Cancel out the environment by pleasant sounds"];
 WhiteNoise.toolMetaDescription = "Pleasant noise generator. Sounds played in a loop. Rainy, ocean, brown noise, white noise " +
     "and other sounds.";
 

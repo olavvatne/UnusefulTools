@@ -71,6 +71,7 @@ if(app.get('env') === 'development') {
 
 //TODO: Move to build.js
 if(app.get('env') === 'production') {
+    app.use(express.static('./public'));
     console.log("==== Render SASS =====")
     //TODO: Dest in public not in public/style in production. Fix
     sass.render({
@@ -83,7 +84,7 @@ if(app.get('env') === 'production') {
             throw new Error("Could not render SASS")
         }
         else {
-            fs.writeFile(destPath + 'style/style.css', result.css, function(err) {
+            fs.writeFile(destPath + '/style/style.css', result.css, function(err) {
                 if(err) {
                     return console.log(err);
                     throw new Error("Could not write SASS")
