@@ -33,6 +33,7 @@ module.exports.set = function(app) {
 
         var templateData = {
             tools: [
+                {url: "/random-movie", image: "images/random-movie.svg", title: "Random movie"},
                 {url: "/weeknumber", image: "images/calendar.svg", title: "Week number"},
                 {url: "/webcam", image: "images/camera.svg", title: "Browser webcamera"},
                 {url: "/bmi-calculator", image: "images/scale.svg", title: "BMI calculator"},
