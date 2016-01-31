@@ -89,9 +89,6 @@ class WhiteNoise extends React.Component {
 
                             </div>
                             <div className="pleasant-sound__controls">
-                                <UIButton
-                                    label="Random"
-                                    onClick={this._generate} />
                             </div>
                             {sounds}
                         </div>
