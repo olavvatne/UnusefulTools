@@ -4,6 +4,17 @@
 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="514.8px" height="514.8px" viewBox="0 0 514.8 514.8" style="enable-background:new 0 0 514.8 514.8;" xml:space="preserve"
 	>
+<style type="text/css" media="screen">
+	<![CDATA[
+	svg {
+	 fill: grey;
+	 fill: rgba(255,20,20,0.6);
+	 opacity=0.4;
+	 pointer-events: none;
+	}
+
+	]]>
+</style>
 <g>
 	<path d="M405.962,47.612c-7.037,0-13.674,1.597-19.688,4.312c-12.021-23.963-36.749-40.459-65.389-40.459
 		c-18.628,0-35.582,7.019-48.501,18.484C250.658,11.398,221.961,0,190.396,0C123.573,0,69.344,50.614,67.967,113.517
