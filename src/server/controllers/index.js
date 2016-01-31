@@ -12,6 +12,9 @@ import ColorConverter from "../../shared/components/ColorConverter";
 import Dice from "../../shared/components/Dice";
 import LoremIpsum from "../../shared/components/LoremIpsum";
 import SpecialCharacters from "../../shared/components/SpecialCharacters.js";
+import RandomMovie from "../../shared/components/RandomMovie.js";
+import movies from "../database/movies.js";
+
 import weatherController from "./weather.js";
 
 
@@ -156,6 +159,27 @@ module.exports.set = function(app) {
         res.render('pages/special-tool', templateData);
     });
 
+    app.get('/random-movie', function(req, res) {
+
+        var callback = function(err, docs) {
+
+            var initData = JSON.stringify(docs);
+            let content = React.renderToString(<RandomMovie data={initData}/>);
+            var environment = getEnvironment();
+            var templateData = {
+                toolTitle: RandomMovie.toolTitle,
+                toolMetaDescription: RandomMovie.toolMetaDescription,
+                reactContent: content,
+                reactEntryPath: environment.scriptPath,
+                reactScript: "RandomMovieClient",
+                environment: environment.environment,
+                data: initData
+            };
+            res.render('pages/default-data-tool', templateData);
+        }
+        movies.getRandomMovie(req.db, callback)
+    });
+
     app.get('/lorem-ipsum', function(req, res) {
         let content = React.renderToString(<LoremIpsum />);
         var environment = getEnvironment();
@@ -183,6 +207,7 @@ module.exports.set = function(app) {
         };
         res.render('pages/default-tool', templateData);
     });
+
 
     // ===== KEEP THIS AT THE BOTTOM ======= , handles 404 errors
     app.use(function(req, res, next){
