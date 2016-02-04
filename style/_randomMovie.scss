@@ -13,6 +13,7 @@
     .poster-right-aligned {
       text-align: center;
       background-color: $shark;
+      padding: 0px;
       padding-top: 20px !important;
       @media(min-width:992px) {
         text-align: right !important;
@@ -60,6 +61,7 @@
     }
     #movie-facts {
       height: 425px;
+      padding: 0px;
     }
 
   }

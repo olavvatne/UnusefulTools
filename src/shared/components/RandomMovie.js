@@ -78,7 +78,7 @@ class RandomMovie extends React.Component {
                             </div>
                             <div className="about-movie fade-in">
                                 <div className="mui-row">
-                                    <div className="mui-col-md-6 poster-right-aligned">
+                                    <div className="mui-col-md-4 poster-right-aligned">
                                         <img src={movie.Poster} alt="Movie poster"/>
                                     </div>
                                     <div className="mui-col-md-6" id="movie-facts">
