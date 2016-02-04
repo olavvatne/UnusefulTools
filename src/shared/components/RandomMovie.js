@@ -64,7 +64,7 @@ class RandomMovie extends React.Component {
 
         var movie = this.state.movies[this.state.movieIndex];
         if (movie.Poster == 'N/A') {
-            movie.Poster = "http://placehold.it/300x425";
+            movie.Poster = "/images/movies/no_poster.png";
         }
         var imdbUrl = "http://www.imdb.com/title/" + movie.imdbID + "/";
 
