@@ -2,6 +2,7 @@ import movies from "../database/movies.js"
 
 module.exports.set = function(app) {
 
+    /*
     app.get('/api/v1/movies', function(req, res) {
 
         // TODO: This should not be possible, getting 10000 movies will crash browser!!
@@ -13,6 +14,7 @@ module.exports.set = function(app) {
             res.json(docs);
         });
     });
+    */
 
     app.get('/api/v1/random-movies', function(req, res) {
         var callback = function (err, docs) {
