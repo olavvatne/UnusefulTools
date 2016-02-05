@@ -1,8 +1,17 @@
 
 .random-movie-content {
 
+  .about-tool {
+    p {
+      margin-bottom: 25px;
+    }
+  }
+
   .about-movie {
 
+    // Keep text at edges from disappearing on mobile devices
+    margin-left: 15px;
+    margin-right: 15px;
 
     img {
       width: 300px;
@@ -64,9 +73,11 @@
       padding: 0px;
     }
 
+
+
   }
 }
 
 .get-new-movie {
-  margin: 6em;
+  margin: 2em;
 }

@@ -20,19 +20,20 @@ class RandomMovie extends React.Component {
     }
 
     _pickMovie() {
+
         if (this.state.movieIndex < this.state.movies.length) {
-            var index = this.state.movieIndex + 1
+            var index = this.state.movieIndex + 1;
         }
 
         // get new movies if index is near end
         var length = this.state.movies.length;
         if (length > 0 && index > length - 3) {
-            this._retrieveMoreMovies()
+            this._retrieveMoreMovies();
         }
 
         this.setState({
             movieIndex: index
-        })
+        });
 
     }
 
@@ -63,9 +64,11 @@ class RandomMovie extends React.Component {
     render() {
 
         var movie = this.state.movies[this.state.movieIndex];
+
         if (movie.Poster == 'N/A') {
             movie.Poster = "/images/movies/no_poster.png";
         }
+
         var imdbUrl = "http://www.imdb.com/title/" + movie.imdbID + "/";
 
         return (
@@ -73,12 +76,13 @@ class RandomMovie extends React.Component {
                 <div className="mui-container">
                     <div className="mui-row">
                         <div className="random-movie-content mui-text-center">
-                            <div className="about">
+                            <div className="about-tool">
                                 <h1>{RandomMovie.toolTitle}</h1>
+                                <p>{RandomMovie.toolDescription}</p>
                             </div>
                             <div className="about-movie fade-in">
                                 <div className="mui-row">
-                                    <div className="mui-col-md-4 poster-right-aligned">
+                                    <div className="mui-col-md-5 poster-right-aligned">
                                         <img src={movie.Poster} alt="Movie poster"/>
                                     </div>
                                     <div className="mui-col-md-6" id="movie-facts">
@@ -92,7 +96,7 @@ class RandomMovie extends React.Component {
                                                 <td className="short-cell">{movie.Year}</td>
                                             </tr>
                                             <tr>
-                                                <td className="short-cell">Meatscore: {movie.Metascore}</td>
+                                                <td className="short-cell">Metascore: {movie.Metascore}</td>
                                                 <td>{movie.Language}</td>
                                                 <td className="short-cell">{movie.Runtime}</td>
                                             </tr>
@@ -103,7 +107,7 @@ class RandomMovie extends React.Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className="get-new-movie mui-row">
+                            <div className="get-new-movie mui-row jumbotron">
                                     <UIButton label="Give me another!" primary={true} onClick={this._handleRandomMovie}/>
                             </div>
                         </div>
@@ -114,8 +118,8 @@ class RandomMovie extends React.Component {
     }
 }
 
-RandomMovie.toolTitle = "Random movie";
-RandomMovie.toolDescription = "";
-RandomMovie.toolMetaDescription = "";
+RandomMovie.toolTitle = "Pick me a movie!";
+RandomMovie.toolDescription = "This tool will suggest a movie with IMDB rating over 7.0, effectively eliminating the hassle of picking a good movie to watch. ";
+RandomMovie.toolMetaDescription = "Random movie picker. Unsure what good movie to watch? This tool will suggest a movie with IMDB rating over 7.0. ";
 
 module.exports = RandomMovie;

@@ -20,7 +20,7 @@ var movies = {
                 }
                 random_ids.push(nr)
             }
-            console.log(random_ids)
+            //console.log(random_ids)
 
             collection.find({
                 'random_id': {$in: random_ids}
