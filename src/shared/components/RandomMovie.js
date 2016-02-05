@@ -107,7 +107,7 @@ class RandomMovie extends React.Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className="get-new-movie mui-row jumbotron">
+                            <div className="get-new-movie mui-row">
                                     <UIButton label="Give me another!" primary={true} onClick={this._handleRandomMovie}/>
                             </div>
                         </div>
