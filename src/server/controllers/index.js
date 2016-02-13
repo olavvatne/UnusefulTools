@@ -13,8 +13,10 @@ import Dice from "../../shared/components/Dice";
 import LoremIpsum from "../../shared/components/LoremIpsum";
 import SpecialCharacters from "../../shared/components/SpecialCharacters.js";
 import RandomMovie from "../../shared/components/RandomMovie.js";
-import movies from "../database/movies.js";
 import CountryCodes from "../../shared/components/CountryCodes.js";
+
+import movies from "../database/movies.js";
+import countryCodesData from "../database/countryCodesData.js";
 
 import weatherController from "./weather.js";
 
@@ -177,7 +179,7 @@ module.exports.set = function(app) {
                 data: initData
             };
             res.render('pages/default-data-tool', templateData);
-        }
+        };
         movies.getRandomMovie(req.db, callback)
     });
 
@@ -210,17 +212,26 @@ module.exports.set = function(app) {
     });
 
     app.get('/country-codes', function(req, res) {
-        let content = React.renderToString(<CountryCodes />);
-        var environment = getEnvironment();
-        var templateData = {
-            toolTitle: CountryCodes.toolTitle,
-            toolMetaDescription: CountryCodes.toolMetaDescription,
-            reactContent: content,
-            reactEntryPath: environment.scriptPath,
-            reactScript: "CountryCodesClient",
-            environment: environment.environment
+        var callback = function(err, docs) {
+
+            if (docs.length > 0) {
+                var initData = JSON.stringify(docs);
+                let content = React.renderToString(<CountryCodes data={initData}/>);
+                var environment = getEnvironment();
+                var templateData = {
+                    toolTitle: CountryCodes.toolTitle,
+                    toolMetaDescription: CountryCodes.toolMetaDescription,
+                    reactContent: content,
+                    reactEntryPath: environment.scriptPath,
+                    reactScript: "CountryCodesClient",
+                    environment: environment.environment,
+                    data: initData
+                };
+                res.render('pages/default-data-tool', templateData);
+            }
+            res.status(404).render('pages/404', {title: "Page not found", environment: getEnvironment().environment });
         };
-        res.render('pages/default-tool', templateData);
+        countryCodesData.getCountryCodes(req.db, callback)
     });
 
 

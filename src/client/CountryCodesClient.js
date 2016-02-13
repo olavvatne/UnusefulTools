@@ -5,4 +5,5 @@
 
 import React from "react";
 import CountryCodes from "../shared/components/CountryCodes";
-React.render(<CountryCodes />, document.getElementById('app'));
+var initData = document.getElementById("init").text;
+React.render(<CountryCodes data={initData}/>, document.getElementById('app'));

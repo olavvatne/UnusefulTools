@@ -8,11 +8,17 @@ class CountryCodes extends React.Component {
 
     constructor() {
         super();
-
         this.state = {
-            
+            countryCodes: []
         };
 
+    }
+
+    componentWillMount() {
+        var countryCodes = JSON.parse(this.props.data);
+        this.setState({
+            countryCodes: countryCodes
+        });
     }
 
     render() {
@@ -20,6 +26,7 @@ class CountryCodes extends React.Component {
         return (
             <div>
                 <h1>{CountryCodes.toolTitle}</h1>
+                <p>{this.state.countryCodes}</p>
             </div>
         );
     }
