@@ -14,6 +14,7 @@ import LoremIpsum from "../../shared/components/LoremIpsum";
 import SpecialCharacters from "../../shared/components/SpecialCharacters.js";
 import RandomMovie from "../../shared/components/RandomMovie.js";
 import movies from "../database/movies.js";
+import CountryCodes from "../../shared/components/CountryCodes.js";
 
 import weatherController from "./weather.js";
 
@@ -203,6 +204,20 @@ module.exports.set = function(app) {
             reactContent: content,
             reactEntryPath: environment.scriptPath,
             reactScript: "WhiteNoiseClient",
+            environment: environment.environment
+        };
+        res.render('pages/default-tool', templateData);
+    });
+
+    app.get('/country-codes', function(req, res) {
+        let content = React.renderToString(<CountryCodes />);
+        var environment = getEnvironment();
+        var templateData = {
+            toolTitle: CountryCodes.toolTitle,
+            toolMetaDescription: CountryCodes.toolMetaDescription,
+            reactContent: content,
+            reactEntryPath: environment.scriptPath,
+            reactScript: "CountryCodesClient",
             environment: environment.environment
         };
         res.render('pages/default-tool', templateData);
