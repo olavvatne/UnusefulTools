@@ -90,7 +90,7 @@ class ReactCam extends Component {
     getCanvas() {
         if (!this.state.hasUserMedia) return;
 
-        const video = React.findDOMNode(this);
+        const video = this.refs.viewer;
         if (!this.ctx) {
             let canvas = document.createElement('canvas');
             canvas.height = video.clientHeight;
@@ -116,8 +116,9 @@ class ReactCam extends Component {
                 <video
                         autoPlay={true}
                         width={this.props.width}
-                    height={this.props.height}
-                src={this.state.src}
+                        height={this.props.height}
+                        src={this.state.src}
+                        ref ="viewer"
 
                 ></video>
                 <p>{errorText}</p>

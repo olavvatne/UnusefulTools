@@ -13,7 +13,7 @@ class UIText extends React.Component {
     getValue() {
         //TODO: State not updated itself before getValue is called. Results in form being one
         //character behind. FindDomNode works! Is this the best way of doing things?
-        return React.findDOMNode(this.refs.element).value;
+        return this.refs.element.value;
     }
     _handleChange(event) {
         //TODO: Necessary to set state?

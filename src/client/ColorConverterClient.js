@@ -1,6 +1,8 @@
 
 import React from "react";
+import ReactDOM from "react-dom";
+
 import rgbToHex from "rgb-to-hex";
 import ColorConverter from "../shared/components/ColorConverter";
 
-React.render(<ColorConverter />, document.getElementById('app'));
+ReactDOM.render(<ColorConverter />, document.getElementById('app'));
