@@ -5,18 +5,6 @@ import React from "react";
 import ReactDOMServer from "react-dom/server";
 
 import * as Tools from "../../shared/components"
-import HelloWorld from "../../shared/components/HelloWorld";
-import WhiteNoise from "../../shared/components/WhiteNoise";
-import WeekNumber from "../../shared/components/WeekNumber";
-import ImageConverter from "../../shared/components/ImageConverter";
-import BMI from "../../shared/components/BMI";
-import Webcam from "../../shared/components/Webcam";
-import ColorConverter from "../../shared/components/ColorConverter";
-import Dice from "../../shared/components/Dice";
-import LoremIpsum from "../../shared/components/LoremIpsum";
-import SpecialCharacters from "../../shared/components/SpecialCharacters.js";
-import RandomMovie from "../../shared/components/RandomMovie.js";
-import CountryCodes from "../../shared/components/CountryCodes.js";
 
 import movies from "../database/movies.js";
 import countryCodesData from "../database/countryCodesData.js";
@@ -26,7 +14,9 @@ import weatherController from "./weather.js";
 
 module.exports.set = function(app) {
 
-    var createTool = function(name, component, initialData) {
+    var createTool = function(name, initialData) {
+        let reactdata = initialData? {data: initialData}: {};
+        let component = React.createElement(Tools[name], reactdata);
         let content = ReactDOMServer.renderToString(component);
         var environment = getEnvironment();
         var templateData = {
@@ -87,18 +77,18 @@ module.exports.set = function(app) {
      });*/
 
     app.get('/bmi-calculator', function(req, res) {
-        let templateData = createTool("BMI", <BMI />);
+        let templateData = createTool("BMI");
         res.render('pages/default-tool', templateData);
     });
 
     app.get('/webcam', function(req, res) {
-        let templateData = createTool("Webcam", <Webcam />);
+        let templateData = createTool("Webcam");
         res.render('pages/default-tool', templateData);
     });
 
 
     app.get('/weeknumber', function(req, res) {
-        let templateData = createTool("WeekNumber", <WeekNumber />);
+        let templateData = createTool("WeekNumber");
         res.render('pages/default-tool', templateData);
     });
 
@@ -113,17 +103,17 @@ module.exports.set = function(app) {
      });*/
 
     app.get('/rgb-to-hex', function(req, res) {
-        let templateData = createTool("ColorConverter", <ColorConverter />);
+        let templateData = createTool("ColorConverter");
         res.render('pages/default-tool', templateData);
     });
 
     app.get('/dice-roll', function(req, res) {
-        let templateData = createTool("Dice", <Dice />);
+        let templateData = createTool("Dice");
         res.render('pages/default-tool', templateData);
     });
 
     app.get('/special-characters', function(req, res) {
-        let templateData = createTool("SpecialCharacters", <SpecialCharacters />);
+        let templateData = createTool("SpecialCharacters");
         res.render('pages/special-tool', templateData);
     });
 
@@ -132,19 +122,19 @@ module.exports.set = function(app) {
         var callback = function(err, docs) {
 
             var initData = JSON.stringify(docs);
-            let templateData = createTool("RandomMovie", <RandomMovie data={initData}/>, initData);
+            let templateData = createTool("RandomMovie", initData);
             res.render('pages/default-data-tool', templateData);
         };
         movies.getRandomMovie(req.db, callback)
     });
 
     app.get('/lorem-ipsum', function(req, res) {
-        let templateData = createTool("LoremIpsum", <LoremIpsum />);
+        let templateData = createTool("LoremIpsum");
         res.render('pages/special-tool', templateData);
     });
 
     app.get('/noise-mixer', function(req, res) {
-        let templateData = createTool("WhiteNoise", <WhiteNoise />);
+        let templateData = createTool("WhiteNoise");
         res.render('pages/default-tool', templateData);
     });
 
@@ -152,7 +142,7 @@ module.exports.set = function(app) {
         var callback = function(err, docs) {
 
             var initData = JSON.stringify(docs);
-            let templateData = createTool("CountryCodes", <CountryCodes data={initData}/>, initData);
+            let templateData = createTool("CountryCodes", initData);
             res.render('pages/default-data-tool', templateData);
 
         };

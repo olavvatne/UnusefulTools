@@ -4,7 +4,6 @@
 import React from "react";
 import ReactDOMServer from "react-dom/server";
 
-import Weather from "../../shared/components/Weather";
 import request from "request";
 import async from "async";
 import geoip from "geoip-lite";
@@ -15,7 +14,7 @@ module.exports.set = function(app, path, createTool) {
 
 
     app.get('/weather', function(req, res) {
-        let templateData = createTool("Weather", <Weather />);
+        let templateData = createTool("Weather");
         res.render('pages/default-tool', templateData);
     });
 
