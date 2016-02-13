@@ -3,15 +3,19 @@
  */
 
 import React from 'react';
+import UIText from './mui/UIText.js';
 
 class CountryCodes extends React.Component {
 
     constructor() {
         super();
-        this.state = {
-            countryCodes: []
-        };
 
+        this._onInput = this._onInput.bind(this);
+
+        this.state = {
+            countryCodes: [],
+            filtered_countries: []
+        };
     }
 
     componentWillMount() {
@@ -19,6 +23,10 @@ class CountryCodes extends React.Component {
         this.setState({
             countryCodes: countryCodes
         });
+    }
+
+    _onInput(change) {
+
     }
 
     render() {
@@ -31,6 +39,11 @@ class CountryCodes extends React.Component {
             <div>
                 <h1>{CountryCodes.toolTitle}</h1>
                 <p>{countryCodes}</p>
+                <UIText labelText="Country" ref="country"
+                        errorText=""
+                        onChange={this._onInput}
+                        validationPattern=""
+                        style={{display: "inline-block"}}/>
             </div>
         );
     }
