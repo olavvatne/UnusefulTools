@@ -23,10 +23,14 @@ class CountryCodes extends React.Component {
 
     render() {
 
+        var countryCodes = this.state.countryCodes.map(function(c) {
+            return c.full_name;
+        });
+
         return (
             <div>
                 <h1>{CountryCodes.toolTitle}</h1>
-                <p>{this.state.countryCodes}</p>
+                <p>{countryCodes}</p>
             </div>
         );
     }

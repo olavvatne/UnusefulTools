@@ -151,22 +151,10 @@ module.exports.set = function(app) {
     app.get('/country-codes', function(req, res) {
         var callback = function(err, docs) {
 
-            if (docs.length > 0) {
-                var initData = JSON.stringify(docs);
-                let content = React.renderToString(<CountryCodes data={initData}/>);
-                var environment = getEnvironment();
-                var templateData = {
-                    toolTitle: CountryCodes.toolTitle,
-                    toolMetaDescription: CountryCodes.toolMetaDescription,
-                    reactContent: content,
-                    reactEntryPath: environment.scriptPath,
-                    reactScript: "CountryCodesClient",
-                    environment: environment.environment,
-                    data: initData
-                };
-                res.render('pages/default-data-tool', templateData);
-            }
-            res.status(404).render('pages/404', {title: "Page not found", environment: getEnvironment().environment });
+            var initData = JSON.stringify(docs);
+            let templateData = createTool("CountryCodes", <CountryCodes data={initData}/>, initData);
+            res.render('pages/default-data-tool', templateData);
+
         };
         countryCodesData.getCountryCodes(req.db, callback)
     });
