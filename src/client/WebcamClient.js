@@ -3,6 +3,8 @@
  */
 
 import React from "react";
+import ReactDOM from "react-dom";
+
 import Webcam from "../shared/components/Webcam";
 
-React.render(<Webcam />, document.getElementById('app'));
+ReactDOM.render(<Webcam />, document.getElementById('app'));

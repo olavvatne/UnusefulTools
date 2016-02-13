@@ -3,5 +3,7 @@
  */
 
 import React from "react";
+import ReactDOM from "react-dom";
+
 import SpecialCharacters from "../shared/components/SpecialCharacters.js";
-React.render(<SpecialCharacters/>, document.getElementById('app'));//
+ReactDOM.render(<SpecialCharacters/>, document.getElementById('app'));//

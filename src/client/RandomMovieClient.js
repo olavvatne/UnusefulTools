@@ -4,6 +4,8 @@
 
 
 import React from "react";
+import ReactDOM from "react-dom";
+
 import RandomMovie from "../shared/components/RandomMovie";
 var initData = document.getElementById("init").text;
-React.render(<RandomMovie data={initData}/>, document.getElementById('app'));
+ReactDOM.render(<RandomMovie data={initData}/>, document.getElementById('app'));
