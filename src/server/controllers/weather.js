@@ -2,6 +2,8 @@
  * Created by Olav on 10/4/2015.
  */
 import React from "react";
+import ReactDOMServer from "react-dom/server";
+
 import Weather from "../../shared/components/Weather";
 import request from "request";
 import async from "async";
@@ -9,21 +11,11 @@ import geoip from "geoip-lite";
 import api from "../../../apikey.js";
 //var parseString = require('xml2js').parseString;
 
-module.exports.set = function(app, path) {
+module.exports.set = function(app, path, createTool) {
 
 
     app.get('/weather', function(req, res) {
-        let content = React.renderToString(<Weather />);
-        var environment = path();
-
-        var templateData = {
-            toolTitle: Weather.toolTitle,
-            toolMetaDescription: Weather.toolMetaDescription,
-            reactContent: content,
-            reactEntryPath: environment.scriptPath,
-            reactScript: "WeatherClient",
-            environment: environment.environment
-        };
+        let templateData = createTool("Weather", <Weather />);
         res.render('pages/default-tool', templateData);
     });
 

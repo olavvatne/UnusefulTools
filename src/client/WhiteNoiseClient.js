@@ -3,7 +3,9 @@
  */
 
 import React from "react";
+import ReactDOM from "react-dom";
+
 var XMLHttpRequest = require('xhr2');
 import WhiteNoise from "../shared/components/WhiteNoise";
 
-React.render(<WhiteNoise />, document.getElementById('app'));
+ReactDOM.render(<WhiteNoise />, document.getElementById('app'));

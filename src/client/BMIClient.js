@@ -3,6 +3,8 @@
  */
 
 import React from "react";
+import ReactDOM from "react-dom";
+
 import BMI from "../shared/components/BMI";
 
-React.render(<BMI/>, document.getElementById('app'));//
+ReactDOM.render(<BMI/>, document.getElementById('app'));//
