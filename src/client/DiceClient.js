@@ -1,5 +1,7 @@
 
 import React from "react";
+import ReactDOM from "react-dom";
+
 import Dice from "../shared/components/Dice";
 
-React.render(<Dice />, document.getElementById('app'));
+ReactDOM.render(<Dice />, document.getElementById('app'));

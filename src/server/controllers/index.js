@@ -2,23 +2,36 @@
  * Created by Olav on 10/2/2015.
  */
 import React from "react";
-import HelloWorld from "../../shared/components/HelloWorld";
-import WhiteNoise from "../../shared/components/WhiteNoise";
-import WeekNumber from "../../shared/components/WeekNumber";
-import ImageConverter from "../../shared/components/ImageConverter";
-import BMI from "../../shared/components/BMI";
-import Webcam from "../../shared/components/Webcam";
-import ColorConverter from "../../shared/components/ColorConverter";
-import Dice from "../../shared/components/Dice";
-import LoremIpsum from "../../shared/components/LoremIpsum";
-import SpecialCharacters from "../../shared/components/SpecialCharacters.js";
-import RandomMovie from "../../shared/components/RandomMovie.js";
+import ReactDOMServer from "react-dom/server";
+
+import * as Tools from "../../shared/components"
 import movies from "../database/movies.js";
 
 import weatherController from "./weather.js";
 
 
 module.exports.set = function(app) {
+
+    var createTool = function(name, initialData) {
+        let reactdata = initialData? {data: initialData}: {};
+        let component = React.createElement(Tools[name], reactdata);
+        let content = ReactDOMServer.renderToString(component);
+        var environment = getEnvironment();
+        var templateData = {
+            toolTitle: Tools[name].toolTitle,
+            toolMetaDescription: Tools[name].toolMetaDescription,
+            reactContent: content,
+            reactEntryPath: environment.scriptPath,
+            reactScript: name + "Client",
+            environment: environment.environment
+        };
+
+        if(initialData) {
+            templateData.data = initialData;
+        }
+
+        return templateData;
+    };
 
     var getEnvironment = function() {
         if(app.get('env') === 'development') {
@@ -30,7 +43,7 @@ module.exports.set = function(app) {
                 environment: 'production'
         };
     }
-    weatherController.set(app, getEnvironment);
+    weatherController.set(app, getEnvironment, createTool);
 
     app.get('/', function (req, res) {
 
@@ -62,48 +75,18 @@ module.exports.set = function(app) {
      });*/
 
     app.get('/bmi-calculator', function(req, res) {
-        let content = React.renderToString(<BMI />);
-        //content = null;
-        var environment = getEnvironment();
-        var templateData = {
-            toolTitle: BMI.toolTitle,
-            toolMetaDescription: BMI.toolMetaDescription,
-            reactContent: content,
-            reactEntryPath: environment.scriptPath,
-            reactScript: "BMIClient",
-            environment: environment.environment
-
-        };
+        let templateData = createTool("BMI");
         res.render('pages/default-tool', templateData);
     });
 
     app.get('/webcam', function(req, res) {
-        let content = React.renderToString(<Webcam />);
-        //content = null;
-        var environment = getEnvironment();
-        var templateData = {
-            toolTitle: Webcam.toolTitle,
-            toolMetaDescription: Webcam.toolMetaDescription,
-            reactContent: content,
-            reactEntryPath: environment.scriptPath,
-            reactScript: "WebcamClient",
-            environment: environment.environment
-        };
+        let templateData = createTool("Webcam");
         res.render('pages/default-tool', templateData);
     });
 
 
     app.get('/weeknumber', function(req, res) {
-        let content = React.renderToString(<WeekNumber />);
-        var environment = getEnvironment();
-        var templateData = {
-            toolTitle: WeekNumber.toolTitle,
-            toolMetaDescription: WeekNumber.toolMetaDescription,
-            reactContent: content,
-            reactEntryPath: environment.scriptPath,
-            reactScript: "WeekNumberClient",
-            environment: environment.environment
-        };
+        let templateData = createTool("WeekNumber");
         res.render('pages/default-tool', templateData);
     });
 
@@ -118,44 +101,17 @@ module.exports.set = function(app) {
      });*/
 
     app.get('/rgb-to-hex', function(req, res) {
-        let content = React.renderToString(<ColorConverter />);
-        var environment = getEnvironment();
-        var templateData = {
-            toolTitle: ColorConverter.toolTitle,
-            toolMetaDescription: ColorConverter.toolMetaDescription,
-            reactContent: content,
-            reactEntryPath: environment.scriptPath,
-            reactScript: "ColorConverterClient",
-            environment: environment.environment
-        };
+        let templateData = createTool("ColorConverter");
         res.render('pages/default-tool', templateData);
     });
 
     app.get('/dice-roll', function(req, res) {
-        let content = React.renderToString(<Dice />);
-        var environment = getEnvironment();
-        var templateData = {
-            toolTitle: Dice.toolTitle,
-            toolMetaDescription: Dice.toolMetaDescription,
-            reactContent: content,
-            reactEntryPath: environment.scriptPath,
-            reactScript: "DiceClient",
-            environment: environment.environment
-        };
+        let templateData = createTool("Dice");
         res.render('pages/default-tool', templateData);
     });
 
     app.get('/special-characters', function(req, res) {
-        let content = React.renderToString(<SpecialCharacters />);
-        var environment = getEnvironment();
-        var templateData = {
-            toolTitle: SpecialCharacters.toolTitle,
-            toolMetaDescription: SpecialCharacters.toolMetaDescription,
-            reactContent: content,
-            reactEntryPath: environment.scriptPath,
-            reactScript: "SpecialCharactersClient",
-            environment: environment.environment
-        };
+        let templateData = createTool("SpecialCharacters");
         res.render('pages/special-tool', templateData);
     });
 
@@ -164,47 +120,19 @@ module.exports.set = function(app) {
         var callback = function(err, docs) {
 
             var initData = JSON.stringify(docs);
-            let content = React.renderToString(<RandomMovie data={initData}/>);
-            var environment = getEnvironment();
-            var templateData = {
-                toolTitle: RandomMovie.toolTitle,
-                toolMetaDescription: RandomMovie.toolMetaDescription,
-                reactContent: content,
-                reactEntryPath: environment.scriptPath,
-                reactScript: "RandomMovieClient",
-                environment: environment.environment,
-                data: initData
-            };
+            let templateData = createTool("RandomMovie", initData);
             res.render('pages/default-data-tool', templateData);
         }
         movies.getRandomMovie(req.db, callback)
     });
 
     app.get('/lorem-ipsum', function(req, res) {
-        let content = React.renderToString(<LoremIpsum />);
-        var environment = getEnvironment();
-        var templateData = {
-            toolTitle: LoremIpsum.toolTitle,
-            toolMetaDescription: LoremIpsum.toolMetaDescription,
-            reactContent: content,
-            reactEntryPath: environment.scriptPath,
-            reactScript: "LoremIpsumClient",
-            environment: environment.environment
-        };
+        let templateData = createTool("LoremIpsum");
         res.render('pages/special-tool', templateData);
     });
 
     app.get('/noise-mixer', function(req, res) {
-        let content = React.renderToString(<WhiteNoise />);
-        var environment = getEnvironment();
-        var templateData = {
-            toolTitle: WhiteNoise.toolTitle,
-            toolMetaDescription: WhiteNoise.toolMetaDescription,
-            reactContent: content,
-            reactEntryPath: environment.scriptPath,
-            reactScript: "WhiteNoiseClient",
-            environment: environment.environment
-        };
+        let templateData = createTool("WhiteNoise");
         res.render('pages/default-tool', templateData);
     });
 

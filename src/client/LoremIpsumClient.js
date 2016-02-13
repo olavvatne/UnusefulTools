@@ -3,6 +3,8 @@
  */
 
 import React from "react";
+import ReactDOM from "react-dom";
+
 import LoremIpsum from "../shared/components/LoremIpsum";
 
-React.render(<LoremIpsum/>, document.getElementById('app'));//
+ReactDOM.render(<LoremIpsum/>, document.getElementById('app'));//
