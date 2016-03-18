@@ -60,39 +60,42 @@ class CountryCodes extends React.Component {
     render() {
 
         var filtered_result = this.state.filtered_countries.map(function(c) {
+            var iconPath = "/images/countryFlags/" + c.short_name + ".png";
+            var fallbackIcon = "/images/countryFlags/fallback.png";;
+
             return (
                 <tr key={c.short_name}>
                     <td>
-                        {c.full_name}
-                    </td>
-                    <td>
-                        {c.country_code}
+                        <div>
+                            <object data={iconPath} type="image/png">
+                                <img src={fallbackIcon} alt={c.short_name}/>
+                            </object>
+                            <span className="cname">{c.full_name}</span>
+                            <span className="ccode">{c.country_code}</span>
+                        </div>
                     </td>
                 </tr>
             )
         });
 
         return (
-            <div>
+            <div className="countryCodesComponent">
                 <h1>{CountryCodes.toolTitle}</h1>
 
-                <UIText labelText="Country" ref="country"
+                <UIText labelText="Country or Country code" ref="country"
                         errorText=""
                         onChange={this._onInput}
                         validationPattern=""
                         style={{display: "inline-block"}}/>
 
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Country</th>
-                            <th>Country Code</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {filtered_result}
-                    </tbody>
-                </table>
+                <div >
+                    <table className="countryCodesTable">
+
+                        <tbody>
+                            {filtered_result}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         );
     }
