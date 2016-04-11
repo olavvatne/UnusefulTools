@@ -60,7 +60,8 @@ module.exports.set = function(app) {
                 {url: "/special-characters", image: "images/keyboard.svg", title: "Special characters"},
                 {url: "/lorem-ipsum", image: "images/lorumipsum.svg", title: "Lorem ipsum"},
                 {url: "/rgb-to-hex", image: "images/paint.svg", title: "Convert color RGB to hex"},
-                {url: "/noise-mixer", image: "images/noise.svg", title: "Noise mixer"}
+                {url: "/noise-mixer", image: "images/noise.svg", title: "Noise mixer"},
+                {url: "/country-codes", image: "images/countryCodes.svg", title: "Country codes"}
             ],
             environment: getEnvironment().environment
         };

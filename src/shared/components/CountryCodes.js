@@ -27,7 +27,7 @@ class CountryCodes extends React.Component {
     }
 
     _onInput(change) {
-        console.log(change);
+        
         // Check countrycodes for mathes with change and slice from filtered_countries
         var countries = this.state.countryCodes;
         var filtered_countries = [];
@@ -82,7 +82,7 @@ class CountryCodes extends React.Component {
             <div className="countryCodesComponent">
                 <h1>{CountryCodes.toolTitle}</h1>
 
-                <UIText labelText="Country or Country code" ref="country"
+                <UIText labelText="Search country or Country code" ref="country"
                         errorText=""
                         onChange={this._onInput}
                         validationPattern=""
@@ -104,6 +104,6 @@ class CountryCodes extends React.Component {
 
 CountryCodes.toolTitle = "Country Codes";
 CountryCodes.toolDescription = "";
-CountryCodes.toolMetaDescription = "";
+CountryCodes.toolMetaDescription = "Telephone prefix country code for all countries";
 
 module.exports = CountryCodes;
