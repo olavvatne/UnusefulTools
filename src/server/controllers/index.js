@@ -5,7 +5,9 @@ import React from "react";
 import ReactDOMServer from "react-dom/server";
 
 import * as Tools from "../../shared/components"
+
 import movies from "../database/movies.js";
+import countryCodesData from "../database/countryCodesData.js";
 
 import weatherController from "./weather.js";
 
@@ -58,7 +60,8 @@ module.exports.set = function(app) {
                 {url: "/special-characters", image: "images/keyboard.svg", title: "Special characters"},
                 {url: "/lorem-ipsum", image: "images/lorumipsum.svg", title: "Lorem ipsum"},
                 {url: "/rgb-to-hex", image: "images/paint.svg", title: "Convert color RGB to hex"},
-                {url: "/noise-mixer", image: "images/noise.svg", title: "Noise mixer"}
+                {url: "/noise-mixer", image: "images/noise.svg", title: "Noise mixer"},
+                {url: "/country-codes", image: "images/countryCodes.svg", title: "Country codes"}
             ],
             environment: getEnvironment().environment
         };
@@ -122,7 +125,7 @@ module.exports.set = function(app) {
             var initData = JSON.stringify(docs);
             let templateData = createTool("RandomMovie", initData);
             res.render('pages/default-data-tool', templateData);
-        }
+        };
         movies.getRandomMovie(req.db, callback)
     });
 
@@ -134,6 +137,17 @@ module.exports.set = function(app) {
     app.get('/noise-mixer', function(req, res) {
         let templateData = createTool("WhiteNoise");
         res.render('pages/default-tool', templateData);
+    });
+
+    app.get('/country-codes', function(req, res) {
+        var callback = function(err, docs) {
+
+            var initData = JSON.stringify(docs);
+            let templateData = createTool("CountryCodes", initData);
+            res.render('pages/default-data-tool', templateData);
+
+        };
+        countryCodesData.getCountryCodes(req.db, callback)
     });
 
 
