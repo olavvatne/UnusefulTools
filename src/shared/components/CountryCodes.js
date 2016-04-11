@@ -60,7 +60,8 @@ class CountryCodes extends React.Component {
     render() {
 
         var filtered_result = this.state.filtered_countries.map(function(c) {
-            var iconPath = "/images/countryFlags/" + c.short_name + ".png";
+            var imgName = c.short_name.toLowerCase();
+            var iconPath = "/images/countryFlags/" + imgName + ".png";
             var fallbackIcon = "/images/countryFlags/fallback.png";;
 
             return (
