@@ -10,3 +10,4 @@ export {default as Dice}  from "./Dice";
 export {default as LoremIpsum}  from "./LoremIpsum";
 export {default as SpecialCharacters}  from "./SpecialCharacters.js";
 export {default as RandomMovie}  from "./RandomMovie.js";
+export {default as CountryCodes}  from "./CountryCodes.js";
